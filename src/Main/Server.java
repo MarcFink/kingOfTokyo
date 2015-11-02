@@ -1,10 +1,14 @@
 package Main;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import KingOfTokyoModel.ServerModel;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -13,44 +17,23 @@ import javafx.stage.Stage;
  * changes in the Model.
  */
 public class Server extends Application {
-    private ServerView view;
-    private Server controller;
-    private ServerModel model;
+ 
+
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            // Load view.
+            BorderPane root =(BorderPane)FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Server.fxml"));
+            Scene scene=new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    /**
-     * Note the dependencies between model, view and controller. Additionally,
-     * the view needs the primaryStage created by JavaFX.
-     */
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Part of the GUI will contain log output from our own handler
-        TextAreaHandler textAreaHandler = new TextAreaHandler();
-        textAreaHandler.setLevel(Level.INFO);
-        Logger defaultLogger = Logger.getLogger("");
-        defaultLogger.addHandler(textAreaHandler);
-        
-        // Initialize the GUI
-        model = new ServerModel();
-        view = new ServerView(primaryStage, model, textAreaHandler.getTextArea());
-        controller = new Server(model, view);
-
-        // Display the GUI after all initialization is complete
-        view.start();
-    }
-
-    /**
-     * The stop method is the opposite of the start method. It provides an
-     * opportunity to close down the program gracefully, when the program has
-     * been closed.
-     */
-    @Override
-    public void stop() {
-        if (view != null)
-            view.stop();
     }
 }
