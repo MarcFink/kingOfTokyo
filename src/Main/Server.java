@@ -22,12 +22,11 @@ public class Server extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Load view.
             BorderPane root =(BorderPane)FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Server.fxml"));
             Scene scene=new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
-    
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

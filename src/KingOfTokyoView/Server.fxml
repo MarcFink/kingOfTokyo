@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KingOfTokyo.ServerController">
    <bottom>
       <GridPane prefHeight="90.0" prefWidth="195.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -22,7 +21,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="70.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <Button lineSpacing="1000.0" mnemonicParsing="false" text="Abbrechen" />
-                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Verbinden" />
+                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#connecting" prefHeight="25.0" prefWidth="72.0" text="Verbinden" />
                </children>
             </HBox>
          </children>
