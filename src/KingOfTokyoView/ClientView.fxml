@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KingOfTokyo.ClientController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
@@ -18,8 +17,8 @@
                </padding>
             </TextField>
             <Label prefHeight="17.0" prefWidth="32.0" text="Port" />
-            <TextField />
-            <Button mnemonicParsing="false" text="Button" />
+            <TextField prefHeight="28.0" prefWidth="135.0" />
+            <Button mnemonicParsing="false" onAction="#connectClient" text="verbinden" />
          </children>
          <padding>
             <Insets left="15.0" top="20.0" />
