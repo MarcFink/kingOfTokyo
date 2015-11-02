@@ -1,4 +1,4 @@
-package kingOfTokyo;
+package kingOfTokyoController;
 
 public class class1 {
 
