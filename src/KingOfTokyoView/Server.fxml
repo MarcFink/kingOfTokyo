@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <bottom>
+      <GridPane prefHeight="90.0" prefWidth="195.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="541.0" minWidth="10.0" prefWidth="289.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="200.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="70.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Button lineSpacing="1000.0" mnemonicParsing="false" text="Abbrechen" />
+                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Verbinden" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+   </bottom>
+   <top>
+      <SplitPane dividerPositions="0.17224080267558528" prefHeight="50.0" prefWidth="460.0" BorderPane.alignment="CENTER">
+         <items>
+            <Label alignment="CENTER" prefHeight="100.0" prefWidth="100.0" text="Port:" />
+            <TextField prefHeight="25.0" prefWidth="263.0" text="8080" />
+         </items>
+      </SplitPane>
+   </top>
+</BorderPane>
