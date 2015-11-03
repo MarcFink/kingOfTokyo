@@ -8,7 +8,7 @@ import javafx.concurrent.Task;
 
 public class ServerModel {
 
-	private Integer port;
+	private int port2;
 	private final Logger logger = Logger.getLogger("");
 
 	final Task<Void> serverTask = new Task<Void>() {
@@ -16,7 +16,7 @@ public class ServerModel {
 		protected Void call() throws Exception {
 			ServerSocket listener = null;
 			try {
-				listener = new ServerSocket(port, 10, null);
+				//listener = new ServerSocket(port, 10, null);
 				while (true) {
 					// The "accept" method waits for a request, then creates a
 					// socket
@@ -35,9 +35,15 @@ public class ServerModel {
 			return null;
 		}
 	};
+	private Integer port;
 
 	public void startServerSocket(Integer port) {
 		this.port = port;
 		new Thread(serverTask).start();
 	}
+
+//	public void getPort(String port) {
+//		port2 = Integer.parseInt(port);
+//
+//	}
 }
