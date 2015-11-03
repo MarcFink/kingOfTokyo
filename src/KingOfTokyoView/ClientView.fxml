@@ -11,13 +11,13 @@
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="33.0" prefWidth="49.0" text="Server" />
-            <TextField>
+            <TextField fx:id="ipadresse">
                <padding>
                   <Insets top="10.0" />
                </padding>
             </TextField>
             <Label prefHeight="17.0" prefWidth="32.0" text="Port" />
-            <TextField prefHeight="28.0" prefWidth="135.0" />
+            <TextField fx:id="prt"/>
             <Button mnemonicParsing="false" onAction="#connectClient" text="verbinden" />
          </children>
          <padding>
