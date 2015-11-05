@@ -7,32 +7,28 @@ import javafx.scene.control.TextField;
 
 public class ClientController {
 	private ClientModel model;
+	private ClientController controller;
+	private int port;
+	private String ipA;
 	
 	public ClientController(){
 	this.model=new ClientModel();
+	this.controller=controller;
+	this.port=port;
+	this.ipA=ipA;
 	}
 
-	@FXML TextField ipadresse;
+	@FXML TextField ipa;
 	@FXML TextField prt;
+	
+	
 
-	@FXML public void connectClient(ActionEvent event){
-		String stringipadresse=ipadresse.getText();
-		String stringprt=prt.getText();
-		model.getIp(stringipadresse);
-		model.getPort(stringprt);
-		   String ip = ipadresse.getText();
-           Integer port = new Integer(prt.getText());
-           System.out.println(ip+" "+port);
-           System.out.println(model.connect(ip, port));
-           if (model.connect(ip, port)==true) {
-               System.out.println("success");
-           } else {
-              System.out.println("fail");
-           }
+	@FXML public void connectClient(ActionEvent event)throws Exception{
+		ipA=ipa.getText();
+		port=Integer.parseInt(prt.getText());
+		model.startClientConnection(ipA,port);
 	
 		
-			
-	
 		
 
 	}

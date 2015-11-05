@@ -16,8 +16,7 @@ public class Client extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		model=new ClientModel();
-		//controller=new ClientController(model);
+		
 		try {
 			
 			// Load view.

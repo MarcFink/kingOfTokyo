@@ -17,11 +17,14 @@ import javafx.stage.Stage;
  * changes in the Model.
  */
 public class Server extends Application {
- 
+	
+	
+
 
     @Override
     public void start(Stage primaryStage) {
         try {
+        	
             BorderPane root =(BorderPane)FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Server.fxml"));
             Scene scene=new Scene(root);
             primaryStage.setScene(scene);

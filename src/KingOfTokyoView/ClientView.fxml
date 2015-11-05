@@ -10,14 +10,10 @@
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="33.0" prefWidth="49.0" text="Server" />
-            <TextField fx:id="ipadresse">
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </TextField>
+            <Label text="IP" />
+            <TextField fx:id="ipa" text="Localhost" />
             <Label prefHeight="17.0" prefWidth="32.0" text="Port" />
-            <TextField fx:id="prt"/>
+            <TextField fx:id="prt" text="8080" />
             <Button mnemonicParsing="false" onAction="#connectClient" text="verbinden" />
          </children>
          <padding>

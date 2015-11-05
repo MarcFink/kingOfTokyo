@@ -1,5 +1,6 @@
 package KingOfTokyoModel;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Logger;
@@ -7,43 +8,18 @@ import java.util.logging.Logger;
 import javafx.concurrent.Task;
 
 public class ServerModel {
-
-	private int port2;
-	private final Logger logger = Logger.getLogger("");
-
-	final Task<Void> serverTask = new Task<Void>() {
-		@Override
-		protected Void call() throws Exception {
-			ServerSocket listener = null;
-			try {
-				//listener = new ServerSocket(port, 10, null);
-				while (true) {
-					// The "accept" method waits for a request, then creates a
-					// socket
-					// connected to the requesting client
-					Socket clientSocket = listener.accept();
-
-					ServerThreadForClient client = new ServerThreadForClient(clientSocket);
-					client.start();
-				}
-			} catch (Exception e) {
-				System.err.println(e);
-			} finally {
-				if (listener != null)
-					listener.close();
-			}
-			return null;
-		}
-	};
-	private Integer port;
-
-	public void startServerSocket(Integer port) {
-		this.port = port;
-		new Thread(serverTask).start();
+	
+	private int portnumber;
+	
+	public ServerModel(){
+		
 	}
-
-//	public void getPort(String port) {
-//		port2 = Integer.parseInt(port);
-//
-//	}
+public void startServerConnection(int port) throws IOException{
+	ServerSocket serverSocket=new ServerSocket(port);
+	System.out.println(port+" "+"Server ist gestartet");
+	Socket clientSocket=serverSocket.accept();
+	System.out.println("Verbindung aufgebaut");
+	
+	
+}
 }
