@@ -20,7 +20,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="70.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button lineSpacing="1000.0" mnemonicParsing="false" text="Abbrechen" />
+                  <Button  lineSpacing="1000.0" mnemonicParsing="false" onAction="#cancel" text="abbrechen" />
                   <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#connecting" prefHeight="25.0" prefWidth="72.0" text="Verbinden" />
                </children>
             </HBox>

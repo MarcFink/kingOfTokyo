@@ -11,13 +11,16 @@ import javafx.scene.control.TextField;
 public class ServerController {
 	private ServerModel model;
 	private ServerController controller;
+	private int prt;
 	
 	public ServerController(){
 		this.model=new ServerModel();
 		this.controller=controller;
 		}
 	@FXML TextField port;
-			int prt;
+	
+	
+			
 	
 	
 	@FXML public void connecting(ActionEvent event) throws IOException{
@@ -28,6 +31,10 @@ public class ServerController {
 
 	public int getPortNr(){
 		return prt;
+	}
+
+	@FXML public void cancel(ActionEvent event){
+		System.exit(0);
 	}
 }
 
