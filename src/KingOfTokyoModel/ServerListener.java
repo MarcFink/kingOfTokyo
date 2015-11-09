@@ -7,11 +7,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-public class ServerThreadForClient extends Thread {
+public class ServerListener extends Thread {
     private final Logger logger = Logger.getLogger("");
     private Socket clientSocket;
 
-    public ServerThreadForClient(Socket clientSocket) {
+    public ServerListener(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
