@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import KingOfTokyo.ServerController;
 import KingOfTokyoModel.ServerModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,16 +24,10 @@ public class Server extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try {
-        	
-            BorderPane root =(BorderPane)FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Server.fxml"));
-            Scene scene=new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    ServerModel serverModel=new ServerModel();
+    ServerController serverController=new ServerController();
+    serverController.startView();
+    ;
     }
 
     public static void main(String[] args) {

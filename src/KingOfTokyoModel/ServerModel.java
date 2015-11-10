@@ -6,10 +6,11 @@ import java.net.Socket;
 import java.util.logging.Logger;
 
 import javafx.concurrent.Task;
+import javafx.stage.Stage;
 
 public class ServerModel {
 	
-	private int portnumber;
+	
 	
 	public ServerModel(){
 		
