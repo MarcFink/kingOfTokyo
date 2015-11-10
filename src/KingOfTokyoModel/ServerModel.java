@@ -3,24 +3,30 @@ package KingOfTokyoModel;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Logger;
 
-import javafx.concurrent.Task;
-import javafx.stage.Stage;
+import KingOfTokyo.ServerController;
 
 public class ServerModel {
+	private ServerSocket serverSocket;
+	private Socket clientSocket;
 	
-	
-	
-	public ServerModel(){
+	public ServerModel(ServerController serverController){
+		
+		
 		
 	}
 public void startServerConnection(int port) throws IOException{
-	ServerSocket serverSocket=new ServerSocket(port);
+	serverSocket=new ServerSocket(port);
 	System.out.println(port+" "+"Server ist gestartet");
-	Socket clientSocket=serverSocket.accept();
+	setClientSocket(serverSocket.accept());
 	System.out.println("Verbindung aufgebaut");
 	
 	
+}
+public Socket getClientSocket() {
+	return clientSocket;
+}
+public void setClientSocket(Socket clientSocket) {
+	this.clientSocket = clientSocket;
 }
 }

@@ -7,41 +7,43 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class ClientController {
-	private ClientModel model;
-	private ClientController controller;
+	private ClientModel clientModel;
 	private int port=8080;
 	private String ipA="Localhost";
 	
 	
 	
 	public ClientController(){
-	this.model=new ClientModel();
-	this.controller=controller;
-	this.port=port;
-	this.ipA=ipA;
+		
+			
 	}
-
+	public void startView() throws IOException {
+		Stage menu=new Stage();
+		AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Menu.fxml"));
+		Scene scene = new Scene(root);
+		menu.setScene(scene);
+		menu.setTitle("King of Tokyo");
+		menu.show();
+			
+		}
+		
+		
 	
-	
-	
-	
-
 	@FXML public void connectClient(ActionEvent event)throws Exception{
-		model.startClientConnection(ipA,port);
+		clientModel=new ClientModel();
+		clientModel.startClientConnection(ipA,port);
 		Stage stageNewGame=new Stage();
 		BorderPane root=(BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/NewGamePlattform.fxml"));
 		Scene scene = new Scene(root);
 		stageNewGame.setScene(scene);
 		stageNewGame.setTitle("Neues Spiel");
 		stageNewGame.show();
-		
-		
-
+	
 	}
 
 
@@ -65,7 +67,13 @@ public class ClientController {
 
 
 	@FXML public void getInstructions(ActionEvent event) {}
-	
+
+
+
+
+
+
+
 
 	
 
