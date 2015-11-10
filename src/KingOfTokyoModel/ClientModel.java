@@ -1,22 +1,27 @@
 package KingOfTokyoModel;
 
+import java.io.PrintWriter;
 import java.net.Socket;
 
 import KingOfTokyo.ClientController;
+import Main.Client;
 
 public class ClientModel {
-	private ClientModel model;
-
+	ClientModel clientmodel;
+	PrintWriter sOutput;
+	
 	
 	public ClientModel(){
-		this.model=model;
 		
+
 	}
 	
 	public void startClientConnection(String ipaddress, int port)throws Exception{
 		Socket socket=new Socket(ipaddress, port);
 		System.out.println("Client ist gestartet");
-		
+		this.sOutput=new PrintWriter(socket.getOutputStream(),true);
+		new ServerListener(clientmodel,socket).start();
+		 
 	}
 	
 }

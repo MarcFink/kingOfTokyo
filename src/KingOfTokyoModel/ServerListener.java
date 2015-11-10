@@ -7,32 +7,37 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Logger;
 
+import Main.Client;
+
 public class ServerListener extends Thread {
     private final Logger logger = Logger.getLogger("");
-    private Socket clientSocket;
+    Socket clientSocket;
+    BufferedReader sInput;
+    ClientModel clientmodel;
 
-    public ServerListener(Socket clientSocket) {
+    public ServerListener(ClientModel clientmodel,Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
+        this.clientmodel=clientmodel;
+        this.sInput=new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
     /**
      * Process messages until the client says "Goodbye"
      */
-    @Override
-    public void run() {
     
-        
-        logger.info("Request from client " + clientSocket.getInetAddress().toString()
+    public void run() {
+    listen();
+    }
+    public void listen(){
+    	String s;
+    	
+    try {
+    	while((s=sInput.readLine())!=null){
+    		 logger.info("Request from client " + clientSocket.getInetAddress().toString()
                 + " for server " + clientSocket.getLocalAddress().toString());
-
-        try {
-            System.out.println("test");
-            
-        } catch (Exception e) {
-            logger.severe(e.toString());
-        } finally {
-            try { if (clientSocket != null) clientSocket.close(); } catch (IOException e) {}
-        }
+    	}
+    }
+    catch(Exception e){}
     }
     
     

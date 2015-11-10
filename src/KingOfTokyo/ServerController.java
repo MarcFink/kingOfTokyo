@@ -23,7 +23,7 @@ public class ServerController {
 			
 	
 	
-	@FXML public void connecting(ActionEvent event) throws IOException{
+	@FXML public void connecting(ActionEvent event) throws Exception{
 		prt=Integer.parseInt(port.getText());
 		model.startServerConnection(prt);
 		

@@ -14,6 +14,8 @@ public class Client extends Application {
 	private ClientModel model;
 	private ClientController controller;
 
+	
+
 	@Override
 	public void start(Stage primaryStage) {
 		
