@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="About us">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informatikprojekt 2015 - King of Tokyo " BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </top>
+                     <center>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="In diesem Projekt geht es um die Umsetzung des Brettspiels „King of Tokyo“ in ein Computerspiel. Wir sind drei Wirtschaftsinformatikstudenten an der Fachhochschule Nordwestschweiz. &#10;&#10;Die Basisanforderungen wurden von den Dozenten festgelegt. Da wir einen engen Zeitplan haben, konnte nicht das ganze Brettspiel umgesetzt werden. Ausserdem hat man uns einen kreativen Freiraum zur Verfügung gestellt, wo wir selber Regeln erstellen und so dem Spiel einen eigenen Stempel aufdrücken können.&#10;&#10;Das Programm ist in Java geschrieben und als Entwicklungsumgebung wurde Eclipse verwendet. Um eine reibungslose Zusammenarbeit zu gewährleisten wurde mit der Versionskontrolle Git gearbeitet.&#10;" wrappingWidth="450.185546875" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </content></Tab>
+          <Tab text="Robin Attinkara">
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="424.0" minHeight="10.0" prefHeight="424.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&#9;Robin Attinkara&#10;&#9;Wirtschaftsinformatikstudent&#10;&#9;E-Mail: robin.attinkara@students.fhnw.ch&#10;&#9;TelNr: +41 76 307 78 33" GridPane.rowIndex="1" />
+                        <ImageView fitHeight="380.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@robin.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+               </content></Tab>
+            <Tab text="Daivd Mäder">
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.0" minWidth="10.0" prefWidth="451.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.0" minWidth="10.0" prefWidth="449.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="185.0" minHeight="9.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="452.0" minHeight="10.0" prefHeight="429.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="381.0" fitWidth="471.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@david.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&#9;David Mäder&#10;&#9;Wirtschaftsinformatikstudent&#10;&#9;E-Mail: david.maeder@students.fhnw.ch&#10;&#9;TelNr: +41 78 713 93 44" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </content>
+            </Tab>
+            <Tab text="Marc Fink">
+               <content>
+                  <GridPane prefHeight="521.0" prefWidth="845.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="185.0" minHeight="0.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="474.0" minHeight="10.0" prefHeight="446.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&#9;Marc Fink&#10;&#9;Wirtschaftsinformatikstudent&#10;&#9;E-Mail: marc.fink1@students.fhnw.ch&#10;&#9;TelNr: +41 79 826 29 39&#10;" wrappingWidth="278.37890625" GridPane.rowIndex="1" />
+                        <ImageView fitHeight="350.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@marc.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <bottom>
+      <GridPane alignment="CENTER" maxHeight="100.0" maxWidth="100.0" prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="BOTTOM_RIGHT">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="748.0" minWidth="10.0" prefWidth="681.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="394.0" minWidth="10.0" prefWidth="119.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="24.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="weiter" textAlignment="CENTER" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </bottom>
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bitte Spielname und Spielernamen eingeben!" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </top>
+   <center>
+      <VBox maxHeight="100.0" maxWidth="300.0" prefHeight="43.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Spielname:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Spielername: " textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
