@@ -42,7 +42,7 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&#9;Robin Attinkara&#10;&#9;Wirtschaftsinformatikstudent&#10;&#9;E-Mail: robin.attinkara@students.fhnw.ch&#10;&#9;TelNr: +41 76 307 78 33" GridPane.rowIndex="1" />
                         <ImageView fitHeight="380.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@robin.png" />
+                              <Image url="@/Images/robin.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -63,7 +63,7 @@
                      <children>
                         <ImageView fitHeight="381.0" fitWidth="471.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@david.png" />
+                              <Image url="@/Images/david.png" />
                            </image>
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&#9;David Mäder&#10;&#9;Wirtschaftsinformatikstudent&#10;&#9;E-Mail: david.maeder@students.fhnw.ch&#10;&#9;TelNr: +41 78 713 93 44" GridPane.rowIndex="1" />
@@ -87,7 +87,7 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&#9;Marc Fink&#10;&#9;Wirtschaftsinformatikstudent&#10;&#9;E-Mail: marc.fink1@students.fhnw.ch&#10;&#9;TelNr: +41 79 826 29 39&#10;" wrappingWidth="278.37890625" GridPane.rowIndex="1" />
                         <ImageView fitHeight="350.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@marc.png" />
+                              <Image url="@/Images/marc.png" />
                            </image>
                         </ImageView>
                      </children>

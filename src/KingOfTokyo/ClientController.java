@@ -15,10 +15,13 @@ public class ClientController {
 	private ClientModel clientModel;
 	private int port=8080;
 	private String ipA="Localhost";
+	private Stage stageFacts;
+	private Scene scene;
 	
 	
 	
 	public ClientController(){
+		
 		
 			
 	}
@@ -29,6 +32,7 @@ public class ClientController {
 		menu.setScene(scene);
 		menu.setTitle("King of Tokyo");
 		menu.show();
+		
 			
 		}
 		
@@ -52,9 +56,9 @@ public class ClientController {
 
 
 	@FXML public void getFacts(ActionEvent event) throws IOException {
-		Stage stageFacts=new Stage();
-		BorderPane root=(BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Facts.fxml"));
-		Scene scene = new Scene(root);
+		stageFacts=new Stage();
+		BorderPane borderPane = (BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Facts.fxml"));
+		scene = new Scene(borderPane);
 		stageFacts.setScene(scene);
 		stageFacts.setTitle("Facts");
 		stageFacts.show();	
@@ -67,6 +71,11 @@ public class ClientController {
 
 
 	@FXML public void getInstructions(ActionEvent event) {}
+	
+	
+	@FXML public void goToChooseCharacter(ActionEvent event) throws IOException {
+		
+	}
 
 
 
