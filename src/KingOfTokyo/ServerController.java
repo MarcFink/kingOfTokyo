@@ -34,7 +34,7 @@ public class ServerController {
 
 	@FXML TextField port;
 	
-	@FXML public void connecting(ActionEvent event) throws IOException{
+	@FXML public void connecting(ActionEvent event) throws Exception{
 		prt=Integer.parseInt(port.getText());
 		ServerModel serverModel=new ServerModel(serverController);
 		serverModel.startServerConnection(prt);
