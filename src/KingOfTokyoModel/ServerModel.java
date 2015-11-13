@@ -3,26 +3,57 @@ package KingOfTokyoModel;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import java.util.ArrayList;
 import java.util.logging.Logger;
+
+
+
+import KingOfTokyo.ServerController;
 
 import Main.Server;
 import javafx.concurrent.Task;
 
+
 public class ServerModel {
+
+	private ServerSocket serverSocket;
+	private Socket clientSocket;
+
 	ArrayList<ClientThread> connections;
 	ClientThread activethread;
-	
-	
+
+	public ServerModel(ServerController serverController){
+		
+		
+
+	}
 
 	private int portnumber;
 
 	public ServerModel() {
 		this.connections=new ArrayList<ClientThread>();
 		this.activethread=null;
+
 	}
 
-	public void startServerConnection(int port) throws Exception {
+public void startServerConnection(int port) throws IOException{
+	serverSocket=new ServerSocket(port);
+	System.out.println(port+" "+"Server ist gestartet");
+	setClientSocket(serverSocket.accept());
+	System.out.println("Verbindung aufgebaut");
+	
+	
+}
+public Socket getClientSocket() {
+	return clientSocket;
+}
+public void setClientSocket(Socket clientSocket) {
+	this.clientSocket = clientSocket;
+}
+
+
+	public void startServerConnection1(int port) throws Exception {
 		ServerSocket serverSocket = new ServerSocket(port);
 		while (true) {
 			System.out.println(port + " " + "Server ist gestartet");
@@ -60,4 +91,5 @@ public class ServerModel {
 		}
 		this.activethread=nextThread;
 	}
+
 }
