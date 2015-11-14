@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import KingOfTokyo.ServerController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -12,18 +15,20 @@ import javafx.stage.Stage;
  * changes in the Model.
  */
 public class Server extends Application {
-	
+
 	
 
-//erstellt die ein ServerModel-Objekt und ein ServerController-Objekt. Anschliessend wird die View gestartet.
-	
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-    ServerController serverController=new ServerController();
-    serverController.startView();
-    }
+	@Override
+	public void start(Stage primaryStage) throws IOException {
+		Stage menuStage=new Stage();
+		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Server.fxml"));
+		Scene scene = new Scene(root);
+		menuStage.setScene(scene);
+		menuStage.setTitle("King of Tokyo");
+		menuStage.show();
+	}
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

@@ -13,49 +13,30 @@ import javafx.stage.Stage;
 
 public class ServerController {
 	private int prt;
-	private Stage menuStage;
-	private ServerController serverController;
-	
-	public ServerController(){
-	
-		
 
-		
-		
-		}
-	public void startView() throws IOException {
-			menuStage=new Stage();
-			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Server.fxml"));
-			Scene scene = new Scene(root);
-			menuStage.setScene(scene);
-			menuStage.setTitle("King of Tokyo");
-			menuStage.show();
+	private ServerController serverController;
+
+	public ServerController() {
+
 	}
 
-	@FXML TextField port;
-	
-	@FXML public void connecting(ActionEvent event) throws Exception{
-		prt=Integer.parseInt(port.getText());
-		ServerModel serverModel=new ServerModel(serverController);
-		serverModel.startServerConnection(prt);
-		
-		}
+	@FXML
+	TextField port;
 
-	public int getPortNr(){
+	@FXML
+	public void connecting(ActionEvent event) throws Exception {
+		prt = Integer.parseInt(port.getText());
+		ServerModel serverModel = new ServerModel(serverController);
+		serverModel.serveContent(prt);
+
+	}
+
+	public int getPortNr() {
 		return prt;
 	}
 
-	@FXML public void cancel(ActionEvent event){
+	@FXML
+	public void cancel(ActionEvent event) {
 		System.exit(0);
 	}
 }
-
-
-		
-		
-	
-	
-	
-	
-
-
