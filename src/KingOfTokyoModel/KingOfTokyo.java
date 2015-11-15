@@ -11,7 +11,7 @@ public class KingOfTokyo {
 	// um durchiterieren zu können zwischen Spielern
 	private List<Player> players;
 
-	private Dice[] dice = new Dice[6];
+	private Dice[] diceArray = new Dice[6];
 
 	private GameState gameState;
 
@@ -57,10 +57,17 @@ public class KingOfTokyo {
 		player.setLifePoints(--currentLifePoints);
 	}
 
-	public void rollDice() {
-		int currentDiceValue = new Random().nextInt(5) + 1;
-
-		// noch zu tun
+	public void rollAllDices() {
+		
+		//definieren: dice ist jedes Element des DiceArray
+		
+		for (Dice dice : diceArray) {
+			
+		String diceValue = dice.rollDice();
+		
+		dice.setCurrentDiceValue(diceValue);
+			
+		}
 
 	}
 
