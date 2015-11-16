@@ -1,42 +1,33 @@
 package KingOfTokyoModel;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Logger;
 
-import Main.Server;
+import Main.Client;
 
 public class ClientThread extends Thread {
-Socket socket;
-BufferedReader in;
-PrintWriter out;
-Server server;
-ServerModel servermodel;
 
-public ClientThread(ServerModel servermodel,Socket socket)throws Exception{
-	this.socket=socket;
-	this.in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	this.out=new PrintWriter(socket.getOutputStream(),true);
-	this.servermodel=servermodel;
-}
+	Socket clientSocket;
 	
-	
-	@Override
-	public void run() {
-		listen();
+	ClientModel clientmodel;
+
+	public ClientThread(ClientModel clientmodel, Socket clientSocket) throws IOException {
+		this.clientSocket = clientSocket;
+		this.clientmodel = clientmodel;
+		
 	}
 
+	/**
+	 * Process messages until the client says "Goodbye"
+	 */
 
-	private void listen() {
-		String s;
-		try{
-			while((s=in.readLine())!=null){
-				servermodel.broadcast();
-				
-			}
-		}
-		catch(Exception e){}
+	public void run() {
+		System.out.println("Client gestartet"+clientSocket.getInetAddress().getHostName());
+
 	}
 
 }
