@@ -3,6 +3,7 @@ package KingOfTokyo;
 import java.io.IOException;
 
 import KingOfTokyoModel.ClientModel;
+import KingOfTokyoModel.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 
 public class ClientController {
 	private ClientModel clientModel;
+	private Player player;
 	private int port = 8080;
 	private String ipA = "Localhost";
 	private Scene scene;
@@ -21,6 +25,11 @@ public class ClientController {
 	private Stage stage;
 	private FXMLLoader loader;
 	private Parent root;
+	private String glorypoints;
+	@FXML Label playonelabl;
+	@FXML Label gloryPointslbl;
+	
+	
 	
 
 	
@@ -40,6 +49,7 @@ public class ClientController {
         stage.setTitle("Neues Spiel");
         stage.setScene(scene);           
         stage.show();
+       
 
 	}
 
@@ -59,7 +69,7 @@ public class ClientController {
 	}
 
 
-	@FXML public void startGame(ActionEvent event) throws IOException {
+	@FXML public void startGame(ActionEvent event) throws IOException {	
 	node=(Node)event.getSource();
 	stage = (Stage) node.getScene().getWindow();
     scene = stage.getScene();
@@ -67,6 +77,12 @@ public class ClientController {
     loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
     root = (Parent) loader.load();
     scene.setRoot(root);
+    
+
+    
 	}
+
+	
+		
 
 }

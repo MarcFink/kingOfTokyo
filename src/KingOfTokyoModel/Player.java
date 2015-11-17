@@ -4,8 +4,8 @@ public class Player {
 	int playerId;
 	String name;
 
-	int gloryPoints;
-	int lifePoints;
+	private int gloryPoints=0;
+	private int lifePoints=20;
 
 	public Player() {
 
@@ -28,6 +28,7 @@ public class Player {
 	}
 
 	public int getGloryPoints() {
+		this.gloryPoints=gloryPoints;
 		return gloryPoints;
 	}
 
