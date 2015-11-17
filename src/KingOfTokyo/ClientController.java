@@ -19,8 +19,10 @@ public class ClientController {
 	private Scene scene;
 	private Node node;
 	private Stage stage;
-	private FXMLLoader fxmlLoader;
-	private BorderPane root;
+	private FXMLLoader loader;
+	private Parent root;
+	
+
 	
 
 	public ClientController() {
@@ -31,12 +33,13 @@ public class ClientController {
 	public void connectClient(ActionEvent event) throws Exception {
 		clientModel = new ClientModel();
 		clientModel.startClientConnection(ipA, port);
-		Stage stageNewGame = new Stage();
-		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/NewGamePlattform.fxml"));
-		Scene scene = new Scene(root);
-		stageNewGame.setScene(scene);
-		stageNewGame.setTitle("Neues Spiel");
-		stageNewGame.show();
+		stage=new Stage(); 
+		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/NewGamePlattform.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root);
+        stage.setTitle("Neues Spiel");
+        stage.setScene(scene);           
+        stage.show();
 
 	}
 
@@ -55,11 +58,15 @@ public class ClientController {
 	public void getInstructions(ActionEvent event) {
 	}
 
-	@FXML
-	public void goToChooseCharacter(ActionEvent event) throws IOException {
-	
+
+	@FXML public void startGame(ActionEvent event) throws IOException {
+	node=(Node)event.getSource();
+	stage = (Stage) node.getScene().getWindow();
+    scene = stage.getScene();
+    stage.setTitle("Spiel gestartet");
+    loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
+    root = (Parent) loader.load();
+    scene.setRoot(root);
 	}
-
-
 
 }

@@ -20,7 +20,7 @@
           <RowConstraints maxHeight="24.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#goToChooseCharacter" prefHeight="25.0" prefWidth="108.0" text="Spiel starten" textAlignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#startGame" prefHeight="25.0" prefWidth="108.0" text="Spiel starten" textAlignment="CENTER" />
          </children>
       </GridPane>
    </bottom>
