@@ -57,14 +57,7 @@ public class ClientController {
 
 	@FXML
 	public void goToChooseCharacter(ActionEvent event) throws IOException {
-		node = (Node) event.getSource();
-		stage = (Stage) node.getScene().getWindow();
-        scene = stage.getScene();
-        fxmlLoader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/ChooseCharacter.fxml"));
-        root = (BorderPane) fxmlLoader.load();
-        scene.setRoot(root);
-		
-
+	
 	}
 
 

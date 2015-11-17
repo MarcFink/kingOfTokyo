@@ -13,12 +13,12 @@ import javafx.stage.Stage;
 public class Client extends Application {
 	
 
+	private ClientController clientController;
 	
-
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		ClientController clientController=new ClientController();
+			clientController=new ClientController();
 			Parent root = (Parent) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Menu.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
