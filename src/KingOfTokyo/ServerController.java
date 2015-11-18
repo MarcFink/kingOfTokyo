@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 public class ServerController {
 	private int prt;
@@ -23,11 +24,16 @@ public class ServerController {
 	@FXML
 	TextField port;
 
+	
+	
+
 	@FXML
 	public void connecting(ActionEvent event) throws Exception {
 		prt = Integer.parseInt(port.getText());
 		ServerModel serverModel = new ServerModel(serverController);
 		serverModel.serveContent(prt);
+	
+		
 
 	}
 

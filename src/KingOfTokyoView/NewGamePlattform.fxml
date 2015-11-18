@@ -48,13 +48,13 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="gameName" />
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Spielername: " textAlignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="playerName" />
                </children>
             </VBox>
          </children>
@@ -90,9 +90,9 @@
                <image>
                   <Image url="@/Images/MonsterTheKing.png" />
                </image></ImageView>
-            <RadioButton mnemonicParsing="false" text="TheKing" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <RadioButton mnemonicParsing="false" text="Kraken" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <RadioButton mnemonicParsing="false" text="GigaZaur" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <RadioButton fx:id="theKing" mnemonicParsing="false" text="TheKing" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <RadioButton fx:id="kraken" mnemonicParsing="false" text="Kraken" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <RadioButton fx:id="gigaZaur" mnemonicParsing="false" text="GigaZaur" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>

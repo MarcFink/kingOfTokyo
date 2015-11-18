@@ -1,13 +1,20 @@
 package KingOfTokyoModel;
 
+import KingOfTokyo.ClientController;
+
 public class Player {
 	int playerId;
-	String name;
+	String playername;
+	private String gamename;
+	private ClientController clientController;
 
 	private int gloryPoints=0;
 	private int lifePoints=20;
 
 	public Player() {
+		
+	
+		
 
 	}
 
@@ -20,15 +27,14 @@ public class Player {
 	}
 
 	public String getName() {
-		return name;
+		return playername;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.playername = name;
 	}
 
 	public int getGloryPoints() {
-		this.gloryPoints=gloryPoints;
 		return gloryPoints;
 	}
 
@@ -42,5 +48,13 @@ public class Player {
 
 	public void setLifePoints(int LifePoints) {
 		this.lifePoints = LifePoints;
+	}
+
+	public String getGamename() {
+		return gamename;
+	}
+
+	public void setGamename(String gamename) {
+//		this.gamename = clientController.getGameName();
 	}
 }

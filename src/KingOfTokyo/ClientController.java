@@ -12,8 +12,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.text.Text;
+import javafx.scene.input.InputMethodEvent;
 
 public class ClientController {
 	private ClientModel clientModel;
@@ -26,8 +29,19 @@ public class ClientController {
 	private FXMLLoader loader;
 	private Parent root;
 	private String glorypoints;
-	@FXML Label playonelabl;
-	@FXML Label gloryPointslbl;
+	private String playername;
+	private String gamename;
+	private String lifepoints=null;
+	private ClientController clientController;
+	
+	
+	
+	@FXML TextField lifeptone;
+	@FXML TextField glryptone;
+	
+	
+	
+	
 	
 	
 	
@@ -36,6 +50,8 @@ public class ClientController {
 
 	public ClientController() {
 
+		
+		
 	}
 
 	@FXML
@@ -49,7 +65,7 @@ public class ClientController {
         stage.setTitle("Neues Spiel");
         stage.setScene(scene);           
         stage.show();
-       
+        
 
 	}
 
@@ -61,6 +77,7 @@ public class ClientController {
 		factstage.setScene(scene);
 		factstage.setTitle("Neues Spiel");
 		factstage.show();
+		
 
 	}
 
@@ -68,15 +85,32 @@ public class ClientController {
 	public void getInstructions(ActionEvent event) {
 	}
 
-
+	
 	@FXML public void startGame(ActionEvent event) throws IOException {	
+	
 	node=(Node)event.getSource();
 	stage = (Stage) node.getScene().getWindow();
     scene = stage.getScene();
-    stage.setTitle("Spiel gestartet");
+
     loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
     root = (Parent) loader.load();
     scene.setRoot(root);
+    stage.setTitle("Hallo");
+    player=new Player(); 
+	String d=String.valueOf(player.getLifePoints());
+	System.out.println(d);
+   
+   
+	  
+     
+     
+	
+    System.out.println(d);
+  
+    
+    
+    
+    
     
 
     
@@ -85,4 +119,10 @@ public class ClientController {
 	
 		
 
-}
+		
+	}
+
+	
+		
+
+

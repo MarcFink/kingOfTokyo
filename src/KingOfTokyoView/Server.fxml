@@ -20,7 +20,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="70.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button  lineSpacing="1000.0" mnemonicParsing="false" onAction="#cancel" text="abbrechen" />
+                  <Button lineSpacing="1000.0" mnemonicParsing="false" onAction="#cancel" text="abbrechen" />
                   <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#connecting" prefHeight="25.0" prefWidth="72.0" text="starten" />
                </children>
             </HBox>
@@ -30,7 +30,7 @@
    <top>
       <SplitPane dividerPositions="0.17224080267558528" prefHeight="50.0" prefWidth="460.0" BorderPane.alignment="CENTER">
          <items>
-            <Label alignment="CENTER" prefHeight="100.0" prefWidth="100.0" text="Port:" />
+            <Label fx:id="prt" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" text="Port:" />
             <TextField fx:id="port" prefHeight="25.0" prefWidth="263.0" text="8080" />
          </items>
       </SplitPane>
