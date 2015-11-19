@@ -34,9 +34,9 @@
                   <Label text="Ruhmpunkte:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Label text="Lebenspunkte:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Label text="Spielername:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField fx:id="lifeptone" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="glryptone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lblname1" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="lbllife1" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblglory1" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
@@ -69,9 +69,13 @@
                   <Label text="Lebenspunkte:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Label text="Ruhmpunkte:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Label text="Spielername:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label text="Label" GridPane.columnIndex="1" />
+                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Button mnemonicParsing="false" onAction="#ErsterZug" prefHeight="25.0" prefWidth="95.0" text="Erster Zug" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </right>

@@ -18,11 +18,17 @@ public class ServerController {
 	private ServerController serverController;
 
 	public ServerController() {
+		
 
 	}
 
+
+	
+		
+
 	@FXML
 	TextField port;
+	
 
 	
 	
@@ -32,6 +38,7 @@ public class ServerController {
 		prt = Integer.parseInt(port.getText());
 		ServerModel serverModel = new ServerModel(serverController);
 		serverModel.serveContent(prt);
+		port.setEditable(false);
 	
 		
 

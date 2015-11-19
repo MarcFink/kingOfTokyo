@@ -11,7 +11,8 @@ public class Player {
 	private int gloryPoints=0;
 	private int lifePoints=20;
 
-	public Player() {
+	public Player(ClientController clientController) {
+		this.clientController=clientController;
 		
 	
 		
@@ -55,6 +56,6 @@ public class Player {
 	}
 
 	public void setGamename(String gamename) {
-//		this.gamename = clientController.getGameName();
+		this.gamename=gamename;
 	}
 }
