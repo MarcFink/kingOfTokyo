@@ -35,70 +35,72 @@ public class ClientController {
 	private String glorypoints;
 	private String playername;
 	private String gamename;
-	private String lifepoints=null;
+	private int lifepoints = 10;
 	private ClientController clientController;
-	
-	
-	
-	
-	@FXML TextField gameName;
-	@FXML TextField playerName;
-	@FXML Label w1;
-	@FXML Label w2;
-	@FXML Label w3;
-	@FXML Label w4;
-	@FXML Label w5;
-	@FXML Label w6;
-	@FXML Label lblname1;
-	@FXML Label lbllife1;
-	@FXML Label lblglory1;
-	
-	
-	
-	
-	
-	
-	
 
-	
+	@FXML
+	TextField gameName;
+	@FXML
+	TextField playerName;
+	@FXML
+	Label w1;
+	@FXML
+	Label w2;
+	@FXML
+	Label w3;
+	@FXML
+	Label w4;
+	@FXML
+	Label w5;
+	@FXML
+	Label w6;
+	@FXML
+	Label lblname;
+	@FXML
+	Label lbllife1;
+	@FXML
+	Label lblglory1;
+	@FXML
+	Label lblplayer;
 
 	public ClientController() {
-		player=new Player(clientController);
-		
-		
+		player = new Player(clientController);
+
 	}
-/*Hier ist die Aktion hinter dem Button Neues Spiel hinterlegt. Zuerst wird ein Objekt von ClientModel erstellt
- *anschliessend wir eine neue Stage erstellt und das GUI NewGamePlattform geladen.
-    */
+
+	/*
+	 * Hier ist die Aktion hinter dem Button Neues Spiel hinterlegt. Zuerst wird
+	 * ein Objekt von ClientModel erstelltanschliessend wir eine neue Stage
+	 * erstellt und das GUI NewGamePlattform geladen.
+	 */
 	@FXML
 	public void connectClient(ActionEvent event) throws Exception {
 		clientModel = new ClientModel();
 		clientModel.startClientConnection(ipA, port);
-		stage=new Stage(); 
-		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/NewGamePlattform.fxml"));
-        Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root);
-        stage.setTitle("Neues Spiel");
-        stage.setScene(scene);           
-        stage.show();
-        
-       
-        
-        
+		stage = new Stage();
+		loader = new FXMLLoader(getClass().getResource(
+				"../KingOfTokyoView/NewGamePlattform.fxml"));
+		Parent root = (Parent) loader.load();
+		Scene scene = new Scene(root);
+		stage.setTitle("Neues Spiel");
+		stage.setScene(scene);
+		stage.show();
 
 	}
-	/*Hier ist die Aktion hinter dem Button Facts hinterlegt. Neue Stage erstellt und Facts als FXML-File geladen.
-	    */
+
+	/*
+	 * Hier ist die Aktion hinter dem Button Facts hinterlegt. Neue Stage
+	 * erstellt und Facts als FXML-File geladen.
+	 */
 	@FXML
 	public void getFacts(ActionEvent event) throws IOException {
-		Stage factstage=new Stage();
-		BorderPane fact= (BorderPane)FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Facts.fxml"));
+		Stage factstage = new Stage();
+		BorderPane fact = (BorderPane) FXMLLoader.load(getClass().getResource(
+				"../KingOfTokyoView/Facts.fxml"));
 		Scene scene = new Scene(fact);
 		factstage.setScene(scene);
 		factstage.setTitle("Neues Spiel");
 		factstage.show();
-	
-		
 
 	}
 
@@ -106,58 +108,63 @@ public class ClientController {
 	public void getInstructions(ActionEvent event) {
 	}
 
-	/*Wir befinden uns im GUI von NewGamePlattform.
-	 * Button Spielstarten lässst Spielereingaben ins Playerobjekt schreiben.
-	 * Anschliessend wird das GUI GameBoard auf die gleiche Stage geladen, auf der sich die Scene
+	/*
+	 * Wir befinden uns im GUI von NewGamePlattform. Button Spielstarten lässst
+	 * Spielereingaben ins Playerobjekt schreiben. Anschliessend wird das GUI
+	 * GameBoard auf die gleiche Stage geladen, auf der sich die Scene
 	 * NewGamePlattform befunden hatte.
-	    */
-	@FXML public void startGame(ActionEvent event) throws IOException {	
-	gamename=gameName.getText();
-	playername=playerName.getText();
-	player.setGamename(gamename);
-	player.setName(playername);
-	System.out.println(player.getGamename());
-	System.out.println(player.getName());
+	 */
+	@FXML
+	public void startGame(ActionEvent event) throws IOException {
+		gamename = gameName.getText();
+		playername = playerName.getText();
+		player.setGamename(gamename);
+		player.setName(playername);
+		System.out.println(player.getGamename());
+		System.out.println(player.getName());
 
+		node = (Node) event.getSource();
+		stage = (Stage) node.getScene().getWindow();
+		scene = stage.getScene();
 
-	node=(Node)event.getSource();
-	stage = (Stage) node.getScene().getWindow();
-    scene = stage.getScene();
-    loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
-    root = (Parent) loader.load();
-    scene.setRoot(root);
-    stage.setTitle(player.getGamename());
-    
+		loader = new FXMLLoader(getClass().getResource(
+				"../KingOfTokyoView/GameBoard.fxml"));
+		root = (Parent) loader.load();
 
+		scene.setRoot(root);
+		stage.setTitle(player.getGamename());
+		//wir suchen nach labelid -> siehe gameboard
+		Label lblplayer = (Label)scene.lookup("#lblname");
+		//dem label ordnen wir den Wert der playername zu
+		lblplayer.setText(playername);
+		
+		//lifepoints
+		Label lbllife1 = (Label)scene.lookup("#lbllife1");
+		lbllife1.setText(Integer.toString(lifepoints));
 	}
-	@FXML public void ErsterZug(ActionEvent event) throws IOException {
-		Stage würfelStage=new Stage();
-		AnchorPane würfeln= (AnchorPane)FXMLLoader.load(getClass().getResource("../KingOfTokyoView/RollDice.fxml"));
+
+	@FXML
+	public void ErsterZug(ActionEvent event) throws IOException {
+		Stage würfelStage = new Stage();
+		AnchorPane würfeln = (AnchorPane) FXMLLoader.load(getClass()
+				.getResource("../KingOfTokyoView/RollDice.fxml"));
 		Scene scene = new Scene(würfeln);
 		würfelStage.setScene(scene);
 		würfelStage.setTitle("Würfeln");
 		würfelStage.show();
-		
-		
+
 	}
-	@FXML public void rollDice(ActionEvent event) {
-		Dice dice=new Dice();
+
+	@FXML
+	public void rollDice(ActionEvent event) {
+		Dice dice = new Dice();
 		w1.setText(dice.rollDice());
 		w2.setText(dice.rollDice());
 		w3.setText(dice.rollDice());
 		w4.setText(dice.rollDice());
 		w5.setText(dice.rollDice());
 		w6.setText(dice.rollDice());
-	
-	}
-	
-	
-		
 
-		
 	}
 
-	
-		
-
-
+}
