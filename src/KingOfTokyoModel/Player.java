@@ -4,7 +4,7 @@ import KingOfTokyo.ClientController;
 
 public class Player {
 	int playerId;
-	String playername;
+	String playername=null;
 	private String gamename;
 	private ClientController clientController;
 

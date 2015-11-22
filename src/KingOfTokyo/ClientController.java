@@ -55,7 +55,7 @@ public class ClientController {
 	@FXML
 	Label w6;
 	@FXML
-	Label lblname;
+	Label lblname1;
 	@FXML
 	Label lbllife1;
 	@FXML
@@ -134,20 +134,24 @@ public class ClientController {
 		scene.setRoot(root);
 		stage.setTitle(player.getGamename());
 		//wir suchen nach labelid -> siehe gameboard
-		Label lblplayer = (Label)scene.lookup("#lblname");
+		Label lblplayer = (Label)scene.lookup("#lblname1");
 		//dem label ordnen wir den Wert der playername zu
 		lblplayer.setText(playername);
 		
 		//lifepoints
 		Label lbllife1 = (Label)scene.lookup("#lbllife1");
-		lbllife1.setText(Integer.toString(lifepoints));
+		lbllife1.setText(String.valueOf(player.getLifePoints()));
+		
+		//glorypoints
+		Label lblglory1=(Label)scene.lookup("#lblglory1");
+		lblglory1.setText(String.valueOf(player.getGloryPoints()));
+		
 	}
 
 	@FXML
 	public void ErsterZug(ActionEvent event) throws IOException {
 		Stage würfelStage = new Stage();
-		AnchorPane würfeln = (AnchorPane) FXMLLoader.load(getClass()
-				.getResource("../KingOfTokyoView/RollDice.fxml"));
+		AnchorPane würfeln = (AnchorPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/RollDice.fxml"));
 		Scene scene = new Scene(würfeln);
 		würfelStage.setScene(scene);
 		würfelStage.setTitle("Würfeln");
