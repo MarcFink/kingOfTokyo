@@ -35,8 +35,9 @@ public class ClientController {
 	private String glorypoints;
 	private String playername;
 	private String gamename;
-	private int lifepoints = 10;
+	private int lifepoints;
 	private ClientController clientController;
+	
 
 	@FXML
 	TextField gameName;
@@ -62,6 +63,9 @@ public class ClientController {
 	Label lblglory1;
 	@FXML
 	Label lblplayer;
+	@FXML RadioButton gigaZaur;
+	@FXML RadioButton kraken;
+	@FXML RadioButton theKing;
 
 	public ClientController() {
 		player = new Player(clientController);
@@ -122,6 +126,7 @@ public class ClientController {
 		player.setName(playername);
 		System.out.println(player.getGamename());
 		System.out.println(player.getName());
+		System.out.println(player.getMonster());
 
 		node = (Node) event.getSource();
 		stage = (Stage) node.getScene().getWindow();
@@ -169,6 +174,18 @@ public class ClientController {
 		w5.setText(dice.rollDice());
 		w6.setText(dice.rollDice());
 
+	}
+
+	@FXML public void theKingAction(ActionEvent event) {
+		player.setMonster("TheKing");
+	}
+
+	@FXML public void krakenAction(ActionEvent event) {
+		player.setMonster("Kraken");
+	}
+
+	@FXML public void gigaZaurAction(ActionEvent event) {
+		player.setMonster("GigaZaur");
 	}
 
 }

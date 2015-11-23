@@ -90,9 +90,12 @@
                <image>
                   <Image url="@/Images/MonsterTheKing.png" />
                </image></ImageView>
-            <RadioButton fx:id="theKing" mnemonicParsing="false" text="TheKing" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <RadioButton fx:id="kraken" mnemonicParsing="false" text="Kraken" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <RadioButton fx:id="gigaZaur" mnemonicParsing="false" text="GigaZaur" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <RadioButton fx:id="theKing" mnemonicParsing="false" onAction="#theKingAction" text="TheKing" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <toggleGroup>
+                  <ToggleGroup fx:id="group" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="kraken" mnemonicParsing="false" onAction="#krakenAction" text="Kraken" toggleGroup="$group" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <RadioButton fx:id="gigaZaur" mnemonicParsing="false" onAction="#gigaZaurAction" selected="true" text="GigaZaur" toggleGroup="$group" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>

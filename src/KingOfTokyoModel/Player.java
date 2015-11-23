@@ -7,7 +7,7 @@ public class Player {
 	String playername=null;
 	private String gamename;
 	private ClientController clientController;
-
+	private String monster;
 	private int gloryPoints=0;
 	private int lifePoints=20;
 
@@ -58,4 +58,12 @@ public class Player {
 	public void setGamename(String gamename) {
 		this.gamename=gamename;
 	}
+	public String getMonster() {
+		return monster;
+	}
+
+	public void setMonster(String monster) {
+		this.monster = monster;
+	}
+
 }
