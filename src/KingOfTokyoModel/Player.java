@@ -7,7 +7,7 @@ public class Player {
 	String playername=null;
 	private String gamename;
 	private ClientController clientController;
-	private String monster;
+	private String monster="GigaZaur";
 	private int gloryPoints=0;
 	private int lifePoints=20;
 

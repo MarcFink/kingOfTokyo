@@ -21,6 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.text.Text;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ClientController {
 	private ClientModel clientModel;
@@ -66,9 +68,11 @@ public class ClientController {
 	@FXML RadioButton gigaZaur;
 	@FXML RadioButton kraken;
 	@FXML RadioButton theKing;
+	@FXML ImageView imageplayerone;
 
 	public ClientController() {
 		player = new Player(clientController);
+		
 
 	}
 
@@ -151,7 +155,27 @@ public class ClientController {
 		Label lblglory1=(Label)scene.lookup("#lblglory1");
 		lblglory1.setText(String.valueOf(player.getGloryPoints()));
 		
+		//setzt das Monsterbild fest, welches man zuvor ausgewählt hat
+		ImageView imageplayerone=(ImageView)scene.lookup("#imageplayerone");{
+			
+		
+		if(player.getMonster().equals("TheKing")){
+			Image img=new Image("./Images/MonsterTheKing.png");
+			imageplayerone.setImage(img);
+		}
+			else if(player.getMonster().equals("Kraken")){
+			Image img=new Image("./Images/MonsterKraken.png");
+			imageplayerone.setImage(img);	
+		}else
+		{
+			Image img=new Image("./Images/MonsterGiagZaur.png");
+			imageplayerone.setImage(img);	
+		}
+		}
 	}
+		
+
+		
 
 	@FXML
 	public void ErsterZug(ActionEvent event) throws IOException {
@@ -178,6 +202,8 @@ public class ClientController {
 
 	@FXML public void theKingAction(ActionEvent event) {
 		player.setMonster("TheKing");
+		
+		
 	}
 
 	@FXML public void krakenAction(ActionEvent event) {
