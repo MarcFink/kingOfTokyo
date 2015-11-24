@@ -1,5 +1,7 @@
 package KingOfTokyoModel;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -24,43 +26,40 @@ public class ServerModel {
 
 	}
 
-	
-
 	public ServerModel() {
 		this.connections = new ArrayList<Socket>();
 
 	}
 
-	
-		// ExecutorService executor=Executors.newFixedThreadPool(2);
-		final Task<Void> servertask = new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
+	// ExecutorService executor=Executors.newFixedThreadPool(2);
+	final Task<Void> servertask = new Task<Void>() {
+		@Override
+		protected Void call() throws Exception {
 
-				try {
-					serverSocket = new ServerSocket(port);
-					System.out.println(port + " " + "Server ist gestartet");
-					while (true) {
+			try {
+				serverSocket = new ServerSocket(port);
+				System.out.println(port + " " + "Server ist gestartet");
+				while (true) {
 
-						clientSocket = serverSocket.accept();
+					clientSocket = serverSocket.accept();
 
-						// executor.execute(new
-						// ClientHandler(model,clientSocket));
-						ClientThread client= new ClientThread(model,clientSocket);
-						client.start();
-
-					}
-				} catch (Exception e) {
+					// executor.execute(new
+					// ClientHandler(model,clientSocket));
+					ClientThread client = new ClientThread(model, clientSocket);
+					client.start();
 
 				}
-				return null;
+			} catch (Exception e) {
+
 			}
-		};
-	
+			return null;
+		}
+	};
+
 	public void serveContent(Integer port) {
-        this.port = port;
-        new Thread(servertask).start();
-    }
+		this.port = port;
+		new Thread(servertask).start();
+	}
 
 	public Socket getClientSocket() {
 		return clientSocket;
@@ -69,5 +68,7 @@ public class ServerModel {
 	public void setClientSocket(Socket clientSocket) {
 		this.clientSocket = clientSocket;
 	}
+
+	
 
 }

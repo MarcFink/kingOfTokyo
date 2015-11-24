@@ -1,6 +1,10 @@
 package KingOfTokyo;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
@@ -38,8 +42,9 @@ public class ClientController {
 	private String playername;
 	private String gamename;
 	private int lifepoints;
+	private ArrayList<String> playerinfo = new ArrayList<String>();
 	private ClientController clientController;
-	
+	File file = new File("C:\\temp\\my_file.txt");
 
 	@FXML
 	TextField gameName;
@@ -65,14 +70,17 @@ public class ClientController {
 	Label lblglory1;
 	@FXML
 	Label lblplayer;
-	@FXML RadioButton gigaZaur;
-	@FXML RadioButton kraken;
-	@FXML RadioButton theKing;
-	@FXML ImageView imageplayerone;
+	@FXML
+	RadioButton gigaZaur;
+	@FXML
+	RadioButton kraken;
+	@FXML
+	RadioButton theKing;
+	@FXML
+	ImageView imageplayerone;
 
 	public ClientController() {
 		player = new Player(clientController);
-		
 
 	}
 
@@ -86,8 +94,7 @@ public class ClientController {
 		clientModel = new ClientModel();
 		clientModel.startClientConnection(ipA, port);
 		stage = new Stage();
-		loader = new FXMLLoader(getClass().getResource(
-				"../KingOfTokyoView/NewGamePlattform.fxml"));
+		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/NewGamePlattform.fxml"));
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
 		stage.setTitle("Neues Spiel");
@@ -103,8 +110,7 @@ public class ClientController {
 	@FXML
 	public void getFacts(ActionEvent event) throws IOException {
 		Stage factstage = new Stage();
-		BorderPane fact = (BorderPane) FXMLLoader.load(getClass().getResource(
-				"../KingOfTokyoView/Facts.fxml"));
+		BorderPane fact = (BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Facts.fxml"));
 		Scene scene = new Scene(fact);
 		factstage.setScene(scene);
 		factstage.setTitle("Neues Spiel");
@@ -131,51 +137,80 @@ public class ClientController {
 		System.out.println(player.getGamename());
 		System.out.println(player.getName());
 		System.out.println(player.getMonster());
+		System.out.println(String.valueOf(player.getLifePoints()));
+		System.out.println(String.valueOf(player.getGloryPoints()));
+		
 
 		node = (Node) event.getSource();
 		stage = (Stage) node.getScene().getWindow();
 		scene = stage.getScene();
 
-		loader = new FXMLLoader(getClass().getResource(
-				"../KingOfTokyoView/GameBoard.fxml"));
+		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
 		root = (Parent) loader.load();
 
 		scene.setRoot(root);
 		stage.setTitle(player.getGamename());
-		//wir suchen nach labelid -> siehe gameboard
-		Label lblplayer = (Label)scene.lookup("#lblname1");
-		//dem label ordnen wir den Wert der playername zu
+		playerinfo.add(player.getGamename());
+		// wir suchen nach labelid -> siehe gameboard
+		Label lblplayer = (Label) scene.lookup("#lblname1");
+		// dem label ordnen wir den Wert der playername zu
 		lblplayer.setText(playername);
-		
-		//lifepoints
-		Label lbllife1 = (Label)scene.lookup("#lbllife1");
+		playerinfo.add(playername);
+
+		// lifepoints
+		Label lbllife1 = (Label) scene.lookup("#lbllife1");
 		lbllife1.setText(String.valueOf(player.getLifePoints()));
-		
-		//glorypoints
-		Label lblglory1=(Label)scene.lookup("#lblglory1");
+		playerinfo.add(String.valueOf(player.getLifePoints()));
+
+		// glorypoints
+		Label lblglory1 = (Label) scene.lookup("#lblglory1");
 		lblglory1.setText(String.valueOf(player.getGloryPoints()));
-		
-		//setzt das Monsterbild fest, welches man zuvor ausgewählt hat
-		ImageView imageplayerone=(ImageView)scene.lookup("#imageplayerone");{
-			
-		
-		if(player.getMonster().equals("TheKing")){
-			Image img=new Image("./Images/MonsterTheKing.png");
-			imageplayerone.setImage(img);
-		}
-			else if(player.getMonster().equals("Kraken")){
-			Image img=new Image("./Images/MonsterKraken.png");
-			imageplayerone.setImage(img);	
-		}else
+		playerinfo.add(String.valueOf(player.getGloryPoints()));
+
+		// setzt das Monsterbild fest, welches man zuvor ausgewählt hat
+		playerinfo.add(player.getMonster());
+		ImageView imageplayerone = (ImageView) scene.lookup("#imageplayerone");
 		{
-			Image img=new Image("./Images/MonsterGiagZaur.png");
-			imageplayerone.setImage(img);	
+
+			if (player.getMonster().equals("TheKing")) {
+				Image img = new Image("./Images/MonsterTheKing.png");
+				imageplayerone.setImage(img);
+			} else if (player.getMonster().equals("Kraken")) {
+				Image img = new Image("./Images/MonsterKraken.png");
+				imageplayerone.setImage(img);
+			} else {
+				Image img = new Image("./Images/MonsterGigaZaur.png");
+				imageplayerone.setImage(img);
+			}
 		}
-		}
-	}
+
+//		if (file.exists()) {
+//
+//			BufferedReader br;
+//			try {
+//				br = new BufferedReader(new FileReader(file));
+//
+//				if (br.readLine() != null) {
+//
+//					clientModel.newLine();
+//				}
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//		}
+		
 		
 
+		for (String s : playerinfo)
+		{
+//		
+		System.out.print(s+"\t");
+//		clientModel.createTextFile(s);
+//			
+		}
 		
+	}
 
 	@FXML
 	public void ErsterZug(ActionEvent event) throws IOException {
@@ -200,17 +235,19 @@ public class ClientController {
 
 	}
 
-	@FXML public void theKingAction(ActionEvent event) {
+	@FXML
+	public void theKingAction(ActionEvent event) {
 		player.setMonster("TheKing");
-		
-		
+
 	}
 
-	@FXML public void krakenAction(ActionEvent event) {
+	@FXML
+	public void krakenAction(ActionEvent event) {
 		player.setMonster("Kraken");
 	}
 
-	@FXML public void gigaZaurAction(ActionEvent event) {
+	@FXML
+	public void gigaZaurAction(ActionEvent event) {
 		player.setMonster("GigaZaur");
 	}
 
