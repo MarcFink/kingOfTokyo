@@ -42,6 +42,12 @@
             </Label>
          </children>
       </HBox>
-      <Button layoutX="675.0" layoutY="503.0" mnemonicParsing="false" onAction="#rollDice" text="Würfeln" />
+      <Button fx:id="Würfeln" layoutX="675.0" layoutY="503.0" mnemonicParsing="false" onAction="#rollDice" text="Würfeln" />
+      <RadioButton fx:id="wr1" layoutX="250.0" layoutY="320.0" mnemonicParsing="false" onAction="#w1Action" />
+      <RadioButton fx:id="wr2" layoutX="295.0" layoutY="320.0" mnemonicParsing="false" onAction="#w2Action" />
+      <RadioButton fx:id="wr3" layoutX="346.0" layoutY="320.0" mnemonicParsing="false" onAction="#w3Action" />
+      <RadioButton fx:id="wr4" layoutX="390.0" layoutY="320.0" mnemonicParsing="false" onAction="#w4Action" />
+      <RadioButton fx:id="wr5" layoutX="439.0" layoutY="320.0" mnemonicParsing="false" onAction="#w5Action" />
+      <RadioButton fx:id="wr6" layoutX="490.0" layoutY="320.0" mnemonicParsing="false" onAction="#w6Action" />
    </children>
 </AnchorPane>

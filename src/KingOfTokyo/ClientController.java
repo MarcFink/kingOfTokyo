@@ -23,6 +23,7 @@ import javafx.scene.text.Text;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 
 public class ClientController {
 	private ClientModel clientModel;
@@ -39,8 +40,14 @@ public class ClientController {
 	private String gamename;
 	private int lifepoints;
 	private ClientController clientController;
+	private Boolean w1Selected=false;
+	private Boolean w2Selected=false;
+	private Boolean w3Selected=false;
+	private Boolean w4Selected=false;
+	private Boolean w5Selected=false;
+	private Boolean w6Selected=false;
+	private int würfelVersuchCounter=0;
 	
-
 	@FXML
 	TextField gameName;
 	@FXML
@@ -69,6 +76,13 @@ public class ClientController {
 	@FXML RadioButton kraken;
 	@FXML RadioButton theKing;
 	@FXML ImageView imageplayerone;
+	@FXML RadioButton wr1;
+	@FXML RadioButton wr2;
+	@FXML RadioButton wr3;
+	@FXML RadioButton wr4;
+	@FXML RadioButton wr5;
+	@FXML RadioButton wr6;
+	@FXML Button Würfeln;
 
 	public ClientController() {
 		player = new Player(clientController);
@@ -168,7 +182,7 @@ public class ClientController {
 			imageplayerone.setImage(img);	
 		}else
 		{
-			Image img=new Image("./Images/MonsterGiagZaur.png");
+			Image img=new Image("./Images/MonsterGigaZaur.png");
 			imageplayerone.setImage(img);	
 		}
 		}
@@ -185,20 +199,86 @@ public class ClientController {
 		würfelStage.setScene(scene);
 		würfelStage.setTitle("Würfeln");
 		würfelStage.show();
+		RadioButton wr1=(RadioButton)scene.lookup("#wr1");
+		wr1.setVisible(false);
+		RadioButton wr2=(RadioButton)scene.lookup("#wr2");
+		wr2.setVisible(false);
+		RadioButton wr3=(RadioButton)scene.lookup("#wr3");
+		wr3.setVisible(false);
+		RadioButton wr4=(RadioButton)scene.lookup("#wr4");
+		wr4.setVisible(false);
+		RadioButton wr5=(RadioButton)scene.lookup("#wr5");
+		wr5.setVisible(false);
+		RadioButton wr6=(RadioButton)scene.lookup("#wr6");
+		wr6.setVisible(false);
+		
+
+		
 
 	}
 
 	@FXML
 	public void rollDice(ActionEvent event) {
 		Dice dice = new Dice();
+		
+		if(würfelVersuchCounter==0){	
 		w1.setText(dice.rollDice());
 		w2.setText(dice.rollDice());
 		w3.setText(dice.rollDice());
 		w4.setText(dice.rollDice());
 		w5.setText(dice.rollDice());
 		w6.setText(dice.rollDice());
+		wr1.setVisible(true);
+		wr2.setVisible(true);
+		wr3.setVisible(true);
+		wr4.setVisible(true);
+		wr5.setVisible(true);
+		wr6.setVisible(true);
+		würfelVersuchCounter++;
+		System.out.println(würfelVersuchCounter);
+		}else if(würfelVersuchCounter<=2){
+			
+		if(w1Selected==true){
+		w1.setText(dice.rollDice());
+		}
+		if(w2Selected==true){
+		w2.setText(dice.rollDice());
+		}
+		if(w3Selected==true){
+		w3.setText(dice.rollDice());
+		}
+		if(w4Selected==true){
+		w4.setText(dice.rollDice());
+		}
+		if(w5Selected==true){
+		w5.setText(dice.rollDice());
+		}
+		if(w6Selected==true){
+		w6.setText(dice.rollDice());
+		}
+		würfelVersuchCounter++;
+		System.out.println(würfelVersuchCounter);
+		}
+		else{	
+		Würfeln.setText("Zug beenden");
+		wr1.setVisible(false);
+		wr2.setVisible(false);
+		wr3.setVisible(false);
+		wr4.setVisible(false);
+		wr5.setVisible(false);
+		wr6.setVisible(false);
+		}
+		}
 
-	}
+		
+		
+		
+		
+		
+		
+		
+
+	
 
 	@FXML public void theKingAction(ActionEvent event) {
 		player.setMonster("TheKing");
@@ -214,4 +294,64 @@ public class ClientController {
 		player.setMonster("GigaZaur");
 	}
 
-}
+	@FXML public void w1Action(ActionEvent event) {
+		if(w1Selected==false){
+			w1Selected=true;
+		}else if(w1Selected==true){
+			w1Selected=false;
+			
+		}
+	}
+
+	@FXML public void w2Action(ActionEvent event) {
+		if(w2Selected==false){
+			w2Selected=true;
+		}else if(w2Selected==true){
+			w2Selected=false;
+			
+		}
+	}
+		
+	
+
+	@FXML public void w3Action(ActionEvent event) {
+		if(w3Selected==false){
+			w3Selected=true;
+		}else if(w3Selected==true){
+			w3Selected=false;
+			
+		}
+	}
+	
+
+	@FXML public void w4Action(ActionEvent event) {
+		if(w4Selected==false){
+			w4Selected=true;
+		}else if(w4Selected==true){
+			w4Selected=false;
+			
+		}
+	}
+	
+
+	@FXML public void w5Action(ActionEvent event) {
+		if(w5Selected==false){
+			w5Selected=true;
+		}else if(w5Selected==true){
+			w5Selected=false;
+			
+		}
+	}
+	
+
+	@FXML public void w6Action(ActionEvent event) {
+		if(w6Selected==false){
+			w6Selected=true;
+		}else if(w6Selected==true){
+			w6Selected=false;
+			
+		}
+	}
+	}
+
+
