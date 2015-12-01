@@ -83,6 +83,12 @@ public class ClientController {
 	@FXML RadioButton wr5;
 	@FXML RadioButton wr6;
 	@FXML Button Würfeln;
+	@FXML ImageView wb1;
+	@FXML ImageView wb5;
+	@FXML ImageView wb4;
+	@FXML ImageView wb2;
+	@FXML ImageView wb3;
+	@FXML ImageView wb6;
 
 	public ClientController() {
 		player = new Player(clientController);
@@ -222,12 +228,114 @@ public class ClientController {
 		Dice dice = new Dice();
 		
 		if(würfelVersuchCounter==0){	
-		w1.setText(dice.rollDice());
-		w2.setText(dice.rollDice());
-		w3.setText(dice.rollDice());
-		w4.setText(dice.rollDice());
-		w5.setText(dice.rollDice());
-		w6.setText(dice.rollDice());
+		String würfel1=dice.rollDice();
+		if(würfel1.equals("1")){
+			Image img=new Image("./Images/Num1.png");
+			wb1.setImage(img);	
+		}
+		else if(würfel1.equals("2")){
+			Image img=new Image("./Images/Num2.png");
+			wb1.setImage(img);	
+		}else if(würfel1.equals("3")){
+			Image img=new Image("./Images/Num3.png");
+			wb1.setImage(img);	
+		}else if(würfel1.equals("A")){
+			Image img=new Image("./Images/attack.png");
+			wb1.setImage(img);	
+		}else if(würfel1.equals("H")){
+			Image img=new Image("./Images/heal.png");
+			wb1.setImage(img);	
+		}
+		String würfel2=dice.rollDice();
+		if(würfel2.equals("1")){
+			Image img=new Image("./Images/Num1.png");
+			wb2.setImage(img);	
+		}
+		else if(würfel2.equals("2")){
+			Image img=new Image("./Images/Num2.png");
+			wb2.setImage(img);	
+		}else if(würfel2.equals("3")){
+			Image img=new Image("./Images/Num3.png");
+			wb2.setImage(img);	
+		}else if(würfel2.equals("A")){
+			Image img=new Image("./Images/attack.png");
+			wb2.setImage(img);	
+		}else if(würfel2.equals("H")){
+			Image img=new Image("./Images/heal.png");
+			wb2.setImage(img);	
+		}
+		String würfel3=dice.rollDice();
+		if(würfel3.equals("1")){
+			Image img=new Image("./Images/Num1.png");
+			wb3.setImage(img);	
+		}
+		else if(würfel3.equals("2")){
+			Image img=new Image("./Images/Num2.png");
+			wb3.setImage(img);	
+		}else if(würfel3.equals("3")){
+			Image img=new Image("./Images/Num3.png");
+			wb3.setImage(img);	
+		}else if(würfel3.equals("A")){
+			Image img=new Image("./Images/attack.png");
+			wb3.setImage(img);	
+		}else if(würfel3.equals("H")){
+			Image img=new Image("./Images/heal.png");
+			wb3.setImage(img);	
+		}
+		String würfel4=dice.rollDice();
+		if(würfel4.equals("1")){
+			Image img=new Image("./Images/Num1.png");
+			wb4.setImage(img);	
+		}
+		else if(würfel4.equals("2")){
+			Image img=new Image("./Images/Num2.png");
+			wb4.setImage(img);	
+		}else if(würfel4.equals("3")){
+			Image img=new Image("./Images/Num3.png");
+			wb4.setImage(img);	
+		}else if(würfel4.equals("A")){
+			Image img=new Image("./Images/attack.png");
+			wb4.setImage(img);	
+		}else if(würfel4.equals("H")){
+			Image img=new Image("./Images/heal.png");
+			wb4.setImage(img);	
+		}
+		String würfel5=dice.rollDice();
+		if(würfel5.equals("1")){
+			Image img=new Image("./Images/Num1.png");
+			wb5.setImage(img);	
+		}
+		else if(würfel5.equals("2")){
+			Image img=new Image("./Images/Num2.png");
+			wb5.setImage(img);	
+		}else if(würfel5.equals("3")){
+			Image img=new Image("./Images/Num3.png");
+			wb5.setImage(img);	
+		}else if(würfel5.equals("A")){
+			Image img=new Image("./Images/attack.png");
+			wb5.setImage(img);	
+		}else if(würfel5.equals("H")){
+			Image img=new Image("./Images/heal.png");
+			wb5.setImage(img);	
+		}
+		String würfel6=dice.rollDice();
+		if(würfel6.equals("1")){
+			Image img=new Image("./Images/Num1.png");
+			wb6.setImage(img);	
+		}
+		else if(würfel6.equals("2")){
+			Image img=new Image("./Images/Num2.png");
+			wb6.setImage(img);	
+		}else if(würfel6.equals("3")){
+			Image img=new Image("./Images/Num3.png");
+			wb6.setImage(img);	
+		}else if(würfel6.equals("A")){
+			Image img=new Image("./Images/attack.png");
+			wb6.setImage(img);	
+		}else if(würfel6.equals("H")){
+			Image img=new Image("./Images/heal.png");
+			wb6.setImage(img);	
+		}
 		wr1.setVisible(true);
 		wr2.setVisible(true);
 		wr3.setVisible(true);
@@ -239,22 +347,124 @@ public class ClientController {
 		}else if(würfelVersuchCounter<=2){
 			
 		if(w1Selected==true){
-		w1.setText(dice.rollDice());
+			String würfel1=dice.rollDice();
+			if(würfel1.equals("1")){
+				Image img=new Image("./Images/Num1.png");
+				wb1.setImage(img);	
+			}
+			else if(würfel1.equals("2")){
+				Image img=new Image("./Images/Num2.png");
+				wb1.setImage(img);	
+			}else if(würfel1.equals("3")){
+				Image img=new Image("./Images/Num3.png");
+				wb1.setImage(img);	
+			}else if(würfel1.equals("A")){
+				Image img=new Image("./Images/attack.png");
+				wb1.setImage(img);	
+			}else if(würfel1.equals("H")){
+				Image img=new Image("./Images/heal.png");
+				wb1.setImage(img);	
+			}
 		}
 		if(w2Selected==true){
-		w2.setText(dice.rollDice());
+			String würfel2=dice.rollDice();
+			if(würfel2.equals("1")){
+				Image img=new Image("./Images/Num1.png");
+				wb2.setImage(img);	
+			}
+			else if(würfel2.equals("2")){
+				Image img=new Image("./Images/Num2.png");
+				wb2.setImage(img);	
+			}else if(würfel2.equals("3")){
+				Image img=new Image("./Images/Num3.png");
+				wb2.setImage(img);	
+			}else if(würfel2.equals("A")){
+				Image img=new Image("./Images/attack.png");
+				wb2.setImage(img);	
+			}else if(würfel2.equals("H")){
+				Image img=new Image("./Images/heal.png");
+				wb2.setImage(img);	
+			}
 		}
 		if(w3Selected==true){
-		w3.setText(dice.rollDice());
+			String würfel3=dice.rollDice();
+			if(würfel3.equals("1")){
+				Image img=new Image("./Images/Num1.png");
+				wb3.setImage(img);	
+			}
+			else if(würfel3.equals("2")){
+				Image img=new Image("./Images/Num2.png");
+				wb3.setImage(img);	
+			}else if(würfel3.equals("3")){
+				Image img=new Image("./Images/Num3.png");
+				wb3.setImage(img);	
+			}else if(würfel3.equals("A")){
+				Image img=new Image("./Images/attack.png");
+				wb3.setImage(img);	
+			}else if(würfel3.equals("H")){
+				Image img=new Image("./Images/heal.png");
+				wb3.setImage(img);	
+			}
 		}
 		if(w4Selected==true){
-		w4.setText(dice.rollDice());
+			String würfel4=dice.rollDice();
+			if(würfel4.equals("1")){
+				Image img=new Image("./Images/Num1.png");
+				wb4.setImage(img);	
+			}
+			else if(würfel4.equals("2")){
+				Image img=new Image("./Images/Num2.png");
+				wb4.setImage(img);	
+			}else if(würfel4.equals("3")){
+				Image img=new Image("./Images/Num3.png");
+				wb4.setImage(img);	
+			}else if(würfel4.equals("A")){
+				Image img=new Image("./Images/attack.png");
+				wb4.setImage(img);	
+			}else if(würfel4.equals("H")){
+				Image img=new Image("./Images/heal.png");
+				wb4.setImage(img);	
+			}
 		}
 		if(w5Selected==true){
-		w5.setText(dice.rollDice());
+			String würfel5=dice.rollDice();
+			if(würfel5.equals("1")){
+				Image img=new Image("./Images/Num1.png");
+				wb5.setImage(img);	
+			}
+			else if(würfel5.equals("2")){
+				Image img=new Image("./Images/Num2.png");
+				wb5.setImage(img);	
+			}else if(würfel5.equals("3")){
+				Image img=new Image("./Images/Num3.png");
+				wb5.setImage(img);	
+			}else if(würfel5.equals("A")){
+				Image img=new Image("./Images/attack.png");
+				wb5.setImage(img);	
+			}else if(würfel5.equals("H")){
+				Image img=new Image("./Images/heal.png");
+				wb5.setImage(img);	
+			}
 		}
 		if(w6Selected==true){
-		w6.setText(dice.rollDice());
+			String würfel6=dice.rollDice();
+			if(würfel6.equals("1")){
+				Image img=new Image("./Images/Num1.png");
+				wb6.setImage(img);	
+			}
+			else if(würfel6.equals("2")){
+				Image img=new Image("./Images/Num2.png");
+				wb6.setImage(img);	
+			}else if(würfel6.equals("3")){
+				Image img=new Image("./Images/Num3.png");
+				wb6.setImage(img);	
+			}else if(würfel6.equals("A")){
+				Image img=new Image("./Images/attack.png");
+				wb6.setImage(img);	
+			}else if(würfel6.equals("H")){
+				Image img=new Image("./Images/heal.png");
+				wb6.setImage(img);	
+			}
 		}
 		würfelVersuchCounter++;
 		System.out.println(würfelVersuchCounter);
