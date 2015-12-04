@@ -3,6 +3,7 @@ package Main;
 import java.io.IOException;
 
 import KingOfTokyo.ClientController;
+import KingOfTokyo.ClientControllerMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,26 +13,15 @@ import javafx.stage.Stage;
 
 public class Client extends Application {
 	
-	private Scene menuScene;
-	private Scene newGameBoaderScene;
-	private FXMLLoader loader;
-	private ClientController clientController;
-	private AnchorPane ap;
+	private Stage kingOfTokyoStage;
 	
 	
-	public Client() throws IOException{
-		clientController=new ClientController();
-		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/Menu.fxml"));
-		ap=loader.load();
-		menuScene=new Scene(ap);
-		
-	}
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-			primaryStage.setScene(menuScene);
-			primaryStage.setTitle("King of Tokyo");
-			primaryStage.show();
-		}
+		kingOfTokyoStage=primaryStage;
+		ClientController clientController=new ClientController(kingOfTokyoStage);
+		
+	}
 	
 
 	

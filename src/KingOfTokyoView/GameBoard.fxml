@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KingOfTokyo.ClientController">
+<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KingOfTokyo.ClientControllerGameBoard">
   <center>
     <ImageView fitHeight="600.0" fitWidth="521.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
       <image>
