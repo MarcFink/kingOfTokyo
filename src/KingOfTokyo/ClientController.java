@@ -1,6 +1,7 @@
 package KingOfTokyo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
@@ -47,6 +48,7 @@ public class ClientController {
 	private Boolean w5Selected=false;
 	private Boolean w6Selected=false;
 	private int würfelVersuchCounter=0;
+	private ArrayList<Player> pl;
 	
 	@FXML
 	TextField gameName;
@@ -91,10 +93,10 @@ public class ClientController {
 	@FXML ImageView wb6;
 
 	public ClientController() {
-		player = new Player(clientController);
 		
-
+		
 	}
+	
 
 	/*
 	 * Hier ist die Aktion hinter dem Button Neues Spiel hinterlegt. Zuerst wird
@@ -127,7 +129,7 @@ public class ClientController {
 				"../KingOfTokyoView/Facts.fxml"));
 		Scene scene = new Scene(fact);
 		factstage.setScene(scene);
-		factstage.setTitle("Neues Spiel");
+		factstage.setTitle("Facts");
 		factstage.show();
 
 	}
@@ -144,28 +146,21 @@ public class ClientController {
 	 */
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
-		gamename = gameName.getText();
-		playername = playerName.getText();
-		player.setGamename(gamename);
-		player.setName(playername);
-		System.out.println(player.getGamename());
-		System.out.println(player.getName());
-		System.out.println(player.getMonster());
-
-		node = (Node) event.getSource();
-		stage = (Stage) node.getScene().getWindow();
-		scene = stage.getScene();
-
-		loader = new FXMLLoader(getClass().getResource(
-				"../KingOfTokyoView/GameBoard.fxml"));
-		root = (Parent) loader.load();
-
-		scene.setRoot(root);
-		stage.setTitle(player.getGamename());
+			initplayer1();
+			node = (Node) event.getSource();
+			stage = (Stage) node.getScene().getWindow();
+			scene = stage.getScene();
+			loader = new FXMLLoader(getClass().getResource(
+					"../KingOfTokyoView/GameBoard.fxml"));
+			root = (Parent) loader.load();
+			scene.setRoot(root);
+			stage.setTitle(player.getGamename());
+		
+		
 		//wir suchen nach labelid -> siehe gameboard
 		Label lblplayer = (Label)scene.lookup("#lblname1");
 		//dem label ordnen wir den Wert der playername zu
-		lblplayer.setText(playername);
+		lblplayer.setText(player.getName());
 		
 		//lifepoints
 		Label lbllife1 = (Label)scene.lookup("#lbllife1");
@@ -195,7 +190,24 @@ public class ClientController {
 	}
 		
 
+	
 		
+	
+
+
+	private void initplayer1() {
+		player=new Player();
+		gamename = gameName.getText();
+		player.setGamename(gamename);
+		playername = playerName.getText();
+		player.setName(playername);
+		System.out.println(player.getGamename());
+		System.out.println(player.getName());
+		System.out.println(player.getMonster());
+
+		
+	}
+
 
 	@FXML
 	public void ErsterZug(ActionEvent event) throws IOException {
@@ -502,8 +514,8 @@ public class ClientController {
 
 	@FXML public void gigaZaurAction(ActionEvent event) {
 		player.setMonster("GigaZaur");
+		
 	}
-
 	@FXML public void w1Action(ActionEvent event) {
 		if(w1Selected==false){
 			w1Selected=true;

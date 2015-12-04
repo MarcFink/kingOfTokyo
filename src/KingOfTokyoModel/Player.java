@@ -6,13 +6,13 @@ public class Player {
 	int playerId;
 	String playername=null;
 	private String gamename;
-	private ClientController clientController;
 	private String monster="GigaZaur";
 	private int gloryPoints=0;
 	private int lifePoints=20;
 
-	public Player(ClientController clientController) {
-		this.clientController=clientController;
+	public Player() {
+		
+	
 		
 	
 		

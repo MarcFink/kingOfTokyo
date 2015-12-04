@@ -12,21 +12,27 @@ import javafx.stage.Stage;
 
 public class Client extends Application {
 	
-
+	private Scene menuScene;
+	private Scene newGameBoaderScene;
+	private FXMLLoader loader;
 	private ClientController clientController;
+	private AnchorPane ap;
 	
+	
+	public Client() throws IOException{
+		clientController=new ClientController();
+		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/Menu.fxml"));
+		ap=loader.load();
+		menuScene=new Scene(ap);
+		
+	}
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-
-			clientController=new ClientController();
-			Parent root = (Parent) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Menu.fxml"));
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
+			primaryStage.setScene(menuScene);
 			primaryStage.setTitle("King of Tokyo");
 			primaryStage.show();
-			
-			
 		}
+	
 
 	
 
