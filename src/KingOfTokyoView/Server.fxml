@@ -31,7 +31,7 @@
       <SplitPane dividerPositions="0.17224080267558528" prefHeight="50.0" prefWidth="460.0" BorderPane.alignment="CENTER">
          <items>
             <Label fx:id="prt1" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" text="Port:" />
-            <TextField fx:id="port" prefHeight="25.0" prefWidth="263.0" text="8080" />
+            <TextField fx:id="port" prefHeight="25.0" prefWidth="263.0" text="4444" />
          </items>
       </SplitPane>
    </top>

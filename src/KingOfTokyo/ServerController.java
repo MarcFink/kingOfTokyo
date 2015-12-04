@@ -18,28 +18,18 @@ public class ServerController {
 	private ServerController serverController;
 
 	public ServerController() {
-		
 
 	}
 
-
-	
-		
-
 	@FXML
 	TextField port;
-	
-
-	
-	
 
 	@FXML
 	public void connecting(ActionEvent event) throws Exception {
 		prt = Integer.parseInt(port.getText());
-		ServerModel serverModel = new ServerModel(serverController);
-		serverModel.serveContent(prt);
 		port.setEditable(false);
-	
+		ServerModel serverModel = new ServerModel(serverController);
+		serverModel.connectServer(serverModel);
 		
 
 	}

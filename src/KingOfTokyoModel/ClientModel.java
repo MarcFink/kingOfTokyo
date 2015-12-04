@@ -18,18 +18,14 @@ public class ClientModel {
 	}
 
 	public void startClientConnection(String ipaddress, int port) throws Exception {
-		setSocket(new Socket(ipaddress, port));
+		socket=new Socket("localhost", 4444);
 		System.out.println("Client ist gestartet");
 
 	}
 
-	public Socket getSocket() {
-		return socket;
-	}
 
-	public void setSocket(Socket socket) {
-		this.socket = socket;
-	}
+
+	
 
 //	public void createTextFile(String player) {
 //

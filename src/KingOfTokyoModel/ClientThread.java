@@ -5,29 +5,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.logging.Logger;
-
-import Main.Client;
 
 public class ClientThread extends Thread {
-
-	Socket clientSocket;
 	
-	ClientModel clientmodel;
+	Socket clientSocket;
+	private BufferedReader in;
+	private PrintWriter out;
+	private int id;
 
-	public ClientThread(ClientModel clientmodel, Socket clientSocket) throws IOException {
+	public ClientThread(int id, Socket clientSocket) throws IOException {
 		this.clientSocket = clientSocket;
-		this.clientmodel = clientmodel;
-		
+		this.id = id;
+		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		out = new PrintWriter(clientSocket.getOutputStream());
 	}
 
-	/**
-	 * Process messages until the client says "Goodbye"
-	 */
-
 	public void run() {
-		System.out.println("Client gestartet"+clientSocket.getInetAddress().getHostName());
+		try {
+			listen();
+			
+			System.out.println("Client gestartet ");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
+	public void listen() throws IOException {
+
+		String inputLine;
+		while ((inputLine = in.readLine()) != null) {
+			System.out.println(inputLine);
+		}
 	}
 
 }

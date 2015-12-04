@@ -46,17 +46,16 @@ public class ClientController {
 	private ArrayList<String> playerinfo = new ArrayList<String>();
 	private ClientController clientController;
 
-	private Boolean w1Selected=false;
-	private Boolean w2Selected=false;
-	private Boolean w3Selected=false;
-	private Boolean w4Selected=false;
-	private Boolean w5Selected=false;
-	private Boolean w6Selected=false;
-	private int würfelVersuchCounter=0;
+	private Boolean w1Selected = false;
+	private Boolean w2Selected = false;
+	private Boolean w3Selected = false;
+	private Boolean w4Selected = false;
+	private Boolean w5Selected = false;
+	private Boolean w6Selected = false;
+	private int würfelVersuchCounter = 0;
 	private ArrayList<Player> pl;
 
 	File file = new File("C:\\temp\\my_file.txt");
-
 
 	@FXML
 	TextField gameName;
@@ -77,40 +76,52 @@ public class ClientController {
 	@FXML
 	Label lblname;
 	@FXML
-	Label lbllife1;
+	Label lbllife;
 	@FXML
-	Label lblglory1;
+	Label lblglory;
 	@FXML
 	Label lblplayer;
 
-	@FXML RadioButton gigaZaur;
-	@FXML RadioButton kraken;
-	@FXML RadioButton theKing;
-	@FXML ImageView imageplayerone;
-	@FXML RadioButton wr1;
-	@FXML RadioButton wr2;
-	@FXML RadioButton wr3;
-	@FXML RadioButton wr4;
-	@FXML RadioButton wr5;
-	@FXML RadioButton wr6;
-	@FXML Button Würfeln;
-	@FXML ImageView wb1;
-	@FXML ImageView wb5;
-	@FXML ImageView wb4;
-	@FXML ImageView wb2;
-	@FXML ImageView wb3;
-	@FXML ImageView wb6;
-
-
-
+	@FXML
+	RadioButton gigaZaur;
+	@FXML
+	RadioButton kraken;
+	@FXML
+	RadioButton theKing;
+	@FXML
+	ImageView imageplayerone;
+	@FXML
+	RadioButton wr1;
+	@FXML
+	RadioButton wr2;
+	@FXML
+	RadioButton wr3;
+	@FXML
+	RadioButton wr4;
+	@FXML
+	RadioButton wr5;
+	@FXML
+	RadioButton wr6;
+	@FXML
+	Button Würfeln;
+	@FXML
+	ImageView wb1;
+	@FXML
+	ImageView wb5;
+	@FXML
+	ImageView wb4;
+	@FXML
+	ImageView wb2;
+	@FXML
+	ImageView wb3;
+	@FXML
+	ImageView wb6;
 
 	public ClientController() {
 
 		player = new Player();
 
-
 	}
-	
 
 	/*
 	 * Hier ist die Aktion hinter dem Button Neues Spiel hinterlegt. Zuerst wird
@@ -159,24 +170,14 @@ public class ClientController {
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
 
-			initplayer1();
-			node = (Node) event.getSource();
-			stage = (Stage) node.getScene().getWindow();
-			scene = stage.getScene();
-			loader = new FXMLLoader(getClass().getResource(
-					"../KingOfTokyoView/GameBoard.fxml"));
-			root = (Parent) loader.load();
-			scene.setRoot(root);
-			stage.setTitle(player.getGamename());
-		
-		
-		//wir suchen nach labelid -> siehe gameboard
-		Label lblplayer = (Label)scene.lookup("#lblname1");
-		//dem label ordnen wir den Wert der playername zu
-		lblplayer.setText(player.getName());
-		
-		//lifepoints
-		Label lbllife1 = (Label)scene.lookup("#lbllife1");
+		initplayer1();
+		node = (Node) event.getSource();
+		stage = (Stage) node.getScene().getWindow();
+		scene = stage.getScene();
+		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
+		root = (Parent) loader.load();
+		scene.setRoot(root);
+		stage.setTitle(player.getGamename());
 
 		gamename = gameName.getText();
 		playername = playerName.getText();
@@ -187,17 +188,7 @@ public class ClientController {
 		System.out.println(player.getMonster());
 		System.out.println(String.valueOf(player.getLifePoints()));
 		System.out.println(String.valueOf(player.getGloryPoints()));
-		
 
-		node = (Node) event.getSource();
-		stage = (Stage) node.getScene().getWindow();
-		scene = stage.getScene();
-
-		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
-		root = (Parent) loader.load();
-
-		scene.setRoot(root);
-		stage.setTitle(player.getGamename());
 		playerinfo.add(player.getGamename());
 		// wir suchen nach labelid -> siehe gameboard
 		Label lblname = (Label) scene.lookup("#lblname");
@@ -212,64 +203,55 @@ public class ClientController {
 		playerinfo.add(String.valueOf(player.getLifePoints()));
 
 		// glorypoints
-		Label lblglory1 = (Label) scene.lookup("#lblglory1");
-		lblglory1.setText(String.valueOf(player.getGloryPoints()));
+		Label lblglory = (Label) scene.lookup("#lblglory");
+		lblglory.setText(String.valueOf(player.getGloryPoints()));
 		playerinfo.add(String.valueOf(player.getGloryPoints()));
 
 		// setzt das Monsterbild fest, welches man zuvor ausgewählt hat
 		playerinfo.add(player.getMonster());
 		ImageView imageplayerone = (ImageView) scene.lookup("#imageplayerone");
 		{
-			Image img=new Image("./Images/MonsterGigaZaur.png");
-			imageplayerone.setImage(img);	
+			Image img = new Image("./Images/MonsterGigaZaur.png");
+			imageplayerone.setImage(img);
 		}
-			if (player.getMonster().equals("TheKing")) {
-				Image img = new Image("./Images/MonsterTheKing.png");
-				imageplayerone.setImage(img);
-			} else if (player.getMonster().equals("Kraken")) {
-				Image img = new Image("./Images/MonsterKraken.png");
-				imageplayerone.setImage(img);
-			} else {
-				Image img = new Image("./Images/MonsterGigaZaur.png");
-				imageplayerone.setImage(img);
-			}
-
-		
-
-//		if (file.exists()) {
-//
-//			BufferedReader br;
-//			try {
-//				br = new BufferedReader(new FileReader(file));
-//
-//				if (br.readLine() != null) {
-//
-//					clientModel.newLine();
-//				}
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//		}
-		
-		
-
-
-		for (String s : playerinfo)
-		{
-//		
-		System.out.print(s+"\t");
-//		clientModel.createTextFile(s);
-//			
+		if (player.getMonster().equals("TheKing")) {
+			Image img = new Image("./Images/MonsterTheKing.png");
+			imageplayerone.setImage(img);
+		} else if (player.getMonster().equals("Kraken")) {
+			Image img = new Image("./Images/MonsterKraken.png");
+			imageplayerone.setImage(img);
+		} else {
+			Image img = new Image("./Images/MonsterGigaZaur.png");
+			imageplayerone.setImage(img);
 		}
 	}
-		
 
-	
-
+	// if (file.exists()) {
+	//
+	// BufferedReader br;
+	// try {
+	// br = new BufferedReader(new FileReader(file));
+	//
+	// if (br.readLine() != null) {
+	//
+	// clientModel.newLine();
+	// }
+	// } catch (IOException e1) {
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// }
+	// }
+	//
+	// for (String s : playerinfo) {
+	// //
+	// System.out.print(s + "\t");
+	// // clientModel.createTextFile(s);
+	// //
+	// }
+	// }
 
 	private void initplayer1() {
-		player=new Player();
+		player = new Player();
 		gamename = gameName.getText();
 		player.setGamename(gamename);
 		playername = playerName.getText();
@@ -278,11 +260,7 @@ public class ClientController {
 		System.out.println(player.getName());
 		System.out.println(player.getMonster());
 
-		
 	}
-
-
-
 
 	@FXML
 	public void ErsterZug(ActionEvent event) throws IOException {
@@ -292,290 +270,264 @@ public class ClientController {
 		würfelStage.setScene(scene);
 		würfelStage.setTitle("Würfeln");
 		würfelStage.show();
-		RadioButton wr1=(RadioButton)scene.lookup("#wr1");
+		RadioButton wr1 = (RadioButton) scene.lookup("#wr1");
 		wr1.setVisible(false);
-		RadioButton wr2=(RadioButton)scene.lookup("#wr2");
+		RadioButton wr2 = (RadioButton) scene.lookup("#wr2");
 		wr2.setVisible(false);
-		RadioButton wr3=(RadioButton)scene.lookup("#wr3");
+		RadioButton wr3 = (RadioButton) scene.lookup("#wr3");
 		wr3.setVisible(false);
-		RadioButton wr4=(RadioButton)scene.lookup("#wr4");
+		RadioButton wr4 = (RadioButton) scene.lookup("#wr4");
 		wr4.setVisible(false);
-		RadioButton wr5=(RadioButton)scene.lookup("#wr5");
+		RadioButton wr5 = (RadioButton) scene.lookup("#wr5");
 		wr5.setVisible(false);
-		RadioButton wr6=(RadioButton)scene.lookup("#wr6");
+		RadioButton wr6 = (RadioButton) scene.lookup("#wr6");
 		wr6.setVisible(false);
-		
-
-		
 
 	}
 
 	@FXML
 	public void rollDice(ActionEvent event) {
 		Dice dice = new Dice();
-		
-		if(würfelVersuchCounter==0){	
-		String würfel1=dice.rollDice();
-		if(würfel1.equals("1")){
-			Image img=new Image("./Images/Num1.png");
-			wb1.setImage(img);	
-		}
-		else if(würfel1.equals("2")){
-			Image img=new Image("./Images/Num2.png");
-			wb1.setImage(img);	
-		}else if(würfel1.equals("3")){
-			Image img=new Image("./Images/Num3.png");
-			wb1.setImage(img);	
-		}else if(würfel1.equals("A")){
-			Image img=new Image("./Images/attack.png");
-			wb1.setImage(img);	
-		}else if(würfel1.equals("H")){
-			Image img=new Image("./Images/heal.png");
-			wb1.setImage(img);	
-		}
-		String würfel2=dice.rollDice();
-		if(würfel2.equals("1")){
-			Image img=new Image("./Images/Num1.png");
-			wb2.setImage(img);	
-		}
-		else if(würfel2.equals("2")){
-			Image img=new Image("./Images/Num2.png");
-			wb2.setImage(img);	
-		}else if(würfel2.equals("3")){
-			Image img=new Image("./Images/Num3.png");
-			wb2.setImage(img);	
-		}else if(würfel2.equals("A")){
-			Image img=new Image("./Images/attack.png");
-			wb2.setImage(img);	
-		}else if(würfel2.equals("H")){
-			Image img=new Image("./Images/heal.png");
-			wb2.setImage(img);	
-		}
-		String würfel3=dice.rollDice();
-		if(würfel3.equals("1")){
-			Image img=new Image("./Images/Num1.png");
-			wb3.setImage(img);	
-		}
-		else if(würfel3.equals("2")){
-			Image img=new Image("./Images/Num2.png");
-			wb3.setImage(img);	
-		}else if(würfel3.equals("3")){
-			Image img=new Image("./Images/Num3.png");
-			wb3.setImage(img);	
-		}else if(würfel3.equals("A")){
-			Image img=new Image("./Images/attack.png");
-			wb3.setImage(img);	
-		}else if(würfel3.equals("H")){
-			Image img=new Image("./Images/heal.png");
-			wb3.setImage(img);	
-		}
-		String würfel4=dice.rollDice();
-		if(würfel4.equals("1")){
-			Image img=new Image("./Images/Num1.png");
-			wb4.setImage(img);	
-		}
-		else if(würfel4.equals("2")){
-			Image img=new Image("./Images/Num2.png");
-			wb4.setImage(img);	
-		}else if(würfel4.equals("3")){
-			Image img=new Image("./Images/Num3.png");
-			wb4.setImage(img);	
-		}else if(würfel4.equals("A")){
-			Image img=new Image("./Images/attack.png");
-			wb4.setImage(img);	
-		}else if(würfel4.equals("H")){
-			Image img=new Image("./Images/heal.png");
-			wb4.setImage(img);	
-		}
-		String würfel5=dice.rollDice();
-		if(würfel5.equals("1")){
-			Image img=new Image("./Images/Num1.png");
-			wb5.setImage(img);	
-		}
-		else if(würfel5.equals("2")){
-			Image img=new Image("./Images/Num2.png");
-			wb5.setImage(img);	
-		}else if(würfel5.equals("3")){
-			Image img=new Image("./Images/Num3.png");
-			wb5.setImage(img);	
-		}else if(würfel5.equals("A")){
-			Image img=new Image("./Images/attack.png");
-			wb5.setImage(img);	
-		}else if(würfel5.equals("H")){
-			Image img=new Image("./Images/heal.png");
-			wb5.setImage(img);	
-		}
-		String würfel6=dice.rollDice();
-		if(würfel6.equals("1")){
-			Image img=new Image("./Images/Num1.png");
-			wb6.setImage(img);	
-		}
-		else if(würfel6.equals("2")){
-			Image img=new Image("./Images/Num2.png");
-			wb6.setImage(img);	
-		}else if(würfel6.equals("3")){
-			Image img=new Image("./Images/Num3.png");
-			wb6.setImage(img);	
-		}else if(würfel6.equals("A")){
-			Image img=new Image("./Images/attack.png");
-			wb6.setImage(img);	
-		}else if(würfel6.equals("H")){
-			Image img=new Image("./Images/heal.png");
-			wb6.setImage(img);	
-		}
-		wr1.setVisible(true);
-		wr2.setVisible(true);
-		wr3.setVisible(true);
-		wr4.setVisible(true);
-		wr5.setVisible(true);
-		wr6.setVisible(true);
-		würfelVersuchCounter++;
-		System.out.println(würfelVersuchCounter);
-		}else if(würfelVersuchCounter<=2){
-			
-		if(w1Selected==true){
-			String würfel1=dice.rollDice();
-			if(würfel1.equals("1")){
-				Image img=new Image("./Images/Num1.png");
-				wb1.setImage(img);	
-			}
-			else if(würfel1.equals("2")){
-				Image img=new Image("./Images/Num2.png");
-				wb1.setImage(img);	
-			}else if(würfel1.equals("3")){
-				Image img=new Image("./Images/Num3.png");
-				wb1.setImage(img);	
-			}else if(würfel1.equals("A")){
-				Image img=new Image("./Images/attack.png");
-				wb1.setImage(img);	
-			}else if(würfel1.equals("H")){
-				Image img=new Image("./Images/heal.png");
-				wb1.setImage(img);	
-			}
-		}
-		if(w2Selected==true){
-			String würfel2=dice.rollDice();
-			if(würfel2.equals("1")){
-				Image img=new Image("./Images/Num1.png");
-				wb2.setImage(img);	
-			}
-			else if(würfel2.equals("2")){
-				Image img=new Image("./Images/Num2.png");
-				wb2.setImage(img);	
-			}else if(würfel2.equals("3")){
-				Image img=new Image("./Images/Num3.png");
-				wb2.setImage(img);	
-			}else if(würfel2.equals("A")){
-				Image img=new Image("./Images/attack.png");
-				wb2.setImage(img);	
-			}else if(würfel2.equals("H")){
-				Image img=new Image("./Images/heal.png");
-				wb2.setImage(img);	
-			}
-		}
-		if(w3Selected==true){
-			String würfel3=dice.rollDice();
-			if(würfel3.equals("1")){
-				Image img=new Image("./Images/Num1.png");
-				wb3.setImage(img);	
-			}
-			else if(würfel3.equals("2")){
-				Image img=new Image("./Images/Num2.png");
-				wb3.setImage(img);	
-			}else if(würfel3.equals("3")){
-				Image img=new Image("./Images/Num3.png");
-				wb3.setImage(img);	
-			}else if(würfel3.equals("A")){
-				Image img=new Image("./Images/attack.png");
-				wb3.setImage(img);	
-			}else if(würfel3.equals("H")){
-				Image img=new Image("./Images/heal.png");
-				wb3.setImage(img);	
-			}
-		}
-		if(w4Selected==true){
-			String würfel4=dice.rollDice();
-			if(würfel4.equals("1")){
-				Image img=new Image("./Images/Num1.png");
-				wb4.setImage(img);	
-			}
-			else if(würfel4.equals("2")){
-				Image img=new Image("./Images/Num2.png");
-				wb4.setImage(img);	
-			}else if(würfel4.equals("3")){
-				Image img=new Image("./Images/Num3.png");
-				wb4.setImage(img);	
-			}else if(würfel4.equals("A")){
-				Image img=new Image("./Images/attack.png");
-				wb4.setImage(img);	
-			}else if(würfel4.equals("H")){
-				Image img=new Image("./Images/heal.png");
-				wb4.setImage(img);	
-			}
-		}
-		if(w5Selected==true){
-			String würfel5=dice.rollDice();
-			if(würfel5.equals("1")){
-				Image img=new Image("./Images/Num1.png");
-				wb5.setImage(img);	
-			}
-			else if(würfel5.equals("2")){
-				Image img=new Image("./Images/Num2.png");
-				wb5.setImage(img);	
-			}else if(würfel5.equals("3")){
-				Image img=new Image("./Images/Num3.png");
-				wb5.setImage(img);	
-			}else if(würfel5.equals("A")){
-				Image img=new Image("./Images/attack.png");
-				wb5.setImage(img);	
-			}else if(würfel5.equals("H")){
-				Image img=new Image("./Images/heal.png");
-				wb5.setImage(img);	
-			}
-		}
-		if(w6Selected==true){
-			String würfel6=dice.rollDice();
-			if(würfel6.equals("1")){
-				Image img=new Image("./Images/Num1.png");
-				wb6.setImage(img);	
-			}
-			else if(würfel6.equals("2")){
-				Image img=new Image("./Images/Num2.png");
-				wb6.setImage(img);	
-			}else if(würfel6.equals("3")){
-				Image img=new Image("./Images/Num3.png");
-				wb6.setImage(img);	
-			}else if(würfel6.equals("A")){
-				Image img=new Image("./Images/attack.png");
-				wb6.setImage(img);	
-			}else if(würfel6.equals("H")){
-				Image img=new Image("./Images/heal.png");
-				wb6.setImage(img);	
-			}
-		}
-		würfelVersuchCounter++;
-		System.out.println(würfelVersuchCounter);
-		}
-		else{	
-		Würfeln.setText("Zug beenden");
-		wr1.setVisible(false);
-		wr2.setVisible(false);
-		wr3.setVisible(false);
-		wr4.setVisible(false);
-		wr5.setVisible(false);
-		wr6.setVisible(false);
-		}
-		}
 
-		
-		
-		
-		
-		
-		
-		
+		if (würfelVersuchCounter == 0) {
+			String würfel1 = dice.rollDice();
+			if (würfel1.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				wb1.setImage(img);
+			} else if (würfel1.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				wb1.setImage(img);
+			} else if (würfel1.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				wb1.setImage(img);
+			} else if (würfel1.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				wb1.setImage(img);
+			} else if (würfel1.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				wb1.setImage(img);
+			}
+			String würfel2 = dice.rollDice();
+			if (würfel2.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				wb2.setImage(img);
+			} else if (würfel2.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				wb2.setImage(img);
+			} else if (würfel2.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				wb2.setImage(img);
+			} else if (würfel2.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				wb2.setImage(img);
+			} else if (würfel2.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				wb2.setImage(img);
+			}
+			String würfel3 = dice.rollDice();
+			if (würfel3.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				wb3.setImage(img);
+			} else if (würfel3.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				wb3.setImage(img);
+			} else if (würfel3.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				wb3.setImage(img);
+			} else if (würfel3.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				wb3.setImage(img);
+			} else if (würfel3.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				wb3.setImage(img);
+			}
+			String würfel4 = dice.rollDice();
+			if (würfel4.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				wb4.setImage(img);
+			} else if (würfel4.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				wb4.setImage(img);
+			} else if (würfel4.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				wb4.setImage(img);
+			} else if (würfel4.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				wb4.setImage(img);
+			} else if (würfel4.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				wb4.setImage(img);
+			}
+			String würfel5 = dice.rollDice();
+			if (würfel5.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				wb5.setImage(img);
+			} else if (würfel5.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				wb5.setImage(img);
+			} else if (würfel5.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				wb5.setImage(img);
+			} else if (würfel5.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				wb5.setImage(img);
+			} else if (würfel5.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				wb5.setImage(img);
+			}
+			String würfel6 = dice.rollDice();
+			if (würfel6.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				wb6.setImage(img);
+			} else if (würfel6.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				wb6.setImage(img);
+			} else if (würfel6.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				wb6.setImage(img);
+			} else if (würfel6.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				wb6.setImage(img);
+			} else if (würfel6.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				wb6.setImage(img);
+			}
+			wr1.setVisible(true);
+			wr2.setVisible(true);
+			wr3.setVisible(true);
+			wr4.setVisible(true);
+			wr5.setVisible(true);
+			wr6.setVisible(true);
+			würfelVersuchCounter++;
+			System.out.println(würfelVersuchCounter);
+		} else if (würfelVersuchCounter <= 2) {
 
-	
+			if (w1Selected == true) {
+				String würfel1 = dice.rollDice();
+				if (würfel1.equals("1")) {
+					Image img = new Image("./Images/Num1.png");
+					wb1.setImage(img);
+				} else if (würfel1.equals("2")) {
+					Image img = new Image("./Images/Num2.png");
+					wb1.setImage(img);
+				} else if (würfel1.equals("3")) {
+					Image img = new Image("./Images/Num3.png");
+					wb1.setImage(img);
+				} else if (würfel1.equals("A")) {
+					Image img = new Image("./Images/attack.png");
+					wb1.setImage(img);
+				} else if (würfel1.equals("H")) {
+					Image img = new Image("./Images/heal.png");
+					wb1.setImage(img);
+				}
+			}
+			if (w2Selected == true) {
+				String würfel2 = dice.rollDice();
+				if (würfel2.equals("1")) {
+					Image img = new Image("./Images/Num1.png");
+					wb2.setImage(img);
+				} else if (würfel2.equals("2")) {
+					Image img = new Image("./Images/Num2.png");
+					wb2.setImage(img);
+				} else if (würfel2.equals("3")) {
+					Image img = new Image("./Images/Num3.png");
+					wb2.setImage(img);
+				} else if (würfel2.equals("A")) {
+					Image img = new Image("./Images/attack.png");
+					wb2.setImage(img);
+				} else if (würfel2.equals("H")) {
+					Image img = new Image("./Images/heal.png");
+					wb2.setImage(img);
+				}
+			}
+			if (w3Selected == true) {
+				String würfel3 = dice.rollDice();
+				if (würfel3.equals("1")) {
+					Image img = new Image("./Images/Num1.png");
+					wb3.setImage(img);
+				} else if (würfel3.equals("2")) {
+					Image img = new Image("./Images/Num2.png");
+					wb3.setImage(img);
+				} else if (würfel3.equals("3")) {
+					Image img = new Image("./Images/Num3.png");
+					wb3.setImage(img);
+				} else if (würfel3.equals("A")) {
+					Image img = new Image("./Images/attack.png");
+					wb3.setImage(img);
+				} else if (würfel3.equals("H")) {
+					Image img = new Image("./Images/heal.png");
+					wb3.setImage(img);
+				}
+			}
+			if (w4Selected == true) {
+				String würfel4 = dice.rollDice();
+				if (würfel4.equals("1")) {
+					Image img = new Image("./Images/Num1.png");
+					wb4.setImage(img);
+				} else if (würfel4.equals("2")) {
+					Image img = new Image("./Images/Num2.png");
+					wb4.setImage(img);
+				} else if (würfel4.equals("3")) {
+					Image img = new Image("./Images/Num3.png");
+					wb4.setImage(img);
+				} else if (würfel4.equals("A")) {
+					Image img = new Image("./Images/attack.png");
+					wb4.setImage(img);
+				} else if (würfel4.equals("H")) {
+					Image img = new Image("./Images/heal.png");
+					wb4.setImage(img);
+				}
+			}
+			if (w5Selected == true) {
+				String würfel5 = dice.rollDice();
+				if (würfel5.equals("1")) {
+					Image img = new Image("./Images/Num1.png");
+					wb5.setImage(img);
+				} else if (würfel5.equals("2")) {
+					Image img = new Image("./Images/Num2.png");
+					wb5.setImage(img);
+				} else if (würfel5.equals("3")) {
+					Image img = new Image("./Images/Num3.png");
+					wb5.setImage(img);
+				} else if (würfel5.equals("A")) {
+					Image img = new Image("./Images/attack.png");
+					wb5.setImage(img);
+				} else if (würfel5.equals("H")) {
+					Image img = new Image("./Images/heal.png");
+					wb5.setImage(img);
+				}
+			}
+			if (w6Selected == true) {
+				String würfel6 = dice.rollDice();
+				if (würfel6.equals("1")) {
+					Image img = new Image("./Images/Num1.png");
+					wb6.setImage(img);
+				} else if (würfel6.equals("2")) {
+					Image img = new Image("./Images/Num2.png");
+					wb6.setImage(img);
+				} else if (würfel6.equals("3")) {
+					Image img = new Image("./Images/Num3.png");
+					wb6.setImage(img);
+				} else if (würfel6.equals("A")) {
+					Image img = new Image("./Images/attack.png");
+					wb6.setImage(img);
+				} else if (würfel6.equals("H")) {
+					Image img = new Image("./Images/heal.png");
+					wb6.setImage(img);
+				}
+			}
+			würfelVersuchCounter++;
+			System.out.println(würfelVersuchCounter);
+		} else {
+			Würfeln.setText("Zug beenden");
+			wr1.setVisible(false);
+			wr2.setVisible(false);
+			wr3.setVisible(false);
+			wr4.setVisible(false);
+			wr5.setVisible(false);
+			wr6.setVisible(false);
+		}
+	}
 
 	@FXML
 	public void theKingAction(ActionEvent event) {
@@ -591,66 +543,66 @@ public class ClientController {
 	@FXML
 	public void gigaZaurAction(ActionEvent event) {
 		player.setMonster("GigaZaur");
-		
+
 	}
-	@FXML public void w1Action(ActionEvent event) {
-		if(w1Selected==false){
-			w1Selected=true;
-		}else if(w1Selected==true){
-			w1Selected=false;
-			
+
+	@FXML
+	public void w1Action(ActionEvent event) {
+		if (w1Selected == false) {
+			w1Selected = true;
+		} else if (w1Selected == true) {
+			w1Selected = false;
+
 		}
 	}
 
-	@FXML public void w2Action(ActionEvent event) {
-		if(w2Selected==false){
-			w2Selected=true;
-		}else if(w2Selected==true){
-			w2Selected=false;
-			
+	@FXML
+	public void w2Action(ActionEvent event) {
+		if (w2Selected == false) {
+			w2Selected = true;
+		} else if (w2Selected == true) {
+			w2Selected = false;
+
 		}
 	}
-		
-	
 
-	@FXML public void w3Action(ActionEvent event) {
-		if(w3Selected==false){
-			w3Selected=true;
-		}else if(w3Selected==true){
-			w3Selected=false;
-			
+	@FXML
+	public void w3Action(ActionEvent event) {
+		if (w3Selected == false) {
+			w3Selected = true;
+		} else if (w3Selected == true) {
+			w3Selected = false;
+
 		}
 	}
-	
 
-	@FXML public void w4Action(ActionEvent event) {
-		if(w4Selected==false){
-			w4Selected=true;
-		}else if(w4Selected==true){
-			w4Selected=false;
-			
+	@FXML
+	public void w4Action(ActionEvent event) {
+		if (w4Selected == false) {
+			w4Selected = true;
+		} else if (w4Selected == true) {
+			w4Selected = false;
+
 		}
 	}
-	
 
-	@FXML public void w5Action(ActionEvent event) {
-		if(w5Selected==false){
-			w5Selected=true;
-		}else if(w5Selected==true){
-			w5Selected=false;
-			
+	@FXML
+	public void w5Action(ActionEvent event) {
+		if (w5Selected == false) {
+			w5Selected = true;
+		} else if (w5Selected == true) {
+			w5Selected = false;
+
 		}
 	}
-	
 
-	@FXML public void w6Action(ActionEvent event) {
-		if(w6Selected==false){
-			w6Selected=true;
-		}else if(w6Selected==true){
-			w6Selected=false;
-			
+	@FXML
+	public void w6Action(ActionEvent event) {
+		if (w6Selected == false) {
+			w6Selected = true;
+		} else if (w6Selected == true) {
+			w6Selected = false;
+
 		}
 	}
-	}
-
-
+}

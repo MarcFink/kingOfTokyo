@@ -3,10 +3,14 @@ package KingOfTokyoModel;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -19,47 +23,54 @@ public class ServerModel {
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
 	ClientModel model = new ClientModel();
+	private static int client_id = 0;
+	ServerController servercontroller = new ServerController();
+	ObjectInputStream serverInputStream;
+	ObjectOutputStream serverOutputStream;
 
-	ArrayList<Socket> connections;
+
+	Map<Integer, Socket> clients = new HashMap<Integer, Socket>();
+
+	
 
 	public ServerModel(ServerController serverController) {
 
 	}
 
 	public ServerModel() {
-		this.connections = new ArrayList<Socket>();
+		
 
 	}
+	public void connectServer(ServerModel serverModel) throws IOException {
 
-	// ExecutorService executor=Executors.newFixedThreadPool(2);
-	final Task<Void> servertask = new Task<Void>() {
-		@Override
-		protected Void call() throws Exception {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
 
-			try {
-				serverSocket = new ServerSocket(port);
-				System.out.println(port + " " + "Server ist gestartet");
-				while (true) {
+				// BufferedReader in = new BufferedReader(new
+				// InputStreamReader(clientSocket.getInputStream()));
+				// PrintWriter out = new
+				// PrintWriter(clientSocket.getOutputStream(), true);
+				try {
 
-					clientSocket = serverSocket.accept();
-
-					// executor.execute(new
-					// ClientHandler(model,clientSocket));
-					ClientThread client = new ClientThread(model, clientSocket);
-					client.start();
-
+					serverSocket = new ServerSocket(4444);
+					System.out.println("4444 Server ist gestartet");
+					serverModel.connectClient();
+					serverInputStream = new ObjectInputStream(clientSocket.getInputStream());
+					serverOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+					
+				} catch (IOException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
 
 			}
-			return null;
-		}
-	};
+		}).start();
 
-	public void serveContent(Integer port) {
-		this.port = port;
-		new Thread(servertask).start();
 	}
+
+	
+	
 
 	public Socket getClientSocket() {
 		return clientSocket;
@@ -67,6 +78,23 @@ public class ServerModel {
 
 	public void setClientSocket(Socket clientSocket) {
 		this.clientSocket = clientSocket;
+	}
+
+	
+	public void connectClient() throws IOException, InterruptedException {
+
+		while (true) {
+			// try{
+
+			clientSocket = serverSocket.accept();
+			client_id++;
+			new ClientThread(client_id, clientSocket).start();
+
+			System.out.println(client_id + ". Client hinzugefügt");
+			clients.put(client_id, clientSocket);
+
+		}
+
 	}
 
 	
