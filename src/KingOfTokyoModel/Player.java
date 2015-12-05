@@ -11,11 +11,7 @@ public class Player {
 	private int lifePoints=20;
 
 	public Player() {
-		
 	
-		
-	
-		
 
 	}
 

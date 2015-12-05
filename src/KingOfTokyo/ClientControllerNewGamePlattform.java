@@ -32,6 +32,7 @@ public class ClientControllerNewGamePlattform {
 	private int lifepoints;
 	
 	public ClientControllerNewGamePlattform(){
+		this.player=new Player();
 		
 	}
 	@FXML
@@ -47,14 +48,12 @@ public class ClientControllerNewGamePlattform {
 	@FXML
 	Label lblplayer;
 
-	@FXML
-	RadioButton gigaZaur;
-	@FXML
-	RadioButton kraken;
-	@FXML
-	RadioButton theKing;
+	
 	@FXML
 	ImageView imageplayerone;
+	@FXML RadioButton theKing;
+	@FXML RadioButton kraken;
+	@FXML RadioButton gigaZaur;
 	/*
 	 * Wir befinden uns im GUI von NewGamePlattform. Button Spielstarten lässst
 	 * Spielereingaben ins Playerobjekt schreiben. Anschliessend wird das GUI
@@ -63,7 +62,6 @@ public class ClientControllerNewGamePlattform {
 	 */
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
-		player=new Player();
 		playername = playerName.getText();
 		gamename = gameName.getText();
 		player.setGamename(gamename);
@@ -119,21 +117,16 @@ public class ClientControllerNewGamePlattform {
 			imageplayerone.setImage(img);
 		}
 	}
-	@FXML
-	public void theKingAction(ActionEvent event) {
+	@FXML public void theKingAction(ActionEvent event) {
 		player.setMonster("TheKing");
-
+		
 	}
-
-	@FXML
-	public void krakenAction(ActionEvent event) {
+	@FXML public void krakenAction(ActionEvent event) {
 		player.setMonster("Kraken");
 	}
-
-	@FXML
-	public void gigaZaurAction(ActionEvent event) {
+	@FXML public void gigaZaurAction(ActionEvent event) {
 		player.setMonster("GigaZaur");
-
 	}
+	
 
 }

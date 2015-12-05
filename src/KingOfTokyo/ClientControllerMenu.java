@@ -3,6 +3,7 @@ package KingOfTokyo;
 import java.io.IOException;
 
 import KingOfTokyoModel.ClientModel;
+import KingOfTokyoModel.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +20,10 @@ public class ClientControllerMenu {
 	private FXMLLoader loader;
 	private int port = 8080;
 	private String ipA = "Localhost";
+	private Player player;
 	public ClientControllerMenu(){
 	this.clientModel=clientModel;
+	
 		
 	}
 	/*
@@ -39,6 +42,8 @@ public class ClientControllerMenu {
 		stage.setTitle("Neues Spiel");
 		stage.setScene(scene);
 		stage.show();
+		
+		
 
 	}
 

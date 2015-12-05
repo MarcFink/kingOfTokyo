@@ -73,7 +73,7 @@
             <RowConstraints maxHeight="241.0" minHeight="0.0" prefHeight="219.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wähle dein Monster aus!">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wähle dein Monster aus!" wrappingWidth="197.68359375">
                <font>
                   <Font size="18.0" />
                </font>
