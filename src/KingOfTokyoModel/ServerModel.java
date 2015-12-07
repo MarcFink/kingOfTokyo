@@ -22,14 +22,16 @@ public class ServerModel {
 	private Integer port;
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
+	private GameState gamestate;
 	ClientModel model = new ClientModel();
 	private static int client_id = 0;
 	ServerController servercontroller = new ServerController();
 	ObjectInputStream serverInputStream;
 	ObjectOutputStream serverOutputStream;
+	private ServerModel servermodel;
+	private ClientThread clientThread;
 
-
-	Map<Integer, Socket> clients = new HashMap<Integer, Socket>();
+	ArrayList<ClientThread> clients = new ArrayList< ClientThread>();
 
 	
 
@@ -38,19 +40,20 @@ public class ServerModel {
 	}
 
 	public ServerModel() {
+		this.servermodel=servermodel;
+		
 		
 
 	}
 	public void connectServer(ServerModel serverModel) throws IOException {
-
+		
+		this.gamestate=GameState.getGameState();
+		
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 
-				// BufferedReader in = new BufferedReader(new
-				// InputStreamReader(clientSocket.getInputStream()));
-				// PrintWriter out = new
-				// PrintWriter(clientSocket.getOutputStream(), true);
+			
 				try {
 
 					serverSocket = new ServerSocket(4444);
@@ -85,18 +88,44 @@ public class ServerModel {
 
 		while (true) {
 			// try{
+			
 
 			clientSocket = serverSocket.accept();
-			client_id++;
-			new ClientThread(client_id, clientSocket).start();
+			
 
+			client_id++;
+			clientThread=new ClientThread(client_id, clientSocket,servermodel);
+			clientThread.start();
+			
 			System.out.println(client_id + ". Client hinzugefügt");
-			clients.put(client_id, clientSocket);
+			this.gamestate.addPlayer(client_id);
+			clients.add(clientThread);
 
 		}
+	
+	}
 
+	public void objectfromclientSetGameState(GameState gs) {
+		this.gamestate=gs;
+		
+		GameState.setGameState(gs);
+		
+		
+		
+	}
+
+	public void broadcast(GameState gs) {
+		
+		for(ClientThread client: clients){
+			
+		}
+		
+		
+	}
+
+		
 	}
 
 	
 
-}
+

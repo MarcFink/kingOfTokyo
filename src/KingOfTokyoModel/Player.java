@@ -1,17 +1,36 @@
 package KingOfTokyoModel;
 
+import java.io.Serializable;
+
 import KingOfTokyo.ClientController;
 
-public class Player {
-	int playerId;
-	String playername=null;
+public class Player implements Serializable {
+	private int playerId;
+	private String playername = null;
 	private String gamename;
-	private String monster="GigaZaur";
-	private int gloryPoints=0;
-	private int lifePoints=20;
+	private String monster;
+	private boolean isInTokyo;
+	private boolean isTurn;
 
-	public Player() {
-	
+	private int gloryPoints;
+	private int lifePoints;
+
+	public Player(int playerId) {
+		this.playerId=playerId;
+		
+		lifePoints=20;
+		gloryPoints=0;
+		isTurn=false;
+		isInTokyo=false;
+		
+		if (this.playerId == 1){ // Spieler 1 beginnt
+			this.isTurn = true;
+		//	this.isAufTokyo = true;
+			
+		}
+		
+		
+		
 
 	}
 
@@ -52,9 +71,11 @@ public class Player {
 	}
 
 	public void setGamename(String gamename) {
-		this.gamename=gamename;
+		this.gamename = gamename;
 	}
+
 	public String getMonster() {
+
 		return monster;
 	}
 
@@ -62,4 +83,26 @@ public class Player {
 		this.monster = monster;
 	}
 
+	public boolean isInTokyo() {
+		return isInTokyo;
+	}
+
+	public void setInTokyo(boolean isInTokyo) {
+		this.isInTokyo = isInTokyo;
+	}
+
+	public boolean isTurn() {
+		return isTurn;
+	}
+
+	public void setTurn(boolean isTurn) {
+		this.isTurn = isTurn;
+	}
+	
+
+	public String toString(){
+		String id;
+		id=String.valueOf(playerId);
+		return id;
+	}
 }

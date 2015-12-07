@@ -32,7 +32,7 @@ public class ClientControllerNewGamePlattform {
 	private int lifepoints;
 	
 	public ClientControllerNewGamePlattform(){
-		this.player=new Player();
+		
 		
 	}
 	@FXML
