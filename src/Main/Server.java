@@ -20,6 +20,7 @@ public class Server extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+		//Server wird gestartet und GUI wird geladen
 		Stage menuStage=new Stage();
 		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Server.fxml"));
 		Scene scene = new Scene(root);

@@ -30,58 +30,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleGroup;
 
-public class ClientController {
+public class ClientView {
 
 	private Stage kingOfTokyoStage;
 	private FXMLLoader loader;
 	private Scene scene;
 
-
-
-	File file = new File("C:\\temp\\my_file.txt");
-
-	
-	
-	public ClientController(Stage kingOfTokyoStage) throws IOException {
-		this.kingOfTokyoStage=kingOfTokyoStage;
-		loader= new FXMLLoader(getClass().getResource("../KingOfTokyoView/Menu.fxml"));
-		AnchorPane root=new AnchorPane();
-		root=loader.load();
-		scene=new Scene(root);
+	public ClientView(Stage kingOfTokyoStage) throws IOException {
+		//MenuScene wird geladen
+		this.kingOfTokyoStage = kingOfTokyoStage;
+		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/Menu.fxml"));
+		AnchorPane root = new AnchorPane();
+		root = loader.load();
+		scene = new Scene(root);
 		kingOfTokyoStage.setScene(scene);
 		kingOfTokyoStage.show();
-		
 
 	}
 }
 
-
-	
-
-	// if (file.exists()) {
-	//
-	// BufferedReader br;
-	// try {
-	// br = new BufferedReader(new FileReader(file));
-	//
-	// if (br.readLine() != null) {
-	//
-	// clientModel.newLine();
-	// }
-	// } catch (IOException e1) {
-	// // TODO Auto-generated catch block
-	// e1.printStackTrace();
-	// }
-	// }
-	//
-	// for (String s : playerinfo) {
-	// //
-	// System.out.print(s + "\t");
-	// // clientModel.createTextFile(s);
-	// //
-	// }
-	// }
-
-	
-
-	

@@ -2,15 +2,14 @@ package KingOfTokyoModel;
 
 import java.io.Serializable;
 
-import KingOfTokyo.ClientController;
+import KingOfTokyo.ClientView;
 
 public class Player implements Serializable {
 	private int playerId;
-	private String playername = null;
-	private String gamename;
-	private String monster;
 	private boolean isInTokyo;
 	private boolean isTurn;
+	private String playername;
+	private String monster;
 
 	private int gloryPoints;
 	private int lifePoints;
@@ -42,13 +41,7 @@ public class Player implements Serializable {
 		this.playerId = playerId;
 	}
 
-	public String getName() {
-		return playername;
-	}
-
-	public void setName(String name) {
-		this.playername = name;
-	}
+	
 
 	public int getGloryPoints() {
 		return gloryPoints;
@@ -66,13 +59,7 @@ public class Player implements Serializable {
 		this.lifePoints = LifePoints;
 	}
 
-	public String getGamename() {
-		return gamename;
-	}
-
-	public void setGamename(String gamename) {
-		this.gamename = gamename;
-	}
+	
 
 	public String getMonster() {
 
@@ -104,5 +91,13 @@ public class Player implements Serializable {
 		String id;
 		id=String.valueOf(playerId);
 		return id;
+	}
+
+	public String getPlayername() {
+		return playername;
+	}
+
+	public void setPlayername(String playername) {
+		this.playername = playername;
 	}
 }

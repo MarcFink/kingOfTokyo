@@ -2,7 +2,7 @@ package Main;
 
 import java.io.IOException;
 
-import KingOfTokyo.ClientController;
+import KingOfTokyo.ClientView;
 import KingOfTokyo.ClientControllerMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,7 @@ public class Client extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		kingOfTokyoStage=primaryStage;
-		ClientController clientController=new ClientController(kingOfTokyoStage);
+		ClientView clientController=new ClientView(kingOfTokyoStage);
 		
 	}
 	

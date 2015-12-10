@@ -18,13 +18,13 @@ public class ClientControllerMenu {
 	private ClientModel clientModel;
 	private Stage stage;
 	private FXMLLoader loader;
-	private int port = 8080;
+	private int port = 4444;
 	private String ipA = "Localhost";
-	private Player player;
-	public ClientControllerMenu(){
-	this.clientModel=clientModel;
 	
-		
+	
+	
+	public ClientControllerMenu(){
+	
 	}
 	/*
 	 * Hier ist die Aktion hinter dem Button Neues Spiel hinterlegt. Zuerst wird

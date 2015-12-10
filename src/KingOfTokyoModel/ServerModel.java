@@ -23,45 +23,38 @@ public class ServerModel {
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
 	private GameState gamestate;
-	ClientModel model = new ClientModel();
 	private static int client_id = 0;
-	ServerController servercontroller = new ServerController();
+	ServerController serverController;
 	ObjectInputStream serverInputStream;
 	ObjectOutputStream serverOutputStream;
-	private ServerModel servermodel;
-	private ClientThread clientThread;
+	private ServerModel serverModel;
+	private ServerThread serverThread;
+	private ArrayList <ServerThread> serverThreadlist;
 
-	ArrayList<ClientThread> clients = new ArrayList< ClientThread>();
 
-	
 
-	public ServerModel(ServerController serverController) {
-
+	public ServerModel(ServerController serverController, int prt) {
+		// Erstellt das GameStateobjekt, welches während dem Spielen hin und her
+		// geschickt wird.
+		this.serverController = serverController;
+		serverThreadlist = new ArrayList<ServerThread>();
+		this.port = prt;
+		gamestate = GameState.getGameState();
 	}
 
-	public ServerModel() {
-		this.servermodel=servermodel;
-		
-		
+	public void connectServer() throws IOException {
 
-	}
-	public void connectServer(ServerModel serverModel) throws IOException {
-		
-		this.gamestate=GameState.getGameState();
-		
+		// Serversocket wird erstellt und läuft in einem eigenen anonymen Thread
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 
-			
 				try {
 
-					serverSocket = new ServerSocket(4444);
-					System.out.println("4444 Server ist gestartet");
-					serverModel.connectClient();
-					serverInputStream = new ObjectInputStream(clientSocket.getInputStream());
-					serverOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-					
+					serverSocket = new ServerSocket(port);
+					System.out.println(port + " Server ist gestartet");
+					connectClient();
+
 				} catch (IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -72,9 +65,6 @@ public class ServerModel {
 
 	}
 
-	
-	
-
 	public Socket getClientSocket() {
 		return clientSocket;
 	}
@@ -83,49 +73,41 @@ public class ServerModel {
 		this.clientSocket = clientSocket;
 	}
 
-	
 	public void connectClient() throws IOException, InterruptedException {
-
+		// Jeder Client erhält seinen eigenen Thread
 		while (true) {
-			// try{
-			
-
 			clientSocket = serverSocket.accept();
-			
 
 			client_id++;
-			clientThread=new ClientThread(client_id, clientSocket,servermodel);
-			clientThread.start();
-			
+			gamestate.addPlayer(client_id);
+			serverThread = new ServerThread(client_id, clientSocket, serverModel, gamestate);
+			//fügt den Thread in eine Arraylist
+			serverThreadlist.add(serverThread);
+			// clientThread wird gestartet
+			serverThread.start();
 			System.out.println(client_id + ". Client hinzugefügt");
-			this.gamestate.addPlayer(client_id);
-			clients.add(clientThread);
+			// clientThreads werden in einer ArrayListe gespeichert
+			
 
 		}
-	
+
 	}
 
 	public void objectfromclientSetGameState(GameState gs) {
-		this.gamestate=gs;
-		
+		this.gamestate = gs;
+
 		GameState.setGameState(gs);
-		
-		
-		
+
 	}
 
-	public void broadcast(GameState gs) {
+	public void broadcast(GameState gamestate) {
 		
-		for(ClientThread client: clients){
-			
+
+		for (ServerThread thread : serverThreadlist) {
+			thread.sendObjectToClient(gamestate);
 		}
-		
-		
+
+
 	}
 
-		
-	}
-
-	
-
-
+}

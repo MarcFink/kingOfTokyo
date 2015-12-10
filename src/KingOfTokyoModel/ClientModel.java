@@ -10,83 +10,33 @@ import java.net.Socket;
 
 import javafx.application.Platform;
 
-public class ClientModel extends Thread {
+public class ClientModel{
 
 	private Socket socket;
-	private ObjectOutputStream out;
-	private ObjectInputStream in;
-	private volatile boolean stopThread=false;
 	private int playerid;
+	private GameState gamestate=null;
 	ClientModel clientmodel;
-	
+
 
 	public ClientModel() {
+		
+		
 
 	}
 
 	public void startClientConnection(String ipaddress, int port) throws Exception {
 		socket=new Socket("localhost", 4444);
-		this.out=new ObjectOutputStream(socket.getOutputStream());
-		this.in=new ObjectInputStream(socket.getInputStream());
 		System.out.println("Client ist gestartet");
+		ClientThread clientThread=new ClientThread(clientmodel,socket,gamestate);
+		clientThread.start();
+	}
 
-		
-		this.start();
+	public GameState getGamestate() {
+		return gamestate;
+	}
+
+	public void setGamestate(GameState gamestate) {
+		this.gamestate = gamestate;
 	}
 	
-	public void disconnect(){
-		try{
-			if(socket!=null){
-				socket.close();
-				stopThread=true;
-				this.interrupt();
-			}
-			}catch(IOException e){
-				System.out.println(e.getMessage());
-			}
-		}
-		
-	public void sendGameStateToServer(GameState gs){
-		try{
-			
-		gs.setPlayerid(getPlayerid());
-		out.writeObject(gs);
-		
-		}catch(IOException e){
-			System.out.println(e.getMessage());
-		}
-	}
-
-	public void run(){
-		listen();
-		
-	}
-	private void listen() {
-		try{
-			this.playerid=(int) in.readObject();
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run(){
-					
-				}
-				
-				
-			};
-			
-		}catch(IOException e){
-			System.out.println(e.getMessage());
-			
-		}
-	}
-
-	public int getPlayerid() {
-		return playerid;
-	}
-
-	public void setPlayerid(int playerid) {
-		this.playerid = playerid;
-	}
-
-
-
 }

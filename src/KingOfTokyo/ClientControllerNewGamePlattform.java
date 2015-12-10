@@ -1,8 +1,10 @@
 package KingOfTokyo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import KingOfTokyoModel.ClientModel;
+import KingOfTokyoModel.GameState;
 import KingOfTokyoModel.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +31,11 @@ public class ClientControllerNewGamePlattform {
 	private String glorypoints;
 	private String playername;
 	private String gamename;
+	private String monster;
 	private int lifepoints;
+	private ArrayList players;
+	private Player player1;
+	private Player player2;
 	
 	public ClientControllerNewGamePlattform(){
 		
@@ -62,24 +68,21 @@ public class ClientControllerNewGamePlattform {
 	 */
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
-		playername = playerName.getText();
-		gamename = gameName.getText();
-		player.setGamename(gamename);
-		player.setName(playername);
-		System.out.println(player.getGamename());
-		System.out.println(player.getName());
-		System.out.println(player.getMonster());
+		//players=GameState.getPlayerlist();
+		
+		
+		
+		
 		node = (Node) event.getSource();
 		stage = (Stage) node.getScene().getWindow();
 		scene = stage.getScene();
 		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
 		root = (Parent) loader.load();
 		scene.setRoot(root);
-		stage.setTitle(player.getGamename());
+		//stage.setTitle(player.getGamename());
 		
 		
-		System.out.println(String.valueOf(player.getLifePoints()));
-		System.out.println(String.valueOf(player.getGloryPoints()));
+		
 
 		
 		// wir suchen nach labelid -> siehe gameboard
@@ -118,14 +121,14 @@ public class ClientControllerNewGamePlattform {
 		}
 	}
 	@FXML public void theKingAction(ActionEvent event) {
-		player.setMonster("TheKing");
+		monster="TheKing";
 		
 	}
 	@FXML public void krakenAction(ActionEvent event) {
-		player.setMonster("Kraken");
+		monster="Kraken";
 	}
 	@FXML public void gigaZaurAction(ActionEvent event) {
-		player.setMonster("GigaZaur");
+		monster="GigaZaur";
 	}
 	
 

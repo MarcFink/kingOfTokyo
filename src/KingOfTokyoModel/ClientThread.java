@@ -1,100 +1,109 @@
 package KingOfTokyoModel;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ClientThread extends Thread {
+import javafx.application.Platform;
 
-	Socket clientSocket;
-	private int id;
+public class ClientThread extends Thread {
+	
+	private Socket clientsocket;
+	private ClientModel clientmodel;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private ServerModel servermodel;
-
-	public ClientThread(int id, Socket clientSocket, ServerModel servermodel) throws IOException {
-		this.servermodel = servermodel;
-		this.clientSocket = clientSocket;
-		this.id = id;
-		this.in = new ObjectInputStream(clientSocket.getInputStream());
-		this.out = new ObjectOutputStream(clientSocket.getOutputStream());
+	private volatile boolean stopThread=false;
+	private GameState gamestate;
+	
+	public ClientThread(ClientModel clientmodel,Socket clientsocket,GameState gamestate) throws IOException{
+		this.clientsocket=clientsocket;
+		this.clientmodel=clientmodel;
+		this.gamestate=gamestate;
+		this.out=new ObjectOutputStream(clientsocket.getOutputStream());
+		this.in=new ObjectInputStream(clientsocket.getInputStream());
+		
+		
+	}
+	public void disconnect(){
+		try{
+			if(clientsocket!=null){
+				clientsocket.close();
+				stopThread=true;
+				this.interrupt();
+			}
+			}catch(IOException e){
+				System.out.println(e.getMessage());
+			}
+		}
+		
+	public void sendGameStateToServer(GameState gamestate){
+		try{
+	
+		out.writeObject(gamestate);
+		
+		}catch(IOException e){
+			System.out.println(e.getMessage());
+		}
 	}
 
-	public void run() {
+	public void run(){
 		try {
 			listen();
-			System.out.println("Client gestartet ");
-
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+		
 	}
-
-	public void close() {
-		try {
-			this.interrupt();
-			clientSocket.close();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	public void listen() throws IOException, ClassNotFoundException {
-		GameState gs;
-		Object o;
-
-		try {
-
-			while ((o = in.readObject()) != null) {
-
-				gs = (GameState) o;
-				servermodel.objectfromclientSetGameState(gs);
-				servermodel.broadcast(gs);
+	private void listen() throws ClassNotFoundException {
+		
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run(){
+				
+				while(true){
+					
+					try {
+						
+						while (true){
+							
+							gamestate = (GameState) in.readObject();
+							clientmodel.setGamestate(gamestate);
+						}
+						
+						
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
 			}
-
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+			
+			
+		});
 	}
 
-	public void sendObjektToClient(GameState gs) {
-		try {
-
-			int a = gs.getPlayerlist().size();
-			System.out.println(a);
-			this.out.writeObject(gs);
-			out.flush();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+	protected void setGameState(GameState gamestate) {
+		gamestate=gamestate;
 	}
 
-	public void sendIDToClioent(int clientID) {
-		try {
-			this.out.writeObject(clientID);
-			out.flush();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+	public GameState getGamestate() {
+		return gamestate;
 	}
 
-	public ObjectOutputStream getOut() {
-		return out;
+	public void setGamestate(GameState gamestate) {
+		this.gamestate = gamestate;
 	}
 
-	public void setOut(ObjectOutputStream out) {
-		this.out = out;
-	}
+	
 
-	public ObjectInputStream getIn() {
-		return in;
-	}
-
-	public void setIn(ObjectInputStream in) {
-		this.in = in;
-	}
 }
+	
+	
+
+
