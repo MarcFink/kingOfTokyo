@@ -26,7 +26,7 @@ public class ServerThread extends Thread {
 		this.clientSocket = clientSocket;
 		this.in = new ObjectInputStream(clientSocket.getInputStream());
 		this.out = new ObjectOutputStream(clientSocket.getOutputStream());
-		//servermodel.broadcast(gamestate);
+		// Das erste mal wird das Gamestate nur an den einen Client gesendet solange noch keine weiteren verbunden sind.
 		sendObjectToClient(gamestate);
 	}
 
@@ -56,7 +56,9 @@ public class ServerThread extends Thread {
 		try {
 
 			while (true) {
+				//Thread läuft die ganze Zeit und liest ob ein Object geschickt wurde
 				gamestate = (GameState) in.readObject();
+				//Das eingelesene Objekt wird gleich an alle verbundenn Clients geschickt.
 				servermodel.broadcast(gamestate);
 			}
 

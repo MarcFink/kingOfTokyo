@@ -88,7 +88,6 @@ public class ServerModel {
 			System.out.println(client_id + ". Client hinzugefügt");
 			// clientThreads werden in einer ArrayListe gespeichert
 			
-
 		}
 
 	}
@@ -101,6 +100,7 @@ public class ServerModel {
 	}
 
 	public void broadcast(GameState gamestate) {
+		//schickt das Gamestate an alle verbundenen Clients
 		
 
 		for (ServerThread thread : serverThreadlist) {

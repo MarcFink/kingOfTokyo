@@ -34,6 +34,7 @@ public class ClientControllerMenu {
 	@FXML
 	public void connectClient(ActionEvent event) throws Exception {
 		clientModel = new ClientModel();
+		
 		clientModel.startClientConnection(ipA, port);
 		stage = new Stage();
 		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/NewGamePlattform.fxml"));

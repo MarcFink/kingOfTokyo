@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import KingOfTokyo.ClientControllerNewGamePlattform;
 import javafx.application.Platform;
 
 public class ClientThread extends Thread {
@@ -14,12 +15,13 @@ public class ClientThread extends Thread {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private volatile boolean stopThread=false;
-	private GameState gamestate;
 	
-	public ClientThread(ClientModel clientmodel,Socket clientsocket,GameState gamestate) throws IOException{
+	private ClientThread clientThread;
+	
+	public ClientThread(ClientModel clientmodel,Socket clientsocket) throws IOException{
+		this.clientThread=clientThread;
 		this.clientsocket=clientsocket;
 		this.clientmodel=clientmodel;
-		this.gamestate=gamestate;
 		this.out=new ObjectOutputStream(clientsocket.getOutputStream());
 		this.in=new ObjectInputStream(clientsocket.getInputStream());
 		
@@ -48,6 +50,7 @@ public class ClientThread extends Thread {
 	}
 
 	public void run(){
+		
 		try {
 			listen();
 		} catch (ClassNotFoundException e) {
@@ -61,6 +64,7 @@ public class ClientThread extends Thread {
 		Platform.runLater(new Runnable(){
 			@Override
 			public void run(){
+				GameState gamestate=null;
 				
 				while(true){
 					
@@ -70,7 +74,9 @@ public class ClientThread extends Thread {
 							
 							gamestate = (GameState) in.readObject();
 							clientmodel.setGamestate(gamestate);
+							
 						}
+						
 						
 						
 					} catch (ClassNotFoundException e) {
@@ -82,24 +88,19 @@ public class ClientThread extends Thread {
 					}
 				}
 				
+				
 			}
+
+			
 			
 			
 		});
 	}
 
-	protected void setGameState(GameState gamestate) {
-		gamestate=gamestate;
-	}
+	
 
-	public GameState getGamestate() {
-		return gamestate;
-	}
 
-	public void setGamestate(GameState gamestate) {
-		this.gamestate = gamestate;
-	}
-
+	
 	
 
 }
