@@ -12,6 +12,10 @@ public class GameState implements Serializable {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	static GameState gamestate;
 	static ArrayList<Player> playerlist;
 	private static int numofGloryPointsPlayer1 = 0;
@@ -34,14 +38,14 @@ public class GameState implements Serializable {
 		//Singleton, das Objekt wird nur einmal erstellt. 
 		if (GameState.gamestate == null) {
 			GameState.gamestate = new GameState();
-			gamestate.playerlist = new ArrayList<Player>();
+			GameState.playerlist = new ArrayList<Player>();
 			System.out.println("GameState erstellt");
 		}
-		return GameState.gamestate;
+		return gamestate;
 	}
 	
-	public static void setGameState(GameState gs){
-		GameState.gamestate=gs;
+	public static void setGameState(GameState gamestate){
+		GameState.gamestate=gamestate;
 	}
 
 	public String toString() {
@@ -102,16 +106,16 @@ public class GameState implements Serializable {
 		//Jedes mal wenn ein Client erstellt wird wird mit der ClientID ein neues Playerobjekt erstellt.
 		this.playerid=client_id;
 		player=new Player(playerid);
-		playerlist.add(player);
+		GameState.playerlist.add(player);
 		System.out.println(playerid);
 	}
 
-	public static ArrayList<Player> getPlayerlist() {
+	public ArrayList<Player> getPlayerlist() {
 		return playerlist;
 	}
 
 	public void setPlayerlist(ArrayList<Player> playerlist) {
-		this.playerlist = playerlist;
+		GameState.playerlist = playerlist;
 	}
 
 	public int getPlayerid() {
@@ -120,6 +124,14 @@ public class GameState implements Serializable {
 
 	public void setPlayerid(int playerid) {
 		this.playerid = playerid;
+	}
+
+	public static int getPlayer1isTurn() {
+		return player1isTurn;
+	}
+
+	public static void setPlayer1isTurn(int player1isTurn) {
+		GameState.player1isTurn = player1isTurn;
 	}
 	
 	

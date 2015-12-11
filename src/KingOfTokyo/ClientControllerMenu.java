@@ -1,8 +1,10 @@
 package KingOfTokyo;
 
 import java.io.IOException;
+import java.net.Socket;
 
 import KingOfTokyoModel.ClientModel;
+import KingOfTokyoModel.ClientThread;
 import KingOfTokyoModel.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +22,9 @@ public class ClientControllerMenu {
 	private FXMLLoader loader;
 	private int port = 4444;
 	private String ipA = "Localhost";
+	
+	private Socket socket;
+	
 	
 	
 	

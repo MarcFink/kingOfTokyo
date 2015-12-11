@@ -42,6 +42,7 @@ public class ClientControllerNewGamePlattform {
 	private GameState gamestate;
 	
 	public ClientControllerNewGamePlattform(){
+
 		
 		
 		
@@ -73,26 +74,28 @@ public class ClientControllerNewGamePlattform {
 	 * GameBoard auf die gleiche Stage geladen, auf der sich die Scene
 	 * NewGamePlattform befunden hatte.
 	 */
+	
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
 	
-		players=clientModel.getGamestate().getPlayerlist();
+		//players=clientThread.getGamestate().getPlayerlist();
 	
-		for(Player player: players){
-			if(player.getPlayerId()==1){
-				player.setPlayername(playerName.getText());
-				player.setMonster(monster);
-				
-			}else{
-				player.setPlayername(playerName.getText());
-				player.setMonster(monster);
-				
-			}
-			
-			clientThread.sendGameStateToServer(gamestate);
-		}
+//	
+//		for(Player player: players){
+//			if(player.getPlayerId()==1){
+//				player.setPlayername(playerName.getText());
+//				player.setMonster(monster);
+//				
+//			}else{
+//				player.setPlayername(playerName.getText());
+//				player.setMonster(monster);
+//			
+//			}
+//			
+//		clientThread.sendToServer(gamestate);
+//	}
+
 	
-		
 		
 		node = (Node) event.getSource();
 		stage = (Stage) node.getScene().getWindow();
@@ -101,6 +104,7 @@ public class ClientControllerNewGamePlattform {
 		root = (Parent) loader.load();
 		scene.setRoot(root);
 		stage.setTitle("In Da Game");
+		
 		
 		
 	}
