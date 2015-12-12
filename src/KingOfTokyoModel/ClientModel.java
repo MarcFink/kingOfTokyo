@@ -6,6 +6,7 @@ public class ClientModel{
 
 	private Socket socket;
 	ClientModel clientmodel;
+	private ServerListener serverListener;
 
 
 	public ClientModel() {
@@ -17,8 +18,8 @@ public class ClientModel{
 	public void startClientConnection(String ipaddress, int port) throws Exception {
 		socket=new Socket("localhost", 4444);
 		System.out.println("Client ist gestartet");
-		ClientThread clientThread=new ClientThread(clientmodel,socket);
-		clientThread.start();
+		new ServerListener(this,socket).start();
+		
 		
 	}
 

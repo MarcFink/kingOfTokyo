@@ -28,42 +28,35 @@ public class ServerModel {
 	ObjectInputStream serverInputStream;
 	ObjectOutputStream serverOutputStream;
 	private ServerModel serverModel;
-	private ServerThread serverThread;
-	private ArrayList <ServerThread> serverThreadlist;
-
-
+	private ClientThread clientThread;
+	private ArrayList<ClientThread> clientThreadList;
 
 	public ServerModel(ServerController serverController, int prt) {
 		// Erstellt das GameStateobjekt, welches während dem Spielen hin und her
 		// geschickt wird.
 		this.serverController = serverController;
-		serverThreadlist = new ArrayList<ServerThread>();
+		clientThreadList = new ArrayList<ClientThread>();
 		this.port = prt;
 		gamestate = GameState.getInstance();
 	}
-
-	public void connectServer() throws IOException {
-
-		// Serversocket wird erstellt und läuft in einem eigenen anonymen Thread
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-
-				try {
-
-					serverSocket = new ServerSocket(port);
-					System.out.println(port + " Server ist gestartet");
-					connectClient();
-
-				} catch (IOException | InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		}).start();
-
+	
+	public void start() throws IOException {
+		serverSocket = new ServerSocket(port);
+		System.out.println(port + " Server ist gestartet");
+		while (true) {
+			clientSocket = serverSocket.accept();
+			client_id++;
+			gamestate.addPlayer(client_id);
+			clientThread = new ClientThread(client_id, clientSocket, serverModel, gamestate);
+			// fügt den Thread in eine Arraylist
+			clientThreadList.add(clientThread);
+			// clientThread wird gestartet
+			clientThread.start();
+			System.out.println(client_id + ". Client hinzugefügt");
+			// clientThreads werden in einer ArrayListe gespeichert
+		}
 	}
+	
 
 	public Socket getClientSocket() {
 		return clientSocket;
@@ -71,25 +64,6 @@ public class ServerModel {
 
 	public void setClientSocket(Socket clientSocket) {
 		this.clientSocket = clientSocket;
-	}
-
-	public void connectClient() throws IOException, InterruptedException {
-		// Jeder Client erhält seinen eigenen Thread
-		while (true) {
-			clientSocket = serverSocket.accept();
-
-			client_id++;
-			gamestate.addPlayer(client_id);
-			serverThread = new ServerThread(client_id, clientSocket, serverModel, gamestate);
-			//fügt den Thread in eine Arraylist
-			serverThreadlist.add(serverThread);
-			// clientThread wird gestartet
-			serverThread.start();
-			System.out.println(client_id + ". Client hinzugefügt");
-			// clientThreads werden in einer ArrayListe gespeichert
-			
-		}
-
 	}
 
 	public void objectfromclientSetGameState(GameState gs) {
@@ -100,13 +74,11 @@ public class ServerModel {
 	}
 
 	public void broadcast(GameState gamestate) {
-		//schickt das Gamestate an alle verbundenen Clients
-		
+		// schickt das Gamestate an alle verbundenen Clients
 
-		for (ServerThread thread : serverThreadlist) {
+		for (ClientThread thread : clientThreadList) {
 			thread.sendObjectToClient(gamestate);
 		}
-
 
 	}
 

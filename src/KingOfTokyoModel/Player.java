@@ -6,30 +6,21 @@ import KingOfTokyo.ClientView;
 
 public class Player implements Serializable {
 	private int playerId;
-	private boolean isInTokyo;
-	private boolean isTurn;
+	private boolean isInTokyo=false;
+	private boolean isTurn=false;
 	private String playername;
 	private String monster;
 
-	private int gloryPoints;
-	private int lifePoints;
+	private int gloryPoints=0;
+	private int lifePoints=10;
 
 	public Player(int playerId) {
 		this.playerId=playerId;
-		
-		lifePoints=20;
-		gloryPoints=0;
-		isTurn=false;
-		isInTokyo=false;
-		
+	
 		if (this.playerId == 1){ // Spieler 1 beginnt
 			this.isTurn = true;
-		//	this.isAufTokyo = true;
-			
+		//	this.isAufTokyo = true;			
 		}
-		
-		
-		
 
 	}
 

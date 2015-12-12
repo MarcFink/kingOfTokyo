@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import KingOfTokyoModel.ClientModel;
-import KingOfTokyoModel.ClientThread;
+import KingOfTokyoModel.ServerListener;
 import KingOfTokyoModel.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

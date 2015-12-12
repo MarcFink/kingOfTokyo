@@ -3,6 +3,7 @@ package Main;
 import java.io.IOException;
 
 import KingOfTokyo.ServerController;
+import KingOfTokyoModel.ServerModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,13 +21,10 @@ public class Server extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		//Server wird gestartet und GUI wird geladen
-		Stage menuStage=new Stage();
-		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/Server.fxml"));
-		Scene scene = new Scene(root);
-		menuStage.setScene(scene);
-		menuStage.setTitle("King of Tokyo");
-		menuStage.show();
+		//Server wird gestartet
+		
+		ServerController serverController=new ServerController();
+				
 	}
 
 	public static void main(String[] args) {

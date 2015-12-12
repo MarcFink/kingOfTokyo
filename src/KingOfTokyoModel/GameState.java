@@ -2,6 +2,8 @@ package KingOfTokyoModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameState implements Serializable {
 
@@ -12,7 +14,7 @@ public class GameState implements Serializable {
 	/**
 	 * 
 	 */
-	static ArrayList<Player> playerlist;
+	static Map<Integer, Player> playerlist;
 	private static int numofGloryPointsPlayer1 = 0;
 	private static int numofLifePointsPlayer1 = 20;
 	private static boolean inTokyoPlayer1 = false;
@@ -33,7 +35,7 @@ public class GameState implements Serializable {
 		if (instance == null) {
 
 			instance = new GameState();
-			instance.playerlist = new ArrayList<Player>();
+			instance.playerlist = new HashMap<Integer, Player>();
 			System.out.println("GameState wurde erstellt");
 		}
 		return instance;
@@ -70,9 +72,11 @@ public class GameState implements Serializable {
 		}
 	}
 
-	public static void setNumofLifePointsPlayer1(int numofLifePointsPlayer1) {
+	public static void setNumofLifePoints(int numofLifePoints, int playerid) {
 		synchronized (instance) {
 			GameState.numofLifePointsPlayer1 = numofLifePointsPlayer1;
+			Player currentPlayer = playerlist.get(playerid);
+			currentPlayer.setLifePoints(numofLifePoints);
 		}
 	}
 
@@ -125,15 +129,17 @@ public class GameState implements Serializable {
 		// neues Playerobjekt erstellt.
 		this.playerid = client_id;
 		player = new Player(playerid);
-		GameState.playerlist.add(player);
+		GameState.playerlist.put(playerid, player);
 		System.out.println(playerid);
 	}
 
-	public ArrayList<Player> getPlayerlist() {
-		return playerlist;
+	public static Map<Integer, Player> getPlayerlist() {
+		synchronized (instance) {
+			return playerlist;
+		}
 	}
 
-	public void setPlayerlist(ArrayList<Player> playerlist) {
+	public static void setPlayerlist(Map<Integer, Player> playerlist) {
 		synchronized (instance) {
 			GameState.playerlist = playerlist;
 		}

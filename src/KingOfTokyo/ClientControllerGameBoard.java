@@ -1,21 +1,17 @@
 package KingOfTokyo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import KingOfTokyoModel.ClientModel;
 import KingOfTokyoModel.Dice;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
 
 public class ClientControllerGameBoard extends ClientControllerNewGamePlattform{
 
@@ -40,6 +36,7 @@ public class ClientControllerGameBoard extends ClientControllerNewGamePlattform{
 	@FXML Label glorypointstwo;
 	@FXML Label lifepointstwo;
 	
+	private ClientModel clientmodel;
 	private Boolean w1Selected = false;
 	private Boolean w2Selected = false;
 	private Boolean w3Selected = false;
@@ -367,7 +364,12 @@ public class ClientControllerGameBoard extends ClientControllerNewGamePlattform{
 		}
 		würfelVersuchCounter++;
 		System.out.println(würfelVersuchCounter);
-	} else {
+//		gamestate.setNumofLifePoints(numofLifePoints, playerid);
+		
+	} else if(ButtonRollDice.getText().equals("Zug beenden")){
+	//	clientmodel.executeTurn(diceValues);
+	}
+	{
 		ButtonRollDice.setText("Zug beenden");
 		dr1.setVisible(false);
 		dr2.setVisible(false);
