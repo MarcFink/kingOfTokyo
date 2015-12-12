@@ -1,7 +1,10 @@
 package KingOfTokyo;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import KingOfTokyoModel.Dice;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,35 +12,369 @@ import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
 
 public class ClientControllerGameBoard extends ClientControllerNewGamePlattform{
 
+	@FXML Button ButtonRollDice;
+	@FXML RadioButton dr1;
+	@FXML RadioButton dr2;
+	@FXML RadioButton dr3;
+	@FXML RadioButton dr4;
+	@FXML RadioButton dr5;
+	@FXML RadioButton dr6;
+	@FXML ImageView di6;
+	@FXML ImageView di5;
+	@FXML ImageView di4;
+	@FXML ImageView di3;
+	@FXML ImageView di2;
+	@FXML ImageView di1;
+	@FXML ImageView imagemonsterone;
+	@FXML Label playernameone;
+	@FXML Label glorypointsone;
+	@FXML Label lifepointsone;
+	@FXML Label playernametwo;
+	@FXML Label glorypointstwo;
+	@FXML Label lifepointstwo;
+	
+	private Boolean w1Selected = false;
+	private Boolean w2Selected = false;
+	private Boolean w3Selected = false;
+	private Boolean w4Selected = false;
+	private Boolean w5Selected = false;
+	private Boolean w6Selected = false;
+	private int würfelVersuchCounter = 0;
+	private List<String> diceValues;
+
+
 	public ClientControllerGameBoard(){
-		
+	
 	}
-
-
-@FXML
-public void ErsterZug(ActionEvent event) throws IOException {
-	Stage würfelStage = new Stage();
-	AnchorPane würfeln = (AnchorPane) FXMLLoader.load(getClass().getResource("../KingOfTokyoView/RollDice.fxml"));
-	Scene scene = new Scene(würfeln);
-	würfelStage.setScene(scene);
-	würfelStage.setTitle("Würfeln");
-	würfelStage.show();
-	RadioButton wr1 = (RadioButton) scene.lookup("#wr1");
-	wr1.setVisible(false);
-	RadioButton wr2 = (RadioButton) scene.lookup("#wr2");
-	wr2.setVisible(false);
-	RadioButton wr3 = (RadioButton) scene.lookup("#wr3");
-	wr3.setVisible(false);
-	RadioButton wr4 = (RadioButton) scene.lookup("#wr4");
-	wr4.setVisible(false);
-	RadioButton wr5 = (RadioButton) scene.lookup("#wr5");
-	wr5.setVisible(false);
-	RadioButton wr6 = (RadioButton) scene.lookup("#wr6");
-	wr6.setVisible(false);
+	
 	
 
+
+
+@FXML public void dr6action(ActionEvent event) {
+	if (w6Selected == false) {
+		w6Selected = true;
+	} else if (w6Selected == true) {
+		w6Selected = false;
+
+	}
+}
+
+
+
+@FXML public void dr5action(ActionEvent event) {
+	if (w5Selected == false) {
+		w5Selected = true;
+	} else if (w5Selected == true) {
+		w5Selected = false;
+
+	}
+}
+
+
+@FXML public void dr4action(ActionEvent event) {
+	if (w4Selected == false) {
+		w4Selected = true;
+	} else if (w4Selected == true) {
+		w4Selected = false;
+
+	}
+}
+
+
+@FXML public void dr3action(ActionEvent event) {
+	if (w3Selected == false) {
+		w3Selected = true;
+	} else if (w3Selected == true) {
+		w3Selected = false;
+
+	}
+}
+
+
+@FXML public void dr2action(ActionEvent event) {
+	if (w2Selected == false) {
+		w2Selected = true;
+	} else if (w2Selected == true) {
+		w2Selected = false;
+
+	}
+}
+
+
+@FXML public void dr1action(ActionEvent event) {
+	if (w1Selected == false) {
+		w1Selected = true;
+	} else if (w1Selected == true) {
+		w1Selected = false;
+
+	}
+}
+
+
+@FXML public void ButtonRollDiceAction(ActionEvent event) {
+	Dice dice = new Dice();
+	diceValues = new ArrayList<String>();
+	if (würfelVersuchCounter == 0) {
+		String die1 = dice.rollDice();
+		if (die1.equals("1")) {
+			Image img = new Image("./Images/Num1.png");
+			di1.setImage(img);
+		} else if (die1.equals("2")) {
+			Image img = new Image("./Images/Num2.png");
+			di1.setImage(img);
+			
+		} else if (die1.equals("3")) {
+			Image img = new Image("./Images/Num3.png");
+			di1.setImage(img);
+		} else if (die1.equals("A")) {
+			Image img = new Image("./Images/attack.png");
+			di1.setImage(img);
+		} else if (die1.equals("H")) {
+			Image img = new Image("./Images/heal.png");
+			di1.setImage(img);
+		}
+		diceValues.add(die1);
+		String die2 = dice.rollDice();
+		if (die2.equals("1")) {
+			Image img = new Image("./Images/Num1.png");
+			di2.setImage(img);
+
+		} else if (die2.equals("2")) {
+			Image img = new Image("./Images/Num2.png");
+			di2.setImage(img);
+		} else if (die2.equals("3")) {
+			Image img = new Image("./Images/Num3.png");
+			di2.setImage(img);
+		} else if (die2.equals("A")) {
+			Image img = new Image("./Images/attack.png");
+			di2.setImage(img);
+		} else if (die2.equals("H")) {
+			Image img = new Image("./Images/heal.png");
+			di2.setImage(img);
+		}
+		diceValues.add(die2);
+		String die3 = dice.rollDice();
+		if (die3.equals("1")) {
+			Image img = new Image("./Images/Num1.png");
+			di3.setImage(img);
+		} else if (die3.equals("2")) {
+			Image img = new Image("./Images/Num2.png");
+			di3.setImage(img);
+		} else if (die3.equals("3")) {
+			Image img = new Image("./Images/Num3.png");
+			di3.setImage(img);
+		} else if (die3.equals("A")) {
+			Image img = new Image("./Images/attack.png");
+			di3.setImage(img);
+		} else if (die3.equals("H")) {
+			Image img = new Image("./Images/heal.png");
+			di3.setImage(img);
+		}
+		diceValues.add(die3);
+		
+		String die4 = dice.rollDice();
+		if (die4.equals("1")) {
+			Image img = new Image("./Images/Num1.png");
+			di4.setImage(img);
+		} else if (die4.equals("2")) {
+			Image img = new Image("./Images/Num2.png");
+			di4.setImage(img);
+		} else if (die4.equals("3")) {
+			Image img = new Image("./Images/Num3.png");
+			di4.setImage(img);
+		} else if (die4.equals("A")) {
+			Image img = new Image("./Images/attack.png");
+			di4.setImage(img);
+		} else if (die4.equals("H")) {
+			Image img = new Image("./Images/heal.png");
+			di4.setImage(img);
+		}
+		diceValues.add(die4);
+		String die5 = dice.rollDice();
+		if (die5.equals("1")) {
+			Image img = new Image("./Images/Num1.png");
+			di5.setImage(img);
+		} else if (die5.equals("2")) {
+			Image img = new Image("./Images/Num2.png");
+			di5.setImage(img);
+		} else if (die5.equals("3")) {
+			Image img = new Image("./Images/Num3.png");
+			di5.setImage(img);
+		} else if (die5.equals("A")) {
+			Image img = new Image("./Images/attack.png");
+			di5.setImage(img);
+		} else if (die5.equals("H")) {
+			Image img = new Image("./Images/heal.png");
+			di5.setImage(img);
+		}
+		diceValues.add(die5);
+		String die6 = dice.rollDice();
+		if (die6.equals("1")) {
+			Image img = new Image("./Images/Num1.png");
+			di6.setImage(img);
+		} else if (die6.equals("2")) {
+			Image img = new Image("./Images/Num2.png");
+			di6.setImage(img);
+		} else if (die6.equals("3")) {
+			Image img = new Image("./Images/Num3.png");
+			di6.setImage(img);
+		} else if (die6.equals("A")) {
+			Image img = new Image("./Images/attack.png");
+			di6.setImage(img);
+		} else if (die6.equals("H")) {
+			Image img = new Image("./Images/heal.png");
+			di6.setImage(img);
+		}
+		diceValues.add(die6);
+		dr1.setVisible(true);
+		dr2.setVisible(true);
+		dr3.setVisible(true);
+		dr4.setVisible(true);
+		dr5.setVisible(true);
+		dr6.setVisible(true);
+		würfelVersuchCounter++;
+
+		for(String val: diceValues)
+		{
+		int points =  gamestate.getNumofGloryPointsPlayer1();
+		gamestate.setNumofGloryPointsPlayer1(points + Integer.getInteger(val));
+		}
+
+		System.out.println(würfelVersuchCounter);
+	} else if (würfelVersuchCounter <= 2) {
+
+		if (w1Selected == true) {
+			String die1 = dice.rollDice();
+			if (die1.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				di1.setImage(img);
+			} else if (die1.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				di1.setImage(img);
+			} else if (die1.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				di1.setImage(img);
+			} else if (die1.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				di1.setImage(img);
+			} else if (die1.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				di1.setImage(img);
+			}
+		}
+		if (w2Selected == true) {
+			String die2 = dice.rollDice();
+			if (die2.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				di2.setImage(img);
+			} else if (die2.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				di2.setImage(img);
+			} else if (die2.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				di2.setImage(img);
+			} else if (die2.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				di2.setImage(img);
+			} else if (die2.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				di2.setImage(img);
+			}
+		}
+		if (w3Selected == true) {
+			String die3 = dice.rollDice();
+			if (die3.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				di3.setImage(img);
+			} else if (die3.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				di3.setImage(img);
+			} else if (die3.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				di3.setImage(img);
+			} else if (die3.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				di3.setImage(img);
+			} else if (die3.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				di3.setImage(img);
+			}
+		}
+		if (w4Selected == true) {
+			String die4 = dice.rollDice();
+			if (die4.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				di4.setImage(img);
+			} else if (die4.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				di4.setImage(img);
+			} else if (die4.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				di4.setImage(img);
+			} else if (die4.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				di4.setImage(img);
+			} else if (die4.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				di4.setImage(img);
+			}
+		}
+		if (w5Selected == true) {
+			String die5 = dice.rollDice();
+			if (die5.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				di5.setImage(img);
+			} else if (die5.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				di5.setImage(img);
+			} else if (die5.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				di5.setImage(img);
+			} else if (die5.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				di5.setImage(img);
+			} else if (die5.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				di5.setImage(img);
+			}
+		}
+		if (w6Selected == true) {
+			String die6 = dice.rollDice();
+			if (die6.equals("1")) {
+				Image img = new Image("./Images/Num1.png");
+				di6.setImage(img);
+			} else if (die6.equals("2")) {
+				Image img = new Image("./Images/Num2.png");
+				di6.setImage(img);
+			} else if (die6.equals("3")) {
+				Image img = new Image("./Images/Num3.png");
+				di6.setImage(img);
+			} else if (die6.equals("A")) {
+				Image img = new Image("./Images/attack.png");
+				di6.setImage(img);
+			} else if (die6.equals("H")) {
+				Image img = new Image("./Images/heal.png");
+				di6.setImage(img);
+			}
+		}
+		würfelVersuchCounter++;
+		System.out.println(würfelVersuchCounter);
+	} else {
+		ButtonRollDice.setText("Zug beenden");
+		dr1.setVisible(false);
+		dr2.setVisible(false);
+		dr3.setVisible(false);
+		dr4.setVisible(false);
+		dr5.setVisible(false);
+		dr6.setVisible(false);
+	}
 }
 }

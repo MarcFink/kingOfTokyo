@@ -7,83 +7,56 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KingOfTokyo.ClientControllerGameBoard">
-  <center>
-    <ImageView fitHeight="600.0" fitWidth="521.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-      <image>
-        <Image url="@/Images/GameBoard.png" />
-      </image>
-    </ImageView>
-  </center>
-  <left>
-    <GridPane BorderPane.alignment="CENTER">
-      <children>
-        <GridPane GridPane.rowIndex="1">
-          <children>
-            <Label text="Ruhmpunkte:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label text="Lebenspunkte:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label text="Spielername:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label fx:id="lblname" text="Name" GridPane.columnIndex="1" />
-            <Label fx:id="lbllife" text="Lebenspunkte" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="lblglory" text="Glorypoints" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-          </children>
-          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-        </GridPane>
-        <ImageView fx:id="imageplayerone" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-      </children>
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="0.0" prefWidth="0.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-    </GridPane>
-  </left>
-  <right>
-    <GridPane BorderPane.alignment="CENTER">
-      <children>
-        <GridPane GridPane.rowIndex="1">
-          <children>
-            <Label text="Lebenspunkte:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label text="Ruhmpunkte:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label text="Spielername:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label text="Label" GridPane.columnIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-          </children>
-          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-        </GridPane>
-        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-        <Button mnemonicParsing="false" onAction="#ErsterZug" prefHeight="25.0" prefWidth="95.0" text="Erster Zug" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-      </children>
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="0.0" prefWidth="0.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-    </GridPane>
-  </right>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KingOfTokyo.ClientControllerGameBoard">
+   <children>
+      <Label layoutX="58.0" layoutY="300.0" text="Spielername:" />
+      <Label layoutX="58.0" layoutY="340.0" text="Ruhmpunkte:" />
+      <Label layoutX="58.0" layoutY="380.0" text="Lebenspunkte:" />
+      <ImageView fx:id="imagemonsterone" fitHeight="150.0" fitWidth="200.0" layoutX="35.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+      </ImageView>
+      <Label layoutX="110.0" layoutY="60.0" text="Player 1" />
+      <Label fx:id="playernameone" layoutX="160.0" layoutY="300.0" text="Label" />
+      <Label fx:id="glorypointsone" layoutX="160.0" layoutY="340.0" text="Label" />
+      <Label fx:id="lifepointsone" layoutX="160.0" layoutY="381.0" text="Label" />
+      <Label layoutX="892.0" layoutY="300.0" text="Spielername:" />
+      <Label layoutX="891.0" layoutY="340.0" text="Ruhmpunkte:" />
+      <Label layoutX="887.0" layoutY="380.0" text="Lebenspunkte:" />
+      <Label fx:id="playernametwo" layoutX="987.0" layoutY="300.0" text="Label" />
+      <Label fx:id="glorypointstwo" layoutX="987.0" layoutY="342.0" text="Label" />
+      <Label fx:id="lifepointstwo" layoutX="987.0" layoutY="381.0" text="Label" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="878.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+    	
+      </ImageView>
+      <Label layoutX="964.0" layoutY="60.0" text="Player 2" />
+      <ImageView fitHeight="300.0" fitWidth="300" layoutX="504.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+      <Image url="./Images/GameBoard.png" />
+   		</image>
+      </ImageView>
+      <ImageView fx:id="di1" fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+        
+      </ImageView>
+      <ImageView fx:id="di2" fitHeight="100.0" fitWidth="100.0" layoutX="310.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+         
+      </ImageView>
+      <ImageView fx:id="di3" fitHeight="100.0" fitWidth="100.0" layoutX="430.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+         
+      </ImageView>
+      <ImageView fx:id="di4" fitHeight="100.0" fitWidth="100.0" layoutX="550.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+        
+      </ImageView>
+      <ImageView fx:id="di5" fitHeight="100.0" fitWidth="100.0" layoutX="670.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+        
+      </ImageView>
+      <ImageView fx:id="di6" fitHeight="100.0" fitWidth="100.0" layoutX="790.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+        
+      </ImageView>
+      <RadioButton fx:id="dr6" layoutX="820.0" layoutY="560.0" mnemonicParsing="false" onAction="#dr6action" />
+      <RadioButton fx:id="dr5" layoutX="700.0" layoutY="560.0" mnemonicParsing="false" onAction="#dr5action" />
+      <RadioButton fx:id="dr4" layoutX="580.0" layoutY="560.0" mnemonicParsing="false" onAction="#dr4action" />
+      <RadioButton fx:id="dr3" layoutX="460.0" layoutY="560.0" mnemonicParsing="false" onAction="#dr3action" />
+      <RadioButton fx:id="dr2" layoutX="340.0" layoutY="560.0" mnemonicParsing="false" onAction="#dr2action" />
+      <RadioButton fx:id="dr1" layoutX="230.0" layoutY="560.0" mnemonicParsing="false" onAction="#dr1action" />
+      <Button fx:id="ButtonRollDice" layoutX="1009.0" layoutY="619.0" mnemonicParsing="false" onAction="#ButtonRollDiceAction" text="Würfeln" />
+   </children>
+</AnchorPane>

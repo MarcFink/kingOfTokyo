@@ -59,6 +59,7 @@ public class ClientControllerNewGamePlattform {
 	Label lblglory;
 	@FXML
 	Label lblplayer;
+	
 
 	
 	@FXML
@@ -109,6 +110,7 @@ public class ClientControllerNewGamePlattform {
 		
 	}
 
+	
 //		
 //		// wir suchen nach labelid -> siehe gameboard
 //		Label lblname = (Label) scene.lookup("#lblname");
