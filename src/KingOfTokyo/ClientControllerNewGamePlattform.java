@@ -39,7 +39,7 @@ public class ClientControllerNewGamePlattform {
 	private Player player1;
 	private Player player2;
 	private ClientThread clientThread;
-	private GameState gamestate;
+	protected GameState gamestate;
 	
 	public ClientControllerNewGamePlattform(){
 

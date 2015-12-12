@@ -39,7 +39,7 @@ public class ServerModel {
 		this.serverController = serverController;
 		serverThreadlist = new ArrayList<ServerThread>();
 		this.port = prt;
-		gamestate = GameState.getGameState();
+		gamestate = GameState.getInstance();
 	}
 
 	public void connectServer() throws IOException {
@@ -95,7 +95,7 @@ public class ServerModel {
 	public void objectfromclientSetGameState(GameState gs) {
 		this.gamestate = gs;
 
-		GameState.setGameState(gs);
+		GameState.setInstance(gs);
 
 	}
 

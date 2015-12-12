@@ -10,7 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class ClientControllerGameBoard {
+public class ClientControllerGameBoard extends ClientControllerNewGamePlattform{
 
 	public ClientControllerGameBoard(){
 		
@@ -37,6 +37,7 @@ public void ErsterZug(ActionEvent event) throws IOException {
 	wr5.setVisible(false);
 	RadioButton wr6 = (RadioButton) scene.lookup("#wr6");
 	wr6.setVisible(false);
+	
 
 }
 }

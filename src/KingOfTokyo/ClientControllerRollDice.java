@@ -1,6 +1,10 @@
 package KingOfTokyo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import KingOfTokyoModel.Dice;
+import KingOfTokyoModel.GameState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +13,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class ClientControllerRollDice {
+public class ClientControllerRollDice extends ClientControllerNewGamePlattform {
 	private Boolean w1Selected = false;
 	private Boolean w2Selected = false;
 	private Boolean w3Selected = false;
@@ -17,10 +21,11 @@ public class ClientControllerRollDice {
 	private Boolean w5Selected = false;
 	private Boolean w6Selected = false;
 	private int würfelVersuchCounter = 0;
+	private List<String> diceValues;
+	public ClientControllerRollDice() {
 
-	public ClientControllerRollDice(){
-		
 	}
+
 	@FXML
 	RadioButton wr1;
 	@FXML
@@ -47,14 +52,15 @@ public class ClientControllerRollDice {
 	ImageView wb3;
 	@FXML
 	ImageView wb6;
-	@FXML ToggleGroup group;
+	@FXML
+	ToggleGroup group;
 
 	@FXML
 	public void rollDice(ActionEvent event) {
-		
-		Dice dice = new Dice();
 
-		if (würfelVersuchCounter == 0) {	
+		Dice dice = new Dice();
+		diceValues = new ArrayList<String>();
+		if (würfelVersuchCounter == 0) {
 			String würfel1 = dice.rollDice();
 			if (würfel1.equals("1")) {
 				Image img = new Image("./Images/Num1.png");
@@ -62,6 +68,7 @@ public class ClientControllerRollDice {
 			} else if (würfel1.equals("2")) {
 				Image img = new Image("./Images/Num2.png");
 				wb1.setImage(img);
+				
 			} else if (würfel1.equals("3")) {
 				Image img = new Image("./Images/Num3.png");
 				wb1.setImage(img);
@@ -72,10 +79,12 @@ public class ClientControllerRollDice {
 				Image img = new Image("./Images/heal.png");
 				wb1.setImage(img);
 			}
+			diceValues.add(würfel1);
 			String würfel2 = dice.rollDice();
 			if (würfel2.equals("1")) {
 				Image img = new Image("./Images/Num1.png");
 				wb2.setImage(img);
+
 			} else if (würfel2.equals("2")) {
 				Image img = new Image("./Images/Num2.png");
 				wb2.setImage(img);
@@ -89,6 +98,7 @@ public class ClientControllerRollDice {
 				Image img = new Image("./Images/heal.png");
 				wb2.setImage(img);
 			}
+			diceValues.add(würfel2);
 			String würfel3 = dice.rollDice();
 			if (würfel3.equals("1")) {
 				Image img = new Image("./Images/Num1.png");
@@ -106,6 +116,8 @@ public class ClientControllerRollDice {
 				Image img = new Image("./Images/heal.png");
 				wb3.setImage(img);
 			}
+			diceValues.add(würfel3);
+			
 			String würfel4 = dice.rollDice();
 			if (würfel4.equals("1")) {
 				Image img = new Image("./Images/Num1.png");
@@ -123,6 +135,7 @@ public class ClientControllerRollDice {
 				Image img = new Image("./Images/heal.png");
 				wb4.setImage(img);
 			}
+			diceValues.add(würfel4);
 			String würfel5 = dice.rollDice();
 			if (würfel5.equals("1")) {
 				Image img = new Image("./Images/Num1.png");
@@ -140,6 +153,7 @@ public class ClientControllerRollDice {
 				Image img = new Image("./Images/heal.png");
 				wb5.setImage(img);
 			}
+			diceValues.add(würfel5);
 			String würfel6 = dice.rollDice();
 			if (würfel6.equals("1")) {
 				Image img = new Image("./Images/Num1.png");
@@ -157,7 +171,7 @@ public class ClientControllerRollDice {
 				Image img = new Image("./Images/heal.png");
 				wb6.setImage(img);
 			}
-			
+			diceValues.add(würfel6);
 			wr1.setVisible(true);
 			wr2.setVisible(true);
 			wr3.setVisible(true);
@@ -165,6 +179,13 @@ public class ClientControllerRollDice {
 			wr5.setVisible(true);
 			wr6.setVisible(true);
 			würfelVersuchCounter++;
+
+			for(String val: diceValues)
+			{
+			int points =  gamestate.getNumofGloryPointsPlayer1();
+			gamestate.setNumofGloryPointsPlayer1(points + Integer.getInteger(val));
+			}
+
 			System.out.println(würfelVersuchCounter);
 		} else if (würfelVersuchCounter <= 2) {
 
@@ -295,7 +316,6 @@ public class ClientControllerRollDice {
 		}
 	}
 
-	
 	@FXML
 	public void w1Action(ActionEvent event) {
 		if (w1Selected == false) {
@@ -356,5 +376,3 @@ public class ClientControllerRollDice {
 		}
 	}
 }
-
-
