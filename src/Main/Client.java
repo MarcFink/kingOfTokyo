@@ -12,26 +12,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Client extends Application {
-	
+
 	private Stage kingOfTokyoStage;
-	
-	
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		kingOfTokyoStage=primaryStage;
-		ClientView clientController=new ClientView(kingOfTokyoStage);
-		
-	}
-	
+		kingOfTokyoStage = primaryStage;
+		ClientView clientController = new ClientView(kingOfTokyoStage);
 
-	
+	}
 
 	public static void main(String[] args) {
 		launch(args);
-		
-	
+
 	}
 
-	
-		
-	}
+}

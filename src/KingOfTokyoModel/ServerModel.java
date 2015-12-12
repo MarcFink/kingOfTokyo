@@ -27,7 +27,6 @@ public class ServerModel {
 	ServerController serverController;
 	ObjectInputStream serverInputStream;
 	ObjectOutputStream serverOutputStream;
-	private ServerModel serverModel;
 	private ClientThread clientThread;
 	private ArrayList<ClientThread> clientThreadList;
 
@@ -39,7 +38,7 @@ public class ServerModel {
 		this.port = prt;
 		gamestate = GameState.getInstance();
 	}
-	
+
 	public void start() throws IOException {
 		serverSocket = new ServerSocket(port);
 		System.out.println(port + " Server ist gestartet");
@@ -47,7 +46,7 @@ public class ServerModel {
 			clientSocket = serverSocket.accept();
 			client_id++;
 			gamestate.addPlayer(client_id);
-			clientThread = new ClientThread(client_id, clientSocket, serverModel, gamestate);
+			clientThread = new ClientThread(client_id, clientSocket, this, gamestate);
 			// fügt den Thread in eine Arraylist
 			clientThreadList.add(clientThread);
 			// clientThread wird gestartet
@@ -56,7 +55,6 @@ public class ServerModel {
 			// clientThreads werden in einer ArrayListe gespeichert
 		}
 	}
-	
 
 	public Socket getClientSocket() {
 		return clientSocket;
@@ -75,7 +73,7 @@ public class ServerModel {
 
 	public void broadcast(GameState gamestate) {
 		// schickt das Gamestate an alle verbundenen Clients
-
+		System.out.println("Broadcast to clients..");
 		for (ClientThread thread : clientThreadList) {
 			thread.sendObjectToClient(gamestate);
 		}

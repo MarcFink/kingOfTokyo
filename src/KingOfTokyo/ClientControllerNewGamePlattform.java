@@ -34,17 +34,14 @@ public class ClientControllerNewGamePlattform {
 	private String gamename;
 	private String monster;
 	private int lifepoints;
-	private ArrayList <Player> players;
+	private ArrayList<Player> players;
 	private Player player1;
 	private Player player2;
 	private ServerListener serverListener;
 	protected GameState gamestate;
-	
-	public ClientControllerNewGamePlattform(){
 
-		
-		
-		
+	public ClientControllerNewGamePlattform(ClientModel clientModel){
+		this.clientModel = clientModel;
 	}
 	@FXML
 	TextField gameName;
@@ -74,88 +71,91 @@ public class ClientControllerNewGamePlattform {
 	 * GameBoard auf die gleiche Stage geladen, auf der sich die Scene
 	 * NewGamePlattform befunden hatte.
 	 */
-	
+
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
-	
-		//players=clientThread.getGamestate().getPlayerlist();
-	
-//	
-//		for(Player player: players){
-//			if(player.getPlayerId()==1){
-//				player.setPlayername(playerName.getText());
-//				player.setMonster(monster);
-//				
-//			}else{
-//				player.setPlayername(playerName.getText());
-//				player.setMonster(monster);
-//			
-//			}
-//			
-//		clientThread.sendToServer(gamestate);
-//	}
 
-	
-		
+		// players=clientThread.getGamestate().getPlayerlist();
+
+		//
+		// for(Player player: players){
+		// if(player.getPlayerId()==1){
+		// player.setPlayername(playerName.getText());
+		// player.setMonster(monster);
+		//
+		// }else{
+		// player.setPlayername(playerName.getText());
+		// player.setMonster(monster);
+		//
+		// }
+		//
+		// clientThread.sendToServer(gamestate);
+		// }
+
 		node = (Node) event.getSource();
 		stage = (Stage) node.getScene().getWindow();
 		scene = stage.getScene();
+		
 		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/GameBoard.fxml"));
+		ClientControllerGameBoard controller = new ClientControllerGameBoard(clientModel);
+		loader.setController(controller);
+		
 		root = (Parent) loader.load();
 		scene.setRoot(root);
 		stage.setTitle("In Da Game");
-		
-		
-		
+
 	}
 
-	
-//		
-//		// wir suchen nach labelid -> siehe gameboard
-//		Label lblname = (Label) scene.lookup("#lblname");
-//		// dem label ordnen wir den Wert der playername zu
-//		lblname.setText("Hallo");
-//		
-//
-//		// lifepoints
-//		Label lbllife = (Label) scene.lookup("#lbllife");
-//
-//		lbllife.setText(String.valueOf(player.getLifePoints()));
-//	
-//
-//		// glorypoints
-//		Label lblglory = (Label) scene.lookup("#lblglory");
-//		lblglory.setText(String.valueOf(player.getGloryPoints()));
-//		
-//
-//		// setzt das Monsterbild fest, welches man zuvor ausgewählt hat
-//		
-//		ImageView imageplayerone = (ImageView) scene.lookup("#imageplayerone");
-//		{
-//			Image img = new Image("./Images/MonsterGigaZaur.png");
-//			imageplayerone.setImage(img);
-//		}
-//		if (player.getMonster().equals("TheKing")) {
-//			Image img = new Image("./Images/MonsterTheKing.png");
-//			imageplayerone.setImage(img);
-//		} else if (player.getMonster().equals("Kraken")) {
-//			Image img = new Image("./Images/MonsterKraken.png");
-//			imageplayerone.setImage(img);
-//		} else {
-//			Image img = new Image("./Images/MonsterGigaZaur.png");
-//			imageplayerone.setImage(img);
-//		}
-//	}
-	@FXML public void theKingAction(ActionEvent event) {
-		monster="TheKing";
-		
+	//
+	// // wir suchen nach labelid -> siehe gameboard
+	// Label lblname = (Label) scene.lookup("#lblname");
+	// // dem label ordnen wir den Wert der playername zu
+	// lblname.setText("Hallo");
+	//
+	//
+	// // lifepoints
+	// Label lbllife = (Label) scene.lookup("#lbllife");
+	//
+	// lbllife.setText(String.valueOf(player.getLifePoints()));
+	//
+	//
+	// // glorypoints
+	// Label lblglory = (Label) scene.lookup("#lblglory");
+	// lblglory.setText(String.valueOf(player.getGloryPoints()));
+	//
+	//
+	// // setzt das Monsterbild fest, welches man zuvor ausgewählt hat
+	//
+	// ImageView imageplayerone = (ImageView) scene.lookup("#imageplayerone");
+	// {
+	// Image img = new Image("./Images/MonsterGigaZaur.png");
+	// imageplayerone.setImage(img);
+	// }
+	// if (player.getMonster().equals("TheKing")) {
+	// Image img = new Image("./Images/MonsterTheKing.png");
+	// imageplayerone.setImage(img);
+	// } else if (player.getMonster().equals("Kraken")) {
+	// Image img = new Image("./Images/MonsterKraken.png");
+	// imageplayerone.setImage(img);
+	// } else {
+	// Image img = new Image("./Images/MonsterGigaZaur.png");
+	// imageplayerone.setImage(img);
+	// }
+	// }
+	@FXML
+	public void theKingAction(ActionEvent event) {
+		monster = "TheKing";
+
 	}
-	@FXML public void krakenAction(ActionEvent event) {
-		monster="Kraken";
+
+	@FXML
+	public void krakenAction(ActionEvent event) {
+		monster = "Kraken";
 	}
-	@FXML public void gigaZaurAction(ActionEvent event) {
-		monster="GigaZaur";
+
+	@FXML
+	public void gigaZaurAction(ActionEvent event) {
+		monster = "GigaZaur";
 	}
-	
 
 }

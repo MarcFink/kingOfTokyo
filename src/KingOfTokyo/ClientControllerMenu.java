@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-
 public class ClientControllerMenu {
 
 	private ClientModel clientModel;
@@ -22,15 +21,14 @@ public class ClientControllerMenu {
 	private FXMLLoader loader;
 	private int port = 4444;
 	private String ipA = "Localhost";
-	
+	private Socket clientSocket;
+
 	private Socket socket;
-	
-	
-	
-	
-	public ClientControllerMenu(){
-	
+
+	public ClientControllerMenu() {
+
 	}
+
 	/*
 	 * Hier ist die Aktion hinter dem Button Neues Spiel hinterlegt. Zuerst wird
 	 * ein Objekt von ClientModel erstelltanschliessend wir eine neue Stage
@@ -39,17 +37,20 @@ public class ClientControllerMenu {
 	@FXML
 	public void connectClient(ActionEvent event) throws Exception {
 		clientModel = new ClientModel();
-		
 		clientModel.startClientConnection(ipA, port);
 		stage = new Stage();
-		loader = new FXMLLoader(getClass().getResource("../KingOfTokyoView/NewGamePlattform.fxml"));
+
+		loader = new FXMLLoader();
+		ClientControllerNewGamePlattform controller = new ClientControllerNewGamePlattform(clientModel);
+		// Controller wird für den Plattform GUI eingesetzt
+		loader.setController(controller);
+		
+		loader.setLocation(getClass().getResource("../KingOfTokyoView/NewGamePlattform.fxml"));
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
 		stage.setTitle("Neues Spiel");
 		stage.setScene(scene);
 		stage.show();
-		
-		
 
 	}
 
@@ -70,6 +71,6 @@ public class ClientControllerMenu {
 
 	@FXML
 	public void getInstructions(ActionEvent event) {
-		
+
 	}
-	}
+}

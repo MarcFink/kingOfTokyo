@@ -56,10 +56,10 @@ public class ClientThread extends Thread {
 
 	public void listen() throws IOException, ClassNotFoundException {
 		try {
-
-			while (true) {
+			Object e= in.readObject();
+			while ((e !=null)) {
 				//Thread läuft die ganze Zeit und liest ob ein Object geschickt wurde
-				gamestate = (GameState) in.readObject();
+				gamestate = (GameState) e;
 				//Das eingelesene Objekt wird gleich an alle verbundenn Clients geschickt.
 				servermodel.broadcast(gamestate);
 			}
