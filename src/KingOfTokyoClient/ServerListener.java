@@ -1,23 +1,25 @@
-package KingOfTokyoModel;
+package KingOfTokyoClient;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import KingOfTokyoCommon.GameState;
 import javafx.application.Platform;
 
 public class ServerListener extends Thread {
 
 	private Socket clientsocket;
-	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private GameState gamestate = null;
+	private ClientModel clientmodel;
+	
 
 	public ServerListener(ClientModel clientmodel, Socket clientsocket) throws IOException {
+		this.clientmodel=clientmodel;
 		this.clientsocket = clientsocket;
-		this.out = new ObjectOutputStream(clientsocket.getOutputStream());
 		this.in = new ObjectInputStream(clientsocket.getInputStream());
+		
 	}
 
 	public void run() {
@@ -25,16 +27,19 @@ public class ServerListener extends Thread {
 	}
 
 	public void listen() {
-
+		
+		Object gamestate;
 		try {
 			// sobald object im inputstream -> read
 			while (in.readObject() != null) {
 				// Thread läuft die ganze Zeit und liest ob ein Object geschickt
 				// wurde
 				gamestate = (GameState) in.readObject();
+				clientmodel.setGamestate((GameState) gamestate);
 				//von server erhaltene gamestate wird hier gesetzt
-				setGamestate(gamestate);
-				System.out.println("Recieved Game State from server: " + gamestate.toString());
+				
+//				setGamestate(gamestate);
+//				System.out.println("Recieved Game State from server: " + gamestate.toString());
 			}
 
 		} catch (IOException | ClassNotFoundException e) {
@@ -49,25 +54,6 @@ public class ServerListener extends Thread {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-	}
-
-	public void sendToServer(GameState gamestate) {
-		try {
-
-			System.out.println("Writing object to Server..");
-			this.out.writeObject(gamestate);
-			out.flush();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	public GameState getGamestate() {
-		return gamestate;
-	}
-
-	public void setGamestate(GameState gamestate) {
-		this.gamestate = gamestate;
 	}
 
 }

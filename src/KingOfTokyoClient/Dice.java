@@ -1,4 +1,4 @@
-package KingOfTokyoModel;
+package KingOfTokyoClient;
 
 import java.util.Random;
 

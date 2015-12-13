@@ -1,9 +1,7 @@
-package Main;
+package KingOfTokyoServer;
 
 import java.io.IOException;
 
-import KingOfTokyo.ServerController;
-import KingOfTokyoModel.ServerModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,7 +20,6 @@ public class Server extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		//Server wird gestartet
-		
 		ServerController serverController=new ServerController();
 				
 	}

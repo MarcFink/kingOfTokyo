@@ -1,4 +1,4 @@
-package KingOfTokyoModel;
+package KingOfTokyoServer;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import KingOfTokyo.ServerController;
+import KingOfTokyoCommon.GameState;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
@@ -29,32 +29,43 @@ public class ServerModel {
 	ObjectOutputStream serverOutputStream;
 	private ClientThread clientThread;
 	private ArrayList<ClientThread> clientThreadList;
+	private ObjectOutputStream out;
 
-	public ServerModel(ServerController serverController, int prt) {
+	public ServerModel(ServerController serverController, int prt) throws IOException {
 		// Erstellt das GameStateobjekt, welches während dem Spielen hin und her
 		// geschickt wird.
 		this.serverController = serverController;
 		clientThreadList = new ArrayList<ClientThread>();
 		this.port = prt;
 		gamestate = GameState.getInstance();
+		
+	
 	}
 
 	public void start() throws IOException {
 		serverSocket = new ServerSocket(port);
 		System.out.println(port + " Server ist gestartet");
+		
 		while (true) {
 			clientSocket = serverSocket.accept();
+			this.out = new ObjectOutputStream(clientSocket.getOutputStream());
 			client_id++;
-			gamestate.addPlayer(client_id);
 			clientThread = new ClientThread(client_id, clientSocket, this, gamestate);
-			// fügt den Thread in eine Arraylist
 			clientThreadList.add(clientThread);
-			// clientThread wird gestartet
 			clientThread.start();
 			System.out.println(client_id + ". Client hinzugefügt");
-			// clientThreads werden in einer ArrayListe gespeichert
+			
+			
+
 		}
+		
+		// fügt den Thread in eine Arraylist
+
+		// clientThread wird gestartet
+
+		// clientThreads werden in einer ArrayListe gespeichert
 	}
+	
 
 	public Socket getClientSocket() {
 		return clientSocket;
@@ -75,9 +86,18 @@ public class ServerModel {
 		// schickt das Gamestate an alle verbundenen Clients
 		System.out.println("Broadcast to clients..");
 		for (ClientThread thread : clientThreadList) {
-			thread.sendObjectToClient(gamestate);
+			sendObjectToClient(gamestate);
 		}
 
+	}
+
+	public void sendObjectToClient(GameState gamestate) {
+		try {
+			this.out.writeObject(gamestate);
+			out.flush();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
