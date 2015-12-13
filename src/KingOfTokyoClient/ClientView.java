@@ -16,19 +16,11 @@ public class ClientView {
 	private String ipaddress="Localhost";
 	private int port=4444;
 	private AnchorPane root;
-	private Label pname1,pname2,glory1,glory2,life1,life2,playername1,playername2,lifepoints1,lifepoints2,
+	Label pname1,pname2,glory1,glory2,life1,life2,playername1,playername2,lifepoints1,lifepoints2,
 	glorypoints1,glorypoints2;
 	Button rollDice;
 	RadioButton dr1,dr2,dr3,dr4,dr5,dr6;
-	ImageView div1;
-	ImageView div2;
-	ImageView div3;
-	ImageView div4;
-	ImageView div5;
-	ImageView div6;
-	ImageView monster1;
-	ImageView monster2;
-	ImageView gameBoard;
+	ImageView div1,div2,div3,div4,div5,div6,monster1,monster2,gameBoard;
 	Image id1,id2,id3,id4,id5,id6,gb;
 	private Scene scene;
 
@@ -50,6 +42,7 @@ public class ClientView {
 		root.setPrefWidth(1200.0);
 		
 	//Labels die während dem Spiel nicht verändert werden
+	//Player1
 		playername1=new Label("Spielername:");
 		playername1.setLayoutX(58);
 		playername1.setLayoutY(300);
@@ -75,6 +68,7 @@ public class ClientView {
 		glorypoints2.setLayoutY(380);
 		
 		//Labels die während dem Spiel verändert werden
+		//Player2
 		pname1=new Label("Text");
 		pname1.setLayoutX(160);
 		pname1.setLayoutY(300);

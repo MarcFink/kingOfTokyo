@@ -31,15 +31,16 @@ public class ServerListener extends Thread {
 		Object gamestate;
 		try {
 			// sobald object im inputstream -> read
-			while (in.readObject() != null) {
+			while (true) {
 				// Thread läuft die ganze Zeit und liest ob ein Object geschickt
 				// wurde
 				gamestate = (GameState) in.readObject();
+				System.out.println("Empfangen Objekt");
 				clientmodel.setGamestate((GameState) gamestate);
 				//von server erhaltene gamestate wird hier gesetzt
 				
 //				setGamestate(gamestate);
-//				System.out.println("Recieved Game State from server: " + gamestate.toString());
+				//System.out.println("Recieved Game State from server: " + gamestate.toString());
 			}
 
 		} catch (IOException | ClassNotFoundException e) {

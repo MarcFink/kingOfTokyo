@@ -56,7 +56,9 @@ public class ClientModel {
 	}
 
 	public void setGamestate(GameState gamestate) {
+		System.out.println("Objekt wurde gesendet und GameState wird überschrieben");
 		this.gamestate = gamestate;
+		
 	}
 
 }

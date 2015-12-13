@@ -22,7 +22,7 @@ import sun.security.jca.GetInstance;
 
 public class ClientControllerGameBoard {
 
-	private ClientModel clientmodel;
+	private ClientModel clientModel;
 	private Boolean w1Selected = false;
 	private Boolean w2Selected = false;
 	private Boolean w3Selected = false;
@@ -37,19 +37,25 @@ public class ClientControllerGameBoard {
 
 	public ClientControllerGameBoard(ClientModel clientmodel, ClientView clientView) {
 		this.clientView = clientView;
-		this.clientmodel = clientmodel;
+		this.clientModel = clientModel;
 		Dice dice = new Dice();
 		diceValues = new ArrayList<String>();
 		
-		
-		
-//		currentState=clientModel.getGamState();
-//		players=currentState.getPlayerlist();
+//		//Holt den Gamestate vom ClientModel speichert sie im currentState
+//		currentState=clientModel.getGamestate();
 //		
+//		//ArrayList die sich im GameState befindet wir in players gespeichert
+//		players=currentState.getPlayerlist();
+//	
+//		//Wenn die ArrayList bereits einen Spieler hat soll das Label von Playerone mit dem Spielernamen
 //		if(players.size()==1){
+//		Player player1=(Player) players.get(0);
+//		clientView.pname1.setText(player1.getPlayername());
 //			
-//			clientView.setMonster
+//		
 //		}
+		
+		
 //		
 //		if(players.size()==0){
 //			Player player1=new Player();

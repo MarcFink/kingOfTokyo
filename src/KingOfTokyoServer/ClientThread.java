@@ -25,7 +25,7 @@ public class ClientThread extends Thread {
 		this.servermodel = servermodel;
 		this.clientSocket = clientSocket;
 		this.in = new ObjectInputStream(clientSocket.getInputStream());
-		servermodel.broadcast(gamestate);
+		
 		
 		// Das erste mal wird das Gamestate nur an den einen Client gesendet solange noch keine weiteren verbunden sind.
 	

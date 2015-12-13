@@ -54,6 +54,7 @@ public class ServerModel {
 			clientThreadList.add(clientThread);
 			clientThread.start();
 			System.out.println(client_id + ". Client hinzugefügt");
+			broadcast(gamestate);
 			
 			
 
@@ -84,9 +85,10 @@ public class ServerModel {
 
 	public void broadcast(GameState gamestate) {
 		// schickt das Gamestate an alle verbundenen Clients
-		System.out.println("Broadcast to clients..");
+		
 		for (ClientThread thread : clientThreadList) {
 			sendObjectToClient(gamestate);
+			System.out.println("Broadcast to clients..");
 		}
 
 	}
@@ -94,6 +96,7 @@ public class ServerModel {
 	public void sendObjectToClient(GameState gamestate) {
 		try {
 			this.out.writeObject(gamestate);
+			System.out.println("Objekt wurde verschickt");
 			out.flush();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
