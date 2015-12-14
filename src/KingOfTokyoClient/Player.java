@@ -1,8 +1,6 @@
-package KingOfTokyoModel;
+package KingOfTokyoClient;
 
 import java.io.Serializable;
-
-import KingOfTokyo.ClientView;
 
 public class Player implements Serializable {
 	private int playerId;
@@ -10,19 +8,13 @@ public class Player implements Serializable {
 	private boolean isTurn=false;
 	private String playername;
 	private String monster;
-
 	private int gloryPoints=0;
 	private int lifePoints=10;
 
-	public Player(int playerId) {
-		this.playerId=playerId;
+	public Player() {
 	
-		if (this.playerId == 1){ // Spieler 1 beginnt
-			this.isTurn = true;
-		//	this.isAufTokyo = true;			
 		}
 
-	}
 
 	public int getPlayerId() {
 		return playerId;
