@@ -1,0 +1,72 @@
+package KingOfTokyoClient;
+
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import KingOfTokyoCommon.GameState;
+
+public class ClientModel {
+
+	private Socket socket;
+	private ServerListener serverListener;
+	private GameState gamestate=null;
+	private ObjectOutputStream out;
+	private int port;
+	private String ipadress;
+	private int clientID;
+
+
+	public ClientModel() {
+	
+
+	}
+
+	public Socket startClientConnection(String ipaddress, int port) throws Exception {
+		this.ipadress=ipadress;
+		this.port=port;
+		socket = new Socket(ipadress, port);
+		System.out.println("Client ist gestartet");
+		//neuer serverlistener erzeugt und dem Clientmodel zugeordnet
+		serverListener = new ServerListener(this, socket);
+		serverListener.start();
+		this.out = new ObjectOutputStream(socket.getOutputStream());
+		return socket;
+	}
+	public void sendToServer(GameState gamestate) {
+		try {
+
+			this.out.writeObject(gamestate);
+			out.flush();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public void showMeGameState(){
+		System.out.println(gamestate.toString());
+	}
+	
+	
+
+	
+
+	public GameState getGamestate() {
+		return gamestate;
+	}
+
+	public void setGamestate(GameState gamestate) {
+		System.out.println("Objekt wurde gesendet und GameState wird überschrieben");
+		this.gamestate = gamestate;
+		
+	}
+
+	public int getClientID() {
+		return clientID;
+	}
+
+	public void setClientID(int clientID) {
+		this.clientID = clientID;
+	}
+
+
+}
