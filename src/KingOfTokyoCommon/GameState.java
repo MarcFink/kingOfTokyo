@@ -19,11 +19,13 @@ public class GameState implements Serializable {
 	
 	private static int playerTurn = 1;
 	
-	private static String playername1=null;
+	
+	
+	private static String playername1="player1";
 	private static int playeroneglory=0;
 	private static int playeronelife=10;
 	
-	private static String playername2=null;
+	private static String playername2="player2";
 	private static int playertwoglory=0;
 	private static int playertwolife=10;
 	

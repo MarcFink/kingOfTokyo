@@ -26,26 +26,32 @@ public class ServerListener extends Thread {
 
 	public void run() {
 		
-		try {
-			listen();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		{
+		
+				try {
+					listen();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+						
 		}
-
 	}
 	
 
-	
+
+
 	
 	public void listen() throws ClassNotFoundException, IOException {
-		
 		Integer clientID=in.readInt();
 		clientmodel.setClientID(clientID);
-			
+		System.out.println("Objekt wurde empfangen");
+		
+		
+		
 			Object a;
 		try {
 			// sobald object im inputstream -> read
@@ -65,6 +71,7 @@ public class ServerListener extends Thread {
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
+		
 		
 	}
 

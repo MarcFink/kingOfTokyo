@@ -1,5 +1,6 @@
 package KingOfTokyoClient;
 
+import KingOfTokyoCommon.GameState;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -222,6 +223,13 @@ public class ClientView {
 
 	public void setKingOfTokyoStage(Stage kingOfTokyoStage) {
 		this.kingOfTokyoStage = kingOfTokyoStage;
+	}
+
+	public void updateGUI(GameState currentState) {
+		pname1.setText(currentState.getPlayername1());
+		pname2.setText(currentState.getPlayername2());
+		
+		
 	}
 }
 

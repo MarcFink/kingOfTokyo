@@ -31,6 +31,7 @@ public class ClientModel {
 		serverListener = new ServerListener(this, socket);
 		serverListener.start();
 		this.out = new ObjectOutputStream(socket.getOutputStream());
+		
 		return socket;
 	}
 	public void sendToServer(GameState gamestate) {
@@ -66,6 +67,7 @@ public class ClientModel {
 
 	public void setClientID(int clientID) {
 		this.clientID = clientID;
+		System.out.println(clientID);
 	}
 
 

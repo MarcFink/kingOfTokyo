@@ -23,7 +23,6 @@ public class ClientControllerGameBoard {
 	private int würfelVersuchCounter = 0;
 	private List<String> diceValues;
 	private GameState currentState;
-	private ArrayList<Player> players;
 	private ClientView clientView;
 
 	/**
@@ -31,21 +30,36 @@ public class ClientControllerGameBoard {
 	 * @param clientView
 	 */
 	public ClientControllerGameBoard(ClientModel clientModel, ClientView clientView) {
+		
+			
+		
 		this.setClientView(clientView);
 		this.setClientModel(clientModel);
 		Dice dice = new Dice();
 		diceValues = new ArrayList<String>();
 
-		Platform.runLater(() -> {
-
+	
+				Platform.runLater(()->{
+			
 			
 			// Holt den Gamestate vom ClientModel speichert sie im currentState
-			currentState=clientModel.getGamestate();
-
+			currentState=clientModel.getGamestate().getInstance();
 			
-			int i=clientModel.getClientID();
-			System.out.println(i);
-
+			
+			clientView.pname1.setText(currentState.getPlayername1());
+			clientView.pname2.setText(currentState.getPlayername2());
+			clientModel.sendToServer(currentState);
+			
+				});
+	
+		
+				Platform.runLater(()->{
+					
+				
+					
+					int i=clientModel.getClientID();
+					
+				
 			
 				
 				TextInputDialog dialog = new TextInputDialog("");
@@ -53,7 +67,7 @@ public class ClientControllerGameBoard {
 				dialog.setHeaderText("Look, a Text Input Dialog");
 				dialog.setContentText("Please enter your name:");
 
-				// Den eingegebnen Wert verarbeiten
+			// Den eingegebnen Wert verarbeiten
 				Optional<String> result = dialog.showAndWait();
 				if (result.isPresent()) {
 
@@ -65,20 +79,26 @@ public class ClientControllerGameBoard {
 						
 					clientView.pname1.setText(result.get());
 					currentState.setPlayername1(result.get());
-					clientModel.sendToServer(currentState);
-					
-					}else{
+					clientView.updateGUI(currentState);
+//					
+//					
+				}else{
 					clientView.pname2.setText(result.get());
 					currentState.setPlayername2(result.get());
-					// erlaubt das inaktivsetzen von Buttons
+					clientView.updateGUI(currentState);
+					
+//					// erlaubt das inaktivsetzen von Buttons
 					clientView.rollDice.setDisable(true);
-					clientModel.sendToServer(currentState);
-					}
+//					
+				
+					}clientModel.sendToServer(currentState);
 					
-					
-				}});
-		
-	
+				}
+				});
+			
+			
+			
+				
 
 		clientView.rollDice.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -443,6 +463,7 @@ public class ClientControllerGameBoard {
 
 			}
 		});
+		
 	}
 
 	public GameState getCurrentState() {

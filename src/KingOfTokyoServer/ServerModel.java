@@ -1,22 +1,13 @@
 package KingOfTokyoServer;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import KingOfTokyoCommon.GameState;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 
 public class ServerModel {
 	private Integer port;
@@ -29,7 +20,7 @@ public class ServerModel {
 	ObjectOutputStream serverOutputStream;
 	private ClientThread clientThread;
 	private ArrayList<ClientThread> clientThreadList;
-	private ObjectOutputStream out;
+	
 	
 
 	public ServerModel(ServerController serverController, int prt) throws IOException {
@@ -49,7 +40,6 @@ public class ServerModel {
 		
 		while (true) {
 			clientSocket = serverSocket.accept();
-			this.out = new ObjectOutputStream(clientSocket.getOutputStream());
 			client_id++;
 			clientThread = new ClientThread(client_id, clientSocket, this, gameState);
 			clientThreadList.add(clientThread);
@@ -57,33 +47,10 @@ public class ServerModel {
 			System.out.println(client_id + ". Client hinzugefügt");
 			//sendet als erstes die ClientID des ClientThreads zu dem dazugehörigen
 			//Client, so weiss jeder Client welcher ClientThread zu ihm gehört
-			sendIDToClient(client_id);
 			
-			
-			
+		}
 
 		}
-		
-		// fügt den Thread in eine Arraylist
-
-		// clientThread wird gestartet
-
-		// clientThreads werden in einer ArrayListe gespeichert
-	}
-	
-
-	private void sendIDToClient(int client_id) {
-		try {
-			this.out.writeInt(client_id);
-			System.out.println("Objekt wurde verschickt");
-			out.flush();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-		
-		
-		
 
 	public Socket getClientSocket() {
 		return clientSocket;
@@ -100,24 +67,14 @@ public class ServerModel {
 
 	}
 
-	public void broadcast(GameState gameState) {
+	public void broadcast(GameState gameState) throws IOException {
 		// schickt das Gamestate an alle verbundenen Clients
 		
-		for (ClientThread thread : clientThreadList) {
-			sendObjectToClient(gameState);
+		for (ClientThread k: clientThreadList) {
+			k.out.writeObject(gameState);
 			System.out.println("Broadcast to clients..");
 		}
 
 	}
-
-	public void sendObjectToClient(GameState gameState) {
-		try {
-			this.out.writeObject(gameState);
-			System.out.println("Objekt wurde verschickt");
-			out.flush();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
+	
 }
