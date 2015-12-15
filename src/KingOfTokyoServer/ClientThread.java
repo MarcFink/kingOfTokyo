@@ -22,13 +22,13 @@ public class ClientThread extends Thread {
 
 	public ClientThread(int id, Socket clientSocket, ServerModel servermodel, GameState gameState) throws IOException {
 		// Thread wird instanziert. Input- und Outputstreams werden erstellt
-		this.gameState = gameState;
 		this.servermodel = servermodel;
 		this.clientSocket = clientSocket;
 		this.id=id;
+		this.gameState=gameState;
 	
 		this.out = new ObjectOutputStream(clientSocket.getOutputStream());
-		in = new ObjectInputStream(clientSocket.getInputStream());
+		this.in = new ObjectInputStream(clientSocket.getInputStream());
 
 		// Das erste mal wird das Gamestate nur an den einen Client gesendet
 		// solange noch keine weiteren verbunden sind.
@@ -38,7 +38,9 @@ public class ClientThread extends Thread {
 	public void run() {
 		
 		sendIDToClient(id);
-		sendObjectToClient(gameState);
+		
+		this.gameState.setPlayername1("Hallo");
+		sendObjectToClient(this.gameState);
 
 		try {
 			listen();
@@ -64,10 +66,12 @@ public class ClientThread extends Thread {
 			while ((e = in.readObject()) != null) {
 				// Thread läuft die ganze Zeit und liest ob ein Object geschickt
 				// wurde
-				gameState = (GameState) e;
 				// Das eingelesene Objekt wird gleich an alle verbundenn Clients
 				// geschickt.
-				servermodel.broadcast(gameState);
+				gameState=(GameState) e;
+				GameState.setInstance(gameState);
+				System.out.println("Server " + GameState.getInstance().toString());
+				servermodel.broadcast(GameState.getInstance());
 			}
 
 		} catch (IOException e) {
@@ -77,7 +81,7 @@ public class ClientThread extends Thread {
 
 	public void sendObjectToClient(GameState gameState) {
 		try {
-			out.writeObject(gameState);
+			out.writeObject(this.gameState);
 			System.out.println("Objekt gamestate wurde verschickt");
 			out.flush();
 		} catch (IOException e) {
@@ -88,7 +92,7 @@ public class ClientThread extends Thread {
 	public void sendIDToClient(int client_id) {
 			try {
 				out.writeInt(client_id);
-				System.out.println("Objekt wurde verschickt");
+				System.out.println("ID wurde verschickt");
 				out.flush();
 			} catch (IOException e) {
 				System.out.println(e.getMessage());

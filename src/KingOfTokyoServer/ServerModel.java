@@ -41,7 +41,7 @@ public class ServerModel {
 		while (true) {
 			clientSocket = serverSocket.accept();
 			client_id++;
-			clientThread = new ClientThread(client_id, clientSocket, this, gameState);
+			clientThread = new ClientThread(client_id, clientSocket, this,gameState);
 			clientThreadList.add(clientThread);
 			clientThread.start();
 			System.out.println(client_id + ". Client hinzugefügt");

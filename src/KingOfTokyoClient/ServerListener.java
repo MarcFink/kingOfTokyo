@@ -58,10 +58,14 @@ public class ServerListener extends Thread {
 			while ((a=in.readObject())!=null) {
 				
 				
-				System.out.println("Empfangen Objekt");
+				GameState gs = (GameState)a;
+				System.out.println(gs.toString());
+				
+				clientmodel.setGamestate((GameState)a);
+				System.out.println(a.toString());
 				
 				//von server erhaltene gamestate wird hier ins ClientModel gesetzt
-				clientmodel.setGamestate((GameState)a);
+				//clientmodel.setGamestate.set((GameState)a);
 				
 				
 				

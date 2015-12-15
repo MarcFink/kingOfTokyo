@@ -30,33 +30,32 @@ public class ClientModel {
 		//neuer serverlistener erzeugt und dem Clientmodel zugeordnet
 		serverListener = new ServerListener(this, socket);
 		serverListener.start();
-		this.out = new ObjectOutputStream(socket.getOutputStream());
 		
-		return socket;
+		while(true){
+			this.out = new ObjectOutputStream(socket.getOutputStream());
+			
+			return socket;
+		}
+		
+		
+		
 	}
 	public void sendToServer(GameState gamestate) {
 		try {
-
+			System.out.println(gamestate.toString());
 			this.out.writeObject(gamestate);
 			out.flush();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	public void showMeGameState(){
-		System.out.println(gamestate.toString());
-	}
-	
-	
-
-	
 
 	public GameState getGamestate() {
 		return gamestate;
 	}
 
 	public void setGamestate(GameState gamestate) {
-		System.out.println("Objekt wurde gesendet und GameState wird überschrieben");
+		
 		this.gamestate = gamestate;
 		
 	}

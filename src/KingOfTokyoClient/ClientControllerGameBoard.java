@@ -22,7 +22,6 @@ public class ClientControllerGameBoard {
 	private Boolean w6Selected = false;
 	private int würfelVersuchCounter = 0;
 	private List<String> diceValues;
-	private GameState currentState;
 	private ClientView clientView;
 
 	/**
@@ -30,80 +29,69 @@ public class ClientControllerGameBoard {
 	 * @param clientView
 	 */
 	public ClientControllerGameBoard(ClientModel clientModel, ClientView clientView) {
-		
-			
-		
+
 		this.setClientView(clientView);
 		this.setClientModel(clientModel);
 		Dice dice = new Dice();
 		diceValues = new ArrayList<String>();
-
-	
-				Platform.runLater(()->{
-			
-			
-			// Holt den Gamestate vom ClientModel speichert sie im currentState
-			currentState=clientModel.getGamestate().getInstance();
-			
-			
-			clientView.pname1.setText(currentState.getPlayername1());
-			clientView.pname2.setText(currentState.getPlayername2());
-			clientModel.sendToServer(currentState);
-			
-				});
-	
 		
-				Platform.runLater(()->{
-					
-				
-					
-					int i=clientModel.getClientID();
-					
-				
-			
-				
-				TextInputDialog dialog = new TextInputDialog("");
-				dialog.setTitle("Text Input Dialog");
-				dialog.setHeaderText("Look, a Text Input Dialog");
-				dialog.setContentText("Please enter your name:");
+		
+
+		Platform.runLater(() -> {
+
+			// Holt den Gamestate vom ClientModel speichert sie im currentState
+		
+
+		});
+
+		Platform.runLater(() -> {
+
+			int i = clientModel.getClientID();
+
+			TextInputDialog dialog = new TextInputDialog("");
+			dialog.setTitle("Text Input Dialog");
+			dialog.setHeaderText("Look, a Text Input Dialog");
+			dialog.setContentText("Please enter your name:");
 
 			// Den eingegebnen Wert verarbeiten
-				Optional<String> result = dialog.showAndWait();
-				if (result.isPresent()) {
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()) {
 
-					System.out.println("Your name: " + result.get());
+				System.out.println("Your name: " + result.get());
 
-					// Neues Playerobjekt wird erstellt und der Playername wird
-					// gesetzt
-					if(i==1){
-						
+				// Neues Playerobjekt wird erstellt und der Playername wird
+				// gesetzt
+				if (i == 1) {
+
 					clientView.pname1.setText(result.get());
-					currentState.setPlayername1(result.get());
-					clientView.updateGUI(currentState);
-//					
-//					
-				}else{
+					GameState currenState=clientModel.getGamestate();
+					clientModel.getGamestate().setPlayername1(result.get());
+					clientModel.sendToServer(currenState);
+					
+					
+
+					//
+					//
+				} else {
 					clientView.pname2.setText(result.get());
-					currentState.setPlayername2(result.get());
-					clientView.updateGUI(currentState);
 					
-//					// erlaubt das inaktivsetzen von Buttons
+					
+
+					// // erlaubt das inaktivsetzen von Buttons
 					clientView.rollDice.setDisable(true);
-//					
-				
-					}clientModel.sendToServer(currentState);
-					
+					//
+
 				}
-				});
-			
-			
-			
-				
+
+			}
+		});
 
 		clientView.rollDice.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
+				
+
 				clientView.dr1.setVisible(true);
 				clientView.dr2.setVisible(true);
 				clientView.dr3.setVisible(true);
@@ -463,16 +451,10 @@ public class ClientControllerGameBoard {
 
 			}
 		});
-		
+
 	}
 
-	public GameState getCurrentState() {
-		return currentState;
-	}
 
-	public void setCurrentState(GameState currentState) {
-		this.currentState = currentState;
-	}
 
 	public ClientModel getClientModel() {
 		return clientModel;
