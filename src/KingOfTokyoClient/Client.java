@@ -10,17 +10,12 @@ public class Client extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		kingOfTokyoStage = primaryStage;
-		
-		ClientModel clientModel=new ClientModel();
+
+		ClientModel clientModel = new ClientModel();
 		ClientView clientView = new ClientView(kingOfTokyoStage, clientModel);
-		ClientControllerGameBoard clientControllerGameBoard=new ClientControllerGameBoard(clientModel,clientView);
-		
-		
+		ClientControllerGameBoard clientControllerGameBoard = new ClientControllerGameBoard(clientModel, clientView);
+
 		clientView.start();
-		
-	
-		
-		
 
 	}
 

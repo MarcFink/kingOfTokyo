@@ -39,7 +39,7 @@ public class ClientThread extends Thread {
 		
 		sendIDToClient(id);
 		
-		this.gameState.setPlayername1("Hallo");
+		
 		sendObjectToClient(this.gameState);
 
 		try {

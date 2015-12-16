@@ -64,9 +64,9 @@ public class ClientControllerGameBoard {
 				if (i == 1) {
 
 					clientView.pname1.setText(result.get());
-					GameState currenState=clientModel.getGamestate();
+					GameState currentState=clientModel.getGamestate();
 					clientModel.getGamestate().setPlayername1(result.get());
-					clientModel.sendToServer(currenState);
+					clientModel.sendToServer(currentState);
 					
 					
 
@@ -74,11 +74,14 @@ public class ClientControllerGameBoard {
 					//
 				} else {
 					clientView.pname2.setText(result.get());
+					GameState currentState=clientModel.getGamestate();
+					clientModel.getGamestate().setPlayername2(result.get());
+					clientModel.sendToServer(currentState);
 					
 					
 
 					// // erlaubt das inaktivsetzen von Buttons
-					clientView.rollDice.setDisable(true);
+//					clientView.rollDice.setDisable(true);
 					//
 
 				}

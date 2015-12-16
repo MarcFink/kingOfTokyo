@@ -5,17 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import KingOfTokyoClient.Player;
 
 public class GameState implements Serializable {
 
-	/**
-	 * 
-	 */
 
-	/**
-	 * 
-	 */
 
 	private static int playerTurn = 1;
 
@@ -33,7 +28,7 @@ public class GameState implements Serializable {
 
 	}
 
-	public static GameState getInstance() {
+	public static synchronized GameState getInstance() {
 		// Singleton, das Objekt wird nur einmal erstellt.
 		if (GameState.instance == null) {
 			GameState.instance = new GameState();
@@ -42,11 +37,8 @@ public class GameState implements Serializable {
 		return GameState.instance;
 	}
 
-	public static void setInstance(GameState gamestate) {
-		// Singleton, das Objekt wird nur einmal erstellt.
-		synchronized (instance) {
-			instance = gamestate;
-		}
+	public static void setInstance(GameState w) {
+		GameState.instance = w;
 	}
 
 	@Override
@@ -84,7 +76,7 @@ public class GameState implements Serializable {
 	}
 
 	public void setPlayeroneglory(int playeroneglory) {
-		playeroneglory = playeroneglory;
+		this.playeroneglory = playeroneglory;
 	}
 
 	public int getPlayeronelife() {
@@ -92,7 +84,7 @@ public class GameState implements Serializable {
 	}
 
 	public void setPlayeronelife(int playeronelife) {
-		playeronelife = playeronelife;
+		this.playeronelife = playeronelife;
 	}
 
 	public int getPlayertwoglory() {
@@ -100,7 +92,7 @@ public class GameState implements Serializable {
 	}
 
 	public void setPlayertwoglory(int playertwoglory) {
-		playertwoglory = playertwoglory;
+		this.playertwoglory = playertwoglory;
 	}
 
 	public int getPlayertwolife() {
@@ -108,7 +100,7 @@ public class GameState implements Serializable {
 	}
 
 	public void setPlayertwolife(int playertwolife) {
-		playertwolife = playertwolife;
+		this.playertwolife = playertwolife;
 	}
 
 }
