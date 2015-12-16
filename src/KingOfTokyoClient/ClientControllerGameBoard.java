@@ -30,22 +30,14 @@ public class ClientControllerGameBoard {
 	 */
 	public ClientControllerGameBoard(ClientModel clientModel, ClientView clientView) {
 
-		this.clientView=clientView;
-		this.clientModel=clientModel;
+		this.clientView = clientView;
+		this.clientModel = clientModel;
 		Dice dice = new Dice();
 		diceValues = new ArrayList<String>();
-		
-
-
-		
-		
-
-		
 
 		Platform.runLater(() -> {
-			
 
-			int i = clientModel.getClientID();
+			int id = clientModel.getClientID();
 
 			TextInputDialog dialog = new TextInputDialog("");
 			dialog.setTitle("Text Input Dialog");
@@ -60,42 +52,17 @@ public class ClientControllerGameBoard {
 
 				// Neues Playerobjekt wird erstellt und der Playername wird
 				// gesetzt
-				if (i == 1) {
-					clientModel.getGamestate().setPlayername1(result.get());
-					clientModel.sendToServer(clientModel.getGamestate());
-					
-					
-					
-					
-
-					//
-					//
-				} else {
-
-					clientModel.getGamestate().setPlayername2(result.get());
-					clientModel.sendToServer(clientModel.getGamestate());
-					
-					
-					
-
-					// // erlaubt das inaktivsetzen von Buttons
-//					clientView.rollDice.setDisable(true);
-					//
-
-				}
-
+				clientModel.getGamestate().addPlayer(id);
+				clientModel.getGamestate().getPlayer(id).setPlayername(result.get());
+				clientModel.sendToServer(clientModel.getGamestate());
 			}
-			
-			
+
 		});
 
 		clientView.rollDice.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
-				
-				
 
 				clientView.dr1.setVisible(true);
 				clientView.dr2.setVisible(true);
@@ -105,21 +72,10 @@ public class ClientControllerGameBoard {
 				clientView.dr6.setVisible(true);
 
 				if (clientView.rollDice.getText().equals("Zug beenden")) {
-					
-					clientModel.getGamestate().setPlayertwoglory("20");
+
+					clientModel.getGamestate().getPlayer(clientModel.getClientID()).setGloryPoints(20);
 					clientModel.sendToServer(clientModel.getGamestate());
-					
-//					if(clientModel.getGamestate().isPlayerTurn1()==true){
-//						clientModel.getGamestate().setPlayerTurn1(false);
-//					}
-//					else if(clientModel.getGamestate().isPlayerTurn1()==false){
-//						clientModel.getGamestate().setPlayerTurn1(true);
-						
-//					}
-					// send current gamestate to server
-					// clientmodel.sendToServer(currentState);
-					// get current gamestate from server listener
-					// GameState currentState= clientmodel.getGamestate();
+
 				}
 				if (würfelVersuchCounter == 0) {
 					clientModel.sendToServer(clientModel.getGamestate());
@@ -470,8 +426,6 @@ public class ClientControllerGameBoard {
 		});
 
 	}
-
-
 
 	public ClientModel getClientModel() {
 		return clientModel;

@@ -1,27 +1,21 @@
 package KingOfTokyoCommon;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import KingOfTokyoClient.MapLocation;
 import KingOfTokyoClient.Player;
 
 public class GameState implements Serializable {
 
-
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Map<Integer, Player> players = new HashMap<Integer, Player>();
 	boolean playerTurn1 = true;
-	
-
-	String playername1 = "player1";
-	String playeroneglory = "0";
-	String playeronelife = "10";
-
-	String playername2 = "player2";
-	String playertwoglory = "0";
-	String playertwolife = "10";
+	MapLocation location = MapLocation.insideTokyo;
 
 	private static GameState instance = null;
 
@@ -42,59 +36,48 @@ public class GameState implements Serializable {
 		GameState.instance = w;
 	}
 
-	@Override
-	public String toString() {
-		return getPlayeroneglory() + " " +  " " + getPlayername1() + " " + getPlayername2() + " "
-				+ getPlayertwoglory() + " " + getPlayeronelife() + " " + getPlayertwolife();
+	public void addPlayer(int playerId) {
+		if (players == null) {
+			players = new HashMap<Integer, Player>();
+
+		}
+		Player player = new Player(playerId);
+		players.put(playerId, player);
 	}
 
-	
-	public String getPlayername1() {
-		return playername1;
+	public Map<Integer, Player> getPlayers() {
+		return players;
 	}
 
-	public void setPlayername1(String playername1) {
-		this.playername1 = playername1;
+	public void setPlayers(Map<Integer, Player> players) {
+		this.players = players;
 	}
 
-	public String getPlayername2() {
-		return playername2;
+	public void addGloryPoints(Player player, int gloryPoints) {
+
+		// aktuelle Glorypoints
+		int currentGloryPoints = player.getGloryPoints();
+
+		// addiere die neuen Glorypoints
+		player.setGloryPoints(gloryPoints + currentGloryPoints);
 	}
 
-	public void setPlayername2(String playername2) {
-		this.playername2 = playername2;
+	public void attack(Player player, int lifePoints) {
+
+		int currentLifePoints = player.getLifePoints();
+		// nimm Lebenspunkt weg
+		player.setLifePoints(--currentLifePoints);
+
 	}
 
-	public String getPlayeroneglory() {
-		return playeroneglory;
+	public Player getPlayer(int id) {
+		return players.get(id);
 	}
 
-	public void setPlayeroneglory(String playeroneglory) {
-		this.playeroneglory = playeroneglory;
-	}
+	public void loseLifePoints(Player player, int lifePoints) {
 
-	public String getPlayeronelife() {
-		return playeronelife;
-	}
-
-	public void setPlayeronelife(String playeronelife) {
-		this.playeronelife = playeronelife;
-	}
-
-	public String getPlayertwoglory() {
-		return playertwoglory;
-	}
-
-	public void setPlayertwoglory(String playertwoglory) {
-		this.playertwoglory = playertwoglory;
-	}
-
-	public String getPlayertwolife() {
-		return playertwolife;
-	}
-
-	public void setPlayertwolife(String playertwolife) {
-		this.playertwolife = playertwolife;
+		int currentLifePoints = player.getLifePoints();
+		player.setLifePoints(--currentLifePoints);
 	}
 
 	public boolean isPlayerTurn1() {
@@ -105,5 +88,37 @@ public class GameState implements Serializable {
 		this.playerTurn1 = playerTurn1;
 	}
 
+	public void heal(Player player, int lifePoints) {
+
+		int currentLifePoints = player.getLifePoints();
+
+		player.setLifePoints(++currentLifePoints);
+
+	}
+
+	public void getWinner() {
+
+		// Playerliste iterieren
+		for (Player player : players.values()) {
+
+			if (player.getGloryPoints() == 20) {
+
+				System.out.println(player + " is the winner!");
+			}
+		}
+
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer stringVal = new StringBuffer();
+
+		for (Player player : players.values()) {
+			stringVal.append("Player Name: " + player.getPlayername() + " Life points: " + player.getLifePoints()
+					+ " Glory points: " + player.getGloryPoints() + "\n");
+		}
+		stringVal.append("Current location:  " + location.name());
+		return stringVal.toString();
+	}
 
 }

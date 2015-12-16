@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
 	private int playerId;
-	private boolean isInTokyo=false;
-	private boolean isTurn=false;
-	private String playername;
+	private boolean isInTokyo = false;
+	private boolean isTurn = false;
+	private String playername="";
 	private String monster;
-	private int gloryPoints=0;
-	private int lifePoints=10;
+	private int gloryPoints = 0;
+	private int lifePoints = 10;
 
-	public Player() {
-	
-		}
+	public Player(int playerId) {
+		this.playerId = playerId;
+	}
 
 	public int getGloryPoints() {
 		return gloryPoints;
@@ -30,8 +30,6 @@ public class Player implements Serializable {
 	public void setLifePoints(int LifePoints) {
 		this.lifePoints = LifePoints;
 	}
-
-	
 
 	public String getMonster() {
 
@@ -57,11 +55,10 @@ public class Player implements Serializable {
 	public void setTurn(boolean isTurn) {
 		this.isTurn = isTurn;
 	}
-	
 
-	public String toString(){
+	public String toString() {
 		String id;
-		id=String.valueOf(playerId);
+		id = String.valueOf(playerId);
 		return id;
 	}
 
