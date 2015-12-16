@@ -3,6 +3,10 @@ package KingOfTokyoClient;
 import java.io.Serializable;
 
 public class Player implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int playerId;
 	private boolean isInTokyo = false;
 	private boolean isTurn = false;
@@ -14,6 +18,20 @@ public class Player implements Serializable {
 	public Player(int playerId) {
 		this.playerId = playerId;
 	}
+
+	
+	
+	public int getPlayerId() {
+		return playerId;
+	}
+
+
+
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
+
+
 
 	public int getGloryPoints() {
 		return gloryPoints;

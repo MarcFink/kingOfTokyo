@@ -75,25 +75,25 @@ public class ClientView {
 		pname1.setLayoutX(160);
 		pname1.setLayoutY(300);
 
-		glory1 = new Label("Text");
-		glory1.setLayoutX(160);
-		glory1.setLayoutY(340);
-
 		life1 = new Label("Text");
 		life1.setLayoutX(160);
-		life1.setLayoutY(380);
+		life1.setLayoutY(340);
+
+		glory1 = new Label("Text");
+		glory1.setLayoutX(160);
+		glory1.setLayoutY(380);
 
 		pname2 = new Label("Text");
 		pname2.setLayoutX(987);
 		pname2.setLayoutY(300);
 
-		glory2 = new Label("Text");
-		glory2.setLayoutX(987);
-		glory2.setLayoutY(340);
-
 		life2 = new Label("Text");
 		life2.setLayoutX(987);
-		life2.setLayoutY(380);
+		life2.setLayoutY(340);
+
+		glory2 = new Label("Text");
+		glory2.setLayoutX(987);
+		glory2.setLayoutY(380);
 
 		// RadioButtons, sie sind am Anfang nicht sichtbar.
 		dr1 = new RadioButton();
@@ -243,7 +243,7 @@ public class ClientView {
 			} else {
 				rollDice.setDisable(false);
 			}
-			if (clientModel.getGamestate() != null && clientModel.getGamestate().getPlayers().values().size() == 2) {
+			if (clientModel.getGamestate() != null && clientModel.getGamestate().getPlayers().size() == 2) {
 				pname1.setText(clientModel.getGamestate().getPlayer(1).getPlayername());
 				pname2.setText(clientModel.getGamestate().getPlayer(2).getPlayername());
 				glory1.setText(String.valueOf(clientModel.getGamestate().getPlayer(1).getGloryPoints()));

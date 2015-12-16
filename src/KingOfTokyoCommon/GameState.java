@@ -1,8 +1,8 @@
 package KingOfTokyoCommon;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import KingOfTokyoClient.MapLocation;
 import KingOfTokyoClient.Player;
@@ -13,7 +13,7 @@ public class GameState implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Map<Integer, Player> players = new HashMap<Integer, Player>();
+	private List<Player> players = new ArrayList<Player>();
 	boolean playerTurn1 = true;
 	MapLocation location = MapLocation.insideTokyo;
 
@@ -37,47 +37,44 @@ public class GameState implements Serializable {
 	}
 
 	public void addPlayer(int playerId) {
-		if (players == null) {
-			players = new HashMap<Integer, Player>();
 
-		}
 		Player player = new Player(playerId);
-		players.put(playerId, player);
+		this.players.add(player);
 	}
 
-	public Map<Integer, Player> getPlayers() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Map<Integer, Player> players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 
-	public void addGloryPoints(Player player, int gloryPoints) {
+	public void attack(int playerID) {
 
-		// aktuelle Glorypoints
-		int currentGloryPoints = player.getGloryPoints();
+		int currentLifePoints = this.getPlayer(playerID).getLifePoints();
+		// nimm Lebenspunkt weg
+		this.getPlayer(playerID).setLifePoints(currentLifePoints--);
+		System.out.println("Current life points of player " + this.getPlayer(playerID).getPlayername() + " is "
+				+ currentLifePoints);
 
-		// addiere die neuen Glorypoints
-		player.setGloryPoints(gloryPoints + currentGloryPoints);
 	}
 
-	public void attack(Player player, int lifePoints) {
-
-		int currentLifePoints = player.getLifePoints();
-		// nimm Lebenspunkt weg
-		player.setLifePoints(--currentLifePoints);
-
+	public void heal(int playerID) {
+		int currentLifePoints = this.getPlayer(playerID).getLifePoints();
+		this.getPlayer(playerID).setLifePoints(currentLifePoints++);
+		System.out.println("Current life points of player " + this.getPlayer(playerID).getPlayername() + " is "
+				+ currentLifePoints);
 	}
 
 	public Player getPlayer(int id) {
-		return players.get(id);
-	}
 
-	public void loseLifePoints(Player player, int lifePoints) {
-
-		int currentLifePoints = player.getLifePoints();
-		player.setLifePoints(--currentLifePoints);
+		for (Player player : players) {
+			if (player.getPlayerId() == id) {
+				return player;
+			}
+		}
+		return new Player(id);
 	}
 
 	public boolean isPlayerTurn1() {
@@ -88,18 +85,10 @@ public class GameState implements Serializable {
 		this.playerTurn1 = playerTurn1;
 	}
 
-	public void heal(Player player, int lifePoints) {
-
-		int currentLifePoints = player.getLifePoints();
-
-		player.setLifePoints(++currentLifePoints);
-
-	}
-
 	public void getWinner() {
 
 		// Playerliste iterieren
-		for (Player player : players.values()) {
+		for (Player player : players) {
 
 			if (player.getGloryPoints() == 20) {
 
@@ -113,7 +102,7 @@ public class GameState implements Serializable {
 	public String toString() {
 		StringBuffer stringVal = new StringBuffer();
 
-		for (Player player : players.values()) {
+		for (Player player : players) {
 			stringVal.append("Player Name: " + player.getPlayername() + " Life points: " + player.getLifePoints()
 					+ " Glory points: " + player.getGloryPoints() + "\n");
 		}

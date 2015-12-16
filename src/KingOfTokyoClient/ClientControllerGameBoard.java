@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import KingOfTokyoCommon.GameState;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ClientControllerGameBoard {
 
@@ -23,6 +23,12 @@ public class ClientControllerGameBoard {
 	private int würfelVersuchCounter = 0;
 	private List<String> diceValues;
 	private ClientView clientView;
+	private String die1="";
+	private String die2="";
+	private String die3="";
+	private String die4="";
+	private String die5="";
+	private String die6="";
 
 	/**
 	 * @param clientModel
@@ -64,270 +70,58 @@ public class ClientControllerGameBoard {
 			@Override
 			public void handle(ActionEvent event) {
 
-				clientView.dr1.setVisible(true);
-				clientView.dr2.setVisible(true);
-				clientView.dr3.setVisible(true);
-				clientView.dr4.setVisible(true);
-				clientView.dr5.setVisible(true);
-				clientView.dr6.setVisible(true);
+				if (würfelVersuchCounter <= 2) {
 
-				if (clientView.rollDice.getText().equals("Zug beenden")) {
-
-					clientModel.getGamestate().getPlayer(clientModel.getClientID()).setGloryPoints(20);
-					clientModel.sendToServer(clientModel.getGamestate());
-
-				}
-				if (würfelVersuchCounter == 0) {
-					clientModel.sendToServer(clientModel.getGamestate());
-
-					String die1 = dice.rollDice();
-					if (die1.equals("1")) {
-						Image img = new Image("./Images/Num1.png");
-						clientView.div1.setImage(img);
-					} else if (die1.equals("2")) {
-						Image img = new Image("./Images/Num2.png");
-						clientView.div1.setImage(img);
-
-					} else if (die1.equals("3")) {
-						Image img = new Image("./Images/Num3.png");
-						clientView.div1.setImage(img);
-					} else if (die1.equals("A")) {
-						Image img = new Image("./Images/attack.png");
-						clientView.div1.setImage(img);
-					} else if (die1.equals("H")) {
-						Image img = new Image("./Images/heal.png");
-						clientView.div1.setImage(img);
-					}
-					diceValues.add(die1);
-					String die2 = dice.rollDice();
-					if (die2.equals("1")) {
-						Image img = new Image("./Images/Num1.png");
-						clientView.div2.setImage(img);
-
-					} else if (die2.equals("2")) {
-						Image img = new Image("./Images/Num2.png");
-						clientView.div2.setImage(img);
-					} else if (die2.equals("3")) {
-						Image img = new Image("./Images/Num3.png");
-						clientView.div2.setImage(img);
-					} else if (die2.equals("A")) {
-						Image img = new Image("./Images/attack.png");
-						clientView.div2.setImage(img);
-					} else if (die2.equals("H")) {
-						Image img = new Image("./Images/heal.png");
-						clientView.div2.setImage(img);
-					}
-					diceValues.add(die2);
-					String die3 = dice.rollDice();
-					if (die3.equals("1")) {
-						Image img = new Image("./Images/Num1.png");
-						clientView.div3.setImage(img);
-					} else if (die3.equals("2")) {
-						Image img = new Image("./Images/Num2.png");
-						clientView.div3.setImage(img);
-					} else if (die3.equals("3")) {
-						Image img = new Image("./Images/Num3.png");
-						clientView.div3.setImage(img);
-					} else if (die3.equals("A")) {
-						Image img = new Image("./Images/attack.png");
-						clientView.div3.setImage(img);
-					} else if (die3.equals("H")) {
-						Image img = new Image("./Images/heal.png");
-						clientView.div3.setImage(img);
-					}
-					diceValues.add(die3);
-
-					String die4 = dice.rollDice();
-					if (die4.equals("1")) {
-						Image img = new Image("./Images/Num1.png");
-						clientView.div4.setImage(img);
-					} else if (die4.equals("2")) {
-						Image img = new Image("./Images/Num2.png");
-						clientView.div4.setImage(img);
-					} else if (die4.equals("3")) {
-						Image img = new Image("./Images/Num3.png");
-						clientView.div4.setImage(img);
-					} else if (die4.equals("A")) {
-						Image img = new Image("./Images/attack.png");
-						clientView.div4.setImage(img);
-					} else if (die4.equals("H")) {
-						Image img = new Image("./Images/heal.png");
-						clientView.div4.setImage(img);
-					}
-					diceValues.add(die4);
-					String die5 = dice.rollDice();
-					if (die5.equals("1")) {
-						Image img = new Image("./Images/Num1.png");
-						clientView.div5.setImage(img);
-					} else if (die5.equals("2")) {
-						Image img = new Image("./Images/Num2.png");
-						clientView.div5.setImage(img);
-					} else if (die5.equals("3")) {
-						Image img = new Image("./Images/Num3.png");
-						clientView.div5.setImage(img);
-					} else if (die5.equals("A")) {
-						Image img = new Image("./Images/attack.png");
-						clientView.div5.setImage(img);
-					} else if (die5.equals("H")) {
-						Image img = new Image("./Images/heal.png");
-						clientView.div5.setImage(img);
-					}
-					diceValues.add(die5);
-					String die6 = dice.rollDice();
-					if (die6.equals("1")) {
-						Image img = new Image("./Images/Num1.png");
-						clientView.div6.setImage(img);
-					} else if (die6.equals("2")) {
-						Image img = new Image("./Images/Num2.png");
-						clientView.div6.setImage(img);
-					} else if (die6.equals("3")) {
-						Image img = new Image("./Images/Num3.png");
-						clientView.div6.setImage(img);
-					} else if (die6.equals("A")) {
-						Image img = new Image("./Images/attack.png");
-						clientView.div6.setImage(img);
-					} else if (die6.equals("H")) {
-						Image img = new Image("./Images/heal.png");
-						clientView.div6.setImage(img);
-					}
-					diceValues.add(die6);
 					clientView.dr1.setVisible(true);
 					clientView.dr2.setVisible(true);
 					clientView.dr3.setVisible(true);
 					clientView.dr4.setVisible(true);
 					clientView.dr5.setVisible(true);
 					clientView.dr6.setVisible(true);
+
+					// clientModel.sendToServer(clientModel.getGamestate());
+
+					if (würfelVersuchCounter == 0) {
+						die1 = getRollDice(clientView.div1);
+						die2 = getRollDice(clientView.div2);
+						die3 = getRollDice(clientView.div3);
+						die4 = getRollDice(clientView.div4);
+						die5 = getRollDice(clientView.div5);
+						die6 = getRollDice(clientView.div6);
+					}
+
+					else {
+						if (w1Selected == true) {
+							die1 = getRollDice(clientView.div1);
+						}
+						if (w2Selected == true) {
+							die2 = getRollDice(clientView.div2);
+						}
+						if (w3Selected == true) {
+							die3 = getRollDice(clientView.div3);
+						}
+						if (w4Selected == true) {
+							die4 = getRollDice(clientView.div4);
+						}
+						if (w5Selected == true) {
+							die5 = getRollDice(clientView.div5);
+						}
+						if (w6Selected == true) {
+							die6 = getRollDice(clientView.div6);
+						}
+					}
+					if (würfelVersuchCounter == 2) {
+						diceValues.add(die1);
+						diceValues.add(die2);
+						diceValues.add(die3);
+						diceValues.add(die4);
+						diceValues.add(die5);
+						diceValues.add(die6);
+					}
+
 					würfelVersuchCounter++;
 
-					// for (String val : diceValues) {
-					// // durch getinstance die bestehende instanz aufrufen
-					// int points =
-					// GameState.getInstance().getNumofGloryPointsPlayer1();
-					// GameState.getInstance().setNumofGloryPointsPlayer1(points
-					// + Integer.getInteger(val));
-					// }
-
-					System.out.println(würfelVersuchCounter);
-				} else if (würfelVersuchCounter <= 2) {
-
-					if (w1Selected == true) {
-						String die1 = dice.rollDice();
-						if (die1.equals("1")) {
-							Image img = new Image("./Images/Num1.png");
-							clientView.div1.setImage(img);
-						} else if (die1.equals("2")) {
-							Image img = new Image("./Images/Num2.png");
-							clientView.div1.setImage(img);
-						} else if (die1.equals("3")) {
-							Image img = new Image("./Images/Num3.png");
-							clientView.div1.setImage(img);
-						} else if (die1.equals("A")) {
-							Image img = new Image("./Images/attack.png");
-							clientView.div1.setImage(img);
-						} else if (die1.equals("H")) {
-							Image img = new Image("./Images/heal.png");
-							clientView.div1.setImage(img);
-						}
-					}
-					if (w2Selected == true) {
-						String die2 = dice.rollDice();
-						if (die2.equals("1")) {
-							Image img = new Image("./Images/Num1.png");
-							clientView.div2.setImage(img);
-						} else if (die2.equals("2")) {
-							Image img = new Image("./Images/Num2.png");
-							clientView.div2.setImage(img);
-						} else if (die2.equals("3")) {
-							Image img = new Image("./Images/Num3.png");
-							clientView.div2.setImage(img);
-						} else if (die2.equals("A")) {
-							Image img = new Image("./Images/attack.png");
-							clientView.div2.setImage(img);
-						} else if (die2.equals("H")) {
-							Image img = new Image("./Images/heal.png");
-							clientView.div2.setImage(img);
-						}
-					}
-					if (w3Selected == true) {
-						String die3 = dice.rollDice();
-						if (die3.equals("1")) {
-							Image img = new Image("./Images/Num1.png");
-							clientView.div3.setImage(img);
-						} else if (die3.equals("2")) {
-							Image img = new Image("./Images/Num2.png");
-							clientView.div3.setImage(img);
-						} else if (die3.equals("3")) {
-							Image img = new Image("./Images/Num3.png");
-							clientView.div3.setImage(img);
-						} else if (die3.equals("A")) {
-							Image img = new Image("./Images/attack.png");
-							clientView.div3.setImage(img);
-						} else if (die3.equals("H")) {
-							Image img = new Image("./Images/heal.png");
-							clientView.div3.setImage(img);
-						}
-					}
-					if (w4Selected == true) {
-						String die4 = dice.rollDice();
-						if (die4.equals("1")) {
-							Image img = new Image("./Images/Num1.png");
-							clientView.div4.setImage(img);
-						} else if (die4.equals("2")) {
-							Image img = new Image("./Images/Num2.png");
-							clientView.div4.setImage(img);
-						} else if (die4.equals("3")) {
-							Image img = new Image("./Images/Num3.png");
-							clientView.div4.setImage(img);
-						} else if (die4.equals("A")) {
-							Image img = new Image("./Images/attack.png");
-							clientView.div4.setImage(img);
-						} else if (die4.equals("H")) {
-							Image img = new Image("./Images/heal.png");
-							clientView.div4.setImage(img);
-						}
-					}
-					if (w5Selected == true) {
-						String die5 = dice.rollDice();
-						if (die5.equals("1")) {
-							Image img = new Image("./Images/Num1.png");
-							clientView.div5.setImage(img);
-						} else if (die5.equals("2")) {
-							Image img = new Image("./Images/Num2.png");
-							clientView.div5.setImage(img);
-						} else if (die5.equals("3")) {
-							Image img = new Image("./Images/Num3.png");
-							clientView.div5.setImage(img);
-						} else if (die5.equals("A")) {
-							Image img = new Image("./Images/attack.png");
-							clientView.div5.setImage(img);
-						} else if (die5.equals("H")) {
-							Image img = new Image("./Images/heal.png");
-							clientView.div5.setImage(img);
-						}
-					}
-					if (w6Selected == true) {
-						String die6 = dice.rollDice();
-						if (die6.equals("1")) {
-							Image img = new Image("./Images/Num1.png");
-							clientView.div6.setImage(img);
-						} else if (die6.equals("2")) {
-							Image img = new Image("./Images/Num2.png");
-							clientView.div6.setImage(img);
-						} else if (die6.equals("3")) {
-							Image img = new Image("./Images/Num3.png");
-							clientView.div6.setImage(img);
-						} else if (die6.equals("A")) {
-							Image img = new Image("./Images/attack.png");
-							clientView.div6.setImage(img);
-						} else if (die6.equals("H")) {
-							Image img = new Image("./Images/heal.png");
-							clientView.div6.setImage(img);
-						}
-					}
-					würfelVersuchCounter++;
-					System.out.println(würfelVersuchCounter);
-					// gamestate.setNumofLifePoints(numofLifePoints, playerid);
-
+					System.out.println("Würfel Runde: " + würfelVersuchCounter);
 				} else {
 					clientView.rollDice.setText("Zug beenden");
 					clientView.dr1.setVisible(false);
@@ -336,22 +130,38 @@ public class ClientControllerGameBoard {
 					clientView.dr4.setVisible(false);
 					clientView.dr5.setVisible(false);
 					clientView.dr6.setVisible(false);
+
+					System.out.println("Calculating game points..");
+					setGamePoints();
+					clientModel.sendToServer(clientModel.getGamestate());
 				}
 
 			}
+
+			private String getRollDice(ImageView view) {
+				String die;
+				die = dice.rollDice();
+				if (die.equals("1")) {
+					Image img = new Image("./Images/Num1.png");
+					view.setImage(img);
+				} else if (die.equals("2")) {
+					Image img = new Image("./Images/Num2.png");
+					view.setImage(img);
+
+				} else if (die.equals("3")) {
+					Image img = new Image("./Images/Num3.png");
+					view.setImage(img);
+				} else if (die.equals("A")) {
+					Image img = new Image("./Images/attack.png");
+					view.setImage(img);
+				} else if (die.equals("H")) {
+					Image img = new Image("./Images/heal.png");
+					view.setImage(img);
+				}
+				return die;
+			}
+
 		});
-
-		// currentState=clientmodel.getGamestate();
-		// players=currentState.getPlayerlist();
-		//
-		//
-		//
-		// Platform.runLater(()->{
-		//
-
-		//
-		//
-		// });
 
 		clientView.dr1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -425,6 +235,49 @@ public class ClientControllerGameBoard {
 			}
 		});
 
+	}
+
+	private void setGamePoints() {
+		int points = 0;
+		int counter1 = 0;
+		int counter2 = 0;
+		int counter3 = 0;
+
+		for (String val : diceValues) {
+			if (val == "1") {
+				counter1++;
+			}
+			if (val == "2") {
+				counter2++;
+			}
+			if (val == "3") {
+				counter3++;
+			}
+			if (val == "A") {
+				int otherPlayerId = (clientModel.getClientID() == 1) ? 2 : 1;
+				System.out.println("Attacking player " + otherPlayerId);
+				clientModel.getGamestate().attack(otherPlayerId);
+			}
+			if (val.equals("H")) {
+				System.out.println("Healing player " + clientModel.getClientID());
+				clientModel.getGamestate().heal(clientModel.getClientID());
+			}
+
+		}
+
+		points += calcGloryPoints(counter1, 1);
+		points += calcGloryPoints(counter2, 2);
+		points += calcGloryPoints(counter3, 3);
+		System.out.println("Total glory points: " + points);
+		clientModel.getGamestate().getPlayer(clientModel.getClientID()).setGloryPoints(points);
+	}
+
+	private int calcGloryPoints(int count, int digit) {
+		int points = 0;
+		if (count / 3 > 0) {
+			points += digit * (count / 3) + (count % 3);
+		}
+		return points;
 	}
 
 	public ClientModel getClientModel() {
