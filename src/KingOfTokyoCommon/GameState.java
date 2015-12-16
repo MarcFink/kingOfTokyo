@@ -53,8 +53,9 @@ public class GameState implements Serializable {
 	public void attack(int playerID) {
 
 		int currentLifePoints = this.getPlayer(playerID).getLifePoints();
+		currentLifePoints -= 1;
 		// nimm Lebenspunkt weg
-		this.getPlayer(playerID).setLifePoints(currentLifePoints--);
+		this.getPlayer(playerID).setLifePoints(currentLifePoints);
 		System.out.println("Current life points of player " + this.getPlayer(playerID).getPlayername() + " is "
 				+ currentLifePoints);
 
@@ -62,7 +63,8 @@ public class GameState implements Serializable {
 
 	public void heal(int playerID) {
 		int currentLifePoints = this.getPlayer(playerID).getLifePoints();
-		this.getPlayer(playerID).setLifePoints(currentLifePoints++);
+		currentLifePoints += 1;
+		this.getPlayer(playerID).setLifePoints(currentLifePoints);
 		System.out.println("Current life points of player " + this.getPlayer(playerID).getPlayername() + " is "
 				+ currentLifePoints);
 	}

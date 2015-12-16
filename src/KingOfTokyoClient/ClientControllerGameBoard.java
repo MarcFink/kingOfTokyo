@@ -133,6 +133,7 @@ public class ClientControllerGameBoard {
 
 					System.out.println("Calculating game points..");
 					setGamePoints();
+					clientView.rollDice.setDisable(true);
 					clientModel.sendToServer(clientModel.getGamestate());
 				}
 
