@@ -245,6 +245,13 @@ public class ClientView {
 		}else{
 			rollDice.setDisable(true);
 		}
+		
+		if(clientModel.getClientID()==2&&clientModel.getGamestate().isPlayerTurn1()==false){
+			rollDice.setDisable(true);
+		}else{
+				rollDice.setDisable(false);
+			}
+		
 			
 		
 		pname1.setText(clientModel.getGamestate().getPlayername1());

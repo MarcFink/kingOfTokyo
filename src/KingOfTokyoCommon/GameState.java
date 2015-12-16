@@ -12,7 +12,8 @@ public class GameState implements Serializable {
 
 
 
-	private boolean playerTurn1 = true;
+	boolean playerTurn1 = true;
+	
 
 	String playername1 = "player1";
 	String playeroneglory = "0";
@@ -103,5 +104,6 @@ public class GameState implements Serializable {
 	public void setPlayerTurn1(boolean playerTurn1) {
 		this.playerTurn1 = playerTurn1;
 	}
+
 
 }

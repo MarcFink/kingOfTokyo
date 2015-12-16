@@ -95,8 +95,7 @@ public class ClientControllerGameBoard {
 			public void handle(ActionEvent event) {
 				
 				
-				clientModel.sendToServer(clientModel.getGamestate());
-				clientView.updateGUI();
+				
 
 				clientView.dr1.setVisible(true);
 				clientView.dr2.setVisible(true);
@@ -106,12 +105,24 @@ public class ClientControllerGameBoard {
 				clientView.dr6.setVisible(true);
 
 				if (clientView.rollDice.getText().equals("Zug beenden")) {
+					
+					clientModel.getGamestate().setPlayertwoglory("20");
+					clientModel.sendToServer(clientModel.getGamestate());
+					
+//					if(clientModel.getGamestate().isPlayerTurn1()==true){
+//						clientModel.getGamestate().setPlayerTurn1(false);
+//					}
+//					else if(clientModel.getGamestate().isPlayerTurn1()==false){
+//						clientModel.getGamestate().setPlayerTurn1(true);
+						
+//					}
 					// send current gamestate to server
 					// clientmodel.sendToServer(currentState);
 					// get current gamestate from server listener
 					// GameState currentState= clientmodel.getGamestate();
 				}
 				if (würfelVersuchCounter == 0) {
+					clientModel.sendToServer(clientModel.getGamestate());
 
 					String die1 = dice.rollDice();
 					if (die1.equals("1")) {
