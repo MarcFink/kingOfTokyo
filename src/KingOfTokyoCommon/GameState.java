@@ -12,15 +12,15 @@ public class GameState implements Serializable {
 
 
 
-	private static int playerTurn = 1;
+	private boolean playerTurn1 = true;
 
 	String playername1 = "player1";
-	int playeroneglory = 0;
-	int playeronelife = 10;
+	String playeroneglory = "0";
+	String playeronelife = "10";
 
 	String playername2 = "player2";
-	int playertwoglory = 0;
-	int playertwolife = 10;
+	String playertwoglory = "0";
+	String playertwolife = "10";
 
 	private static GameState instance = null;
 
@@ -43,18 +43,11 @@ public class GameState implements Serializable {
 
 	@Override
 	public String toString() {
-		return getPlayeroneglory() + " " + getPlayerTurn() + " " + getPlayername1() + " " + getPlayername2() + " "
+		return getPlayeroneglory() + " " +  " " + getPlayername1() + " " + getPlayername2() + " "
 				+ getPlayertwoglory() + " " + getPlayeronelife() + " " + getPlayertwolife();
 	}
 
-	public int getPlayerTurn() {
-		return playerTurn;
-	}
-
-	public void setPlayerTurn(int playerTurn) {
-		GameState.playerTurn = playerTurn;
-	}
-
+	
 	public String getPlayername1() {
 		return playername1;
 	}
@@ -71,36 +64,44 @@ public class GameState implements Serializable {
 		this.playername2 = playername2;
 	}
 
-	public int getPlayeroneglory() {
+	public String getPlayeroneglory() {
 		return playeroneglory;
 	}
 
-	public void setPlayeroneglory(int playeroneglory) {
+	public void setPlayeroneglory(String playeroneglory) {
 		this.playeroneglory = playeroneglory;
 	}
 
-	public int getPlayeronelife() {
+	public String getPlayeronelife() {
 		return playeronelife;
 	}
 
-	public void setPlayeronelife(int playeronelife) {
+	public void setPlayeronelife(String playeronelife) {
 		this.playeronelife = playeronelife;
 	}
 
-	public int getPlayertwoglory() {
+	public String getPlayertwoglory() {
 		return playertwoglory;
 	}
 
-	public void setPlayertwoglory(int playertwoglory) {
+	public void setPlayertwoglory(String playertwoglory) {
 		this.playertwoglory = playertwoglory;
 	}
 
-	public int getPlayertwolife() {
+	public String getPlayertwolife() {
 		return playertwolife;
 	}
 
-	public void setPlayertwolife(int playertwolife) {
+	public void setPlayertwolife(String playertwolife) {
 		this.playertwolife = playertwolife;
+	}
+
+	public boolean isPlayerTurn1() {
+		return playerTurn1;
+	}
+
+	public void setPlayerTurn1(boolean playerTurn1) {
+		this.playerTurn1 = playerTurn1;
 	}
 
 }

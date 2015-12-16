@@ -30,21 +30,20 @@ public class ClientControllerGameBoard {
 	 */
 	public ClientControllerGameBoard(ClientModel clientModel, ClientView clientView) {
 
-		this.setClientView(clientView);
-		this.setClientModel(clientModel);
+		this.clientView=clientView;
+		this.clientModel=clientModel;
 		Dice dice = new Dice();
 		diceValues = new ArrayList<String>();
 		
+
+
+		
+		
+
 		
 
 		Platform.runLater(() -> {
-
-			// Holt den Gamestate vom ClientModel speichert sie im currentState
-		
-
-		});
-
-		Platform.runLater(() -> {
+			
 
 			int i = clientModel.getClientID();
 
@@ -62,21 +61,20 @@ public class ClientControllerGameBoard {
 				// Neues Playerobjekt wird erstellt und der Playername wird
 				// gesetzt
 				if (i == 1) {
-
-					clientView.pname1.setText(result.get());
-					GameState currentState=clientModel.getGamestate();
 					clientModel.getGamestate().setPlayername1(result.get());
-					clientModel.sendToServer(currentState);
+					clientModel.sendToServer(clientModel.getGamestate());
+					
+					
 					
 					
 
 					//
 					//
 				} else {
-					clientView.pname2.setText(result.get());
-					GameState currentState=clientModel.getGamestate();
+
 					clientModel.getGamestate().setPlayername2(result.get());
-					clientModel.sendToServer(currentState);
+					clientModel.sendToServer(clientModel.getGamestate());
+					
 					
 					
 
@@ -87,6 +85,8 @@ public class ClientControllerGameBoard {
 				}
 
 			}
+			
+			
 		});
 
 		clientView.rollDice.setOnAction(new EventHandler<ActionEvent>() {
@@ -94,6 +94,9 @@ public class ClientControllerGameBoard {
 			@Override
 			public void handle(ActionEvent event) {
 				
+				
+				clientModel.sendToServer(clientModel.getGamestate());
+				clientView.updateGUI();
 
 				clientView.dr1.setVisible(true);
 				clientView.dr2.setVisible(true);

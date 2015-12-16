@@ -1,6 +1,7 @@
 package KingOfTokyoClient;
 
 import KingOfTokyoCommon.GameState;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,7 +35,10 @@ public class ClientView {
 		scene=new Scene(root);
 		kingOfTokyoStage.setScene(scene);
 		
+		
 		clientModel.startClientConnection(ipaddress, port);
+	
+		
 	}
 	
 	private void initGUI() {
@@ -200,7 +204,15 @@ public class ClientView {
 	}
 
 	public void start() {
+		//Setzt den Titel anhand der ID, die der Client vom Server erhält.
+		if(clientModel.getClientID()==1){
+			getKingOfTokyoStage().setTitle("Player 1");
+		}else{
+			getKingOfTokyoStage().setTitle("Player 2");
+		}
+		
 		getKingOfTokyoStage().show();
+		
 	}
 	
 	/**
@@ -225,9 +237,24 @@ public class ClientView {
 		this.kingOfTokyoStage = kingOfTokyoStage;
 	}
 
-	public void updateGUI(GameState currentState) {
-		pname1.setText(currentState.getPlayername1());
-		pname2.setText(currentState.getPlayername2());
+	public void updateGUI() {
+		Platform.runLater(()->{
+			
+		if(clientModel.getClientID()==1&&clientModel.getGamestate().isPlayerTurn1()==true){
+			rollDice.setDisable(false);
+		}else{
+			rollDice.setDisable(true);
+		}
+			
+		
+		pname1.setText(clientModel.getGamestate().getPlayername1());
+		pname2.setText(clientModel.getGamestate().getPlayername2());
+		glory1.setText(clientModel.getGamestate().getPlayeroneglory());
+		glory2.setText(clientModel.getGamestate().getPlayertwoglory());
+		life1.setText(clientModel.getGamestate().getPlayertwolife());
+		life2.setText(clientModel.getGamestate().getPlayeronelife());
+		});
+		
 		
 		
 	}

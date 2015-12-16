@@ -16,6 +16,8 @@ public class Client extends Application {
 		ClientControllerGameBoard clientControllerGameBoard = new ClientControllerGameBoard(clientModel, clientView);
 
 		clientView.start();
+		GUIUpdateThread guiThread= new GUIUpdateThread(clientView);
+		guiThread.start();
 
 	}
 
