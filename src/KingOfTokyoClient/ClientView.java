@@ -89,7 +89,7 @@ public class ClientView {
 		othername.setLayoutY(300);
 
 		otherlife = new Label("Text");
-		otherlife.setLayoutX(997);
+		otherlife.setLayoutX(1000);
 		otherlife.setLayoutY(340);
 
 		otherglory = new Label("Text");
@@ -270,6 +270,13 @@ public class ClientView {
 					othername.setText(otherPlayer.getPlayername());
 					otherlife.setText(String.valueOf(otherPlayer.getLifePoints()));
 					otherglory.setText(String.valueOf(otherPlayer.getGloryPoints()));
+
+					if (otherPlayer.getGloryPoints() >= 20) {
+						clientModel.getGamestate().setWinner(otherPlayer);
+					}
+					if (otherPlayer.getLifePoints() <= 0) {
+						clientModel.getGamestate().setWinner(currentPlayer);
+					}
 				}
 
 				if (clientModel.getGamestate().getWinner() != null) {
