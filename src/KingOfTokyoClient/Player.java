@@ -9,8 +9,7 @@ public class Player implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int playerId;
 	private boolean isInTokyo = false;
-	private boolean isTurn = false;
-	private String playername="";
+	private String playername = "";
 	private String monster;
 	private int gloryPoints = 0;
 	private int lifePoints = 10;
@@ -19,19 +18,13 @@ public class Player implements Serializable {
 		this.playerId = playerId;
 	}
 
-	
-	
 	public int getPlayerId() {
 		return playerId;
 	}
 
-
-
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
-
-
 
 	public int getGloryPoints() {
 		return gloryPoints;
@@ -66,13 +59,6 @@ public class Player implements Serializable {
 		this.isInTokyo = isInTokyo;
 	}
 
-	public boolean isTurn() {
-		return isTurn;
-	}
-
-	public void setTurn(boolean isTurn) {
-		this.isTurn = isTurn;
-	}
 
 	public String toString() {
 		String id;

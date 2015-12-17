@@ -14,9 +14,8 @@ public class GameState implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Player> players = new ArrayList<Player>();
-	boolean playerTurn1 = true;
 	MapLocation location = MapLocation.insideTokyo;
-
+	private int currentPlayerId = 1;
 	private static GameState instance = null;
 
 	private GameState() {
@@ -50,6 +49,14 @@ public class GameState implements Serializable {
 		this.players = players;
 	}
 
+	public int getCurrentPlayerId() {
+		return currentPlayerId;
+	}
+
+	public void setCurrentPlayerId(int currentPlayerId) {
+		this.currentPlayerId = currentPlayerId;
+	}
+
 	public void attack(int playerID) {
 
 		int currentLifePoints = this.getPlayer(playerID).getLifePoints();
@@ -77,14 +84,6 @@ public class GameState implements Serializable {
 			}
 		}
 		return new Player(id);
-	}
-
-	public boolean isPlayerTurn1() {
-		return playerTurn1;
-	}
-
-	public void setPlayerTurn1(boolean playerTurn1) {
-		this.playerTurn1 = playerTurn1;
 	}
 
 	public void getWinner() {

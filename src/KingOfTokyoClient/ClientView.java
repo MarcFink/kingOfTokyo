@@ -232,17 +232,13 @@ public class ClientView {
 	public void updateGUI() {
 		Platform.runLater(() -> {
 
-			if (clientModel.getClientID() == 1 && clientModel.getGamestate().isPlayerTurn1() == true) {
+			if (clientModel.getClientID() == clientModel.getGamestate().getCurrentPlayerId()) {
+				rollDice.setText("Würfeln");
 				rollDice.setDisable(false);
 			} else {
 				rollDice.setDisable(true);
 			}
 
-			if (clientModel.getClientID() == 2 && clientModel.getGamestate().isPlayerTurn1() == false) {
-				rollDice.setDisable(true);
-			} else {
-				rollDice.setDisable(false);
-			}
 			if (clientModel.getGamestate() != null && clientModel.getGamestate().getPlayers().size() == 2) {
 				pname1.setText(clientModel.getGamestate().getPlayer(1).getPlayername());
 				pname2.setText(clientModel.getGamestate().getPlayer(2).getPlayername());

@@ -23,12 +23,12 @@ public class ClientControllerGameBoard {
 	private int würfelVersuchCounter = 0;
 	private List<String> diceValues;
 	private ClientView clientView;
-	private String die1="";
-	private String die2="";
-	private String die3="";
-	private String die4="";
-	private String die5="";
-	private String die6="";
+	private String die1 = "";
+	private String die2 = "";
+	private String die3 = "";
+	private String die4 = "";
+	private String die5 = "";
+	private String die6 = "";
 
 	/**
 	 * @param clientModel
@@ -111,6 +111,7 @@ public class ClientControllerGameBoard {
 						}
 					}
 					if (würfelVersuchCounter == 2) {
+						clientView.rollDice.setText("Zug beenden");
 						diceValues.add(die1);
 						diceValues.add(die2);
 						diceValues.add(die3);
@@ -123,7 +124,7 @@ public class ClientControllerGameBoard {
 
 					System.out.println("Würfel Runde: " + würfelVersuchCounter);
 				} else {
-					clientView.rollDice.setText("Zug beenden");
+					// clientView.rollDice.setText("Zug beenden");
 					clientView.dr1.setVisible(false);
 					clientView.dr2.setVisible(false);
 					clientView.dr3.setVisible(false);
@@ -134,6 +135,13 @@ public class ClientControllerGameBoard {
 					System.out.println("Calculating game points..");
 					setGamePoints();
 					clientView.rollDice.setDisable(true);
+					// other players turn
+					if (clientModel.getClientID() == 1) {
+						clientModel.getGamestate().setCurrentPlayerId(2);
+					} else {
+						clientModel.getGamestate().setCurrentPlayerId(1);
+					}
+					würfelVersuchCounter = 0;
 					clientModel.sendToServer(clientModel.getGamestate());
 				}
 
