@@ -59,7 +59,6 @@ public class Player implements Serializable {
 		this.isInTokyo = isInTokyo;
 	}
 
-
 	public String toString() {
 		String id;
 		id = String.valueOf(playerId);
@@ -72,5 +71,9 @@ public class Player implements Serializable {
 
 	public void setPlayername(String playername) {
 		this.playername = playername;
+	}
+
+	public void addGloryPoints(int points) {
+		this.gloryPoints += points;
 	}
 }

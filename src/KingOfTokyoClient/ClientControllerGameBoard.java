@@ -14,13 +14,7 @@ import javafx.scene.image.ImageView;
 public class ClientControllerGameBoard {
 
 	private ClientModel clientModel;
-	private Boolean w1Selected = false;
-	private Boolean w2Selected = false;
-	private Boolean w3Selected = false;
-	private Boolean w4Selected = false;
-	private Boolean w5Selected = false;
-	private Boolean w6Selected = false;
-	private int würfelVersuchCounter = 0;
+
 	private List<String> diceValues;
 	private ClientView clientView;
 	private String die1 = "";
@@ -39,7 +33,6 @@ public class ClientControllerGameBoard {
 		this.clientView = clientView;
 		this.clientModel = clientModel;
 		Dice dice = new Dice();
-		diceValues = new ArrayList<String>();
 
 		Platform.runLater(() -> {
 
@@ -70,7 +63,7 @@ public class ClientControllerGameBoard {
 			@Override
 			public void handle(ActionEvent event) {
 
-				if (würfelVersuchCounter <= 2) {
+				if (clientView.würfelVersuchCounter <= 2) {
 
 					clientView.dr1.setVisible(true);
 					clientView.dr2.setVisible(true);
@@ -81,7 +74,8 @@ public class ClientControllerGameBoard {
 
 					// clientModel.sendToServer(clientModel.getGamestate());
 
-					if (würfelVersuchCounter == 0) {
+					if (clientView.würfelVersuchCounter == 0) {
+
 						die1 = getRollDice(clientView.div1);
 						die2 = getRollDice(clientView.div2);
 						die3 = getRollDice(clientView.div3);
@@ -91,26 +85,27 @@ public class ClientControllerGameBoard {
 					}
 
 					else {
-						if (w1Selected == true) {
+						if (clientView.dr1.isSelected()) {
 							die1 = getRollDice(clientView.div1);
 						}
-						if (w2Selected == true) {
+						if (clientView.dr2.isSelected()) {
 							die2 = getRollDice(clientView.div2);
 						}
-						if (w3Selected == true) {
+						if (clientView.dr3.isSelected()) {
 							die3 = getRollDice(clientView.div3);
 						}
-						if (w4Selected == true) {
+						if (clientView.dr4.isSelected()) {
 							die4 = getRollDice(clientView.div4);
 						}
-						if (w5Selected == true) {
+						if (clientView.dr5.isSelected()) {
 							die5 = getRollDice(clientView.div5);
 						}
-						if (w6Selected == true) {
+						if (clientView.dr6.isSelected()) {
 							die6 = getRollDice(clientView.div6);
 						}
 					}
-					if (würfelVersuchCounter == 2) {
+					if (clientView.würfelVersuchCounter == 2) {
+						diceValues = new ArrayList<String>();
 						clientView.rollDice.setText("Zug beenden");
 						diceValues.add(die1);
 						diceValues.add(die2);
@@ -120,17 +115,25 @@ public class ClientControllerGameBoard {
 						diceValues.add(die6);
 					}
 
-					würfelVersuchCounter++;
+					clientView.würfelVersuchCounter++;
 
-					System.out.println("Würfel Runde: " + würfelVersuchCounter);
+					System.out.println("Würfel Runde: " + clientView.würfelVersuchCounter);
 				} else {
 					// clientView.rollDice.setText("Zug beenden");
+
 					clientView.dr1.setVisible(false);
 					clientView.dr2.setVisible(false);
 					clientView.dr3.setVisible(false);
 					clientView.dr4.setVisible(false);
 					clientView.dr5.setVisible(false);
 					clientView.dr6.setVisible(false);
+
+					clientView.dr1.setSelected(false);
+					clientView.dr2.setSelected(false);
+					clientView.dr3.setSelected(false);
+					clientView.dr4.setSelected(false);
+					clientView.dr5.setSelected(false);
+					clientView.dr6.setSelected(false);
 
 					System.out.println("Calculating game points..");
 					setGamePoints();
@@ -141,7 +144,7 @@ public class ClientControllerGameBoard {
 					} else {
 						clientModel.getGamestate().setCurrentPlayerId(1);
 					}
-					würfelVersuchCounter = 0;
+					clientView.würfelVersuchCounter = 0;
 					clientModel.sendToServer(clientModel.getGamestate());
 				}
 
@@ -170,78 +173,6 @@ public class ClientControllerGameBoard {
 				return die;
 			}
 
-		});
-
-		clientView.dr1.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (w1Selected == false) {
-					w1Selected = true;
-				} else if (w1Selected == true) {
-					w1Selected = false;
-				}
-
-			}
-		});
-
-		clientView.dr5.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (w5Selected == false) {
-					w5Selected = true;
-				} else if (w5Selected == true) {
-					w5Selected = false;
-				}
-
-			}
-		});
-
-		clientView.dr4.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (w4Selected == false) {
-					w4Selected = true;
-				} else if (w4Selected == true) {
-					w4Selected = false;
-				}
-
-			}
-		});
-
-		clientView.dr3.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (w3Selected == false) {
-					w3Selected = true;
-				} else if (w3Selected == true) {
-					w3Selected = false;
-				}
-
-			}
-		});
-
-		clientView.dr2.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (w2Selected == false) {
-					w2Selected = true;
-				} else if (w2Selected == true) {
-					w2Selected = false;
-				}
-
-			}
-		});
-
-		clientView.dr1.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (w1Selected == false) {
-					w1Selected = true;
-				} else if (w1Selected == true) {
-					w1Selected = false;
-				}
-
-			}
 		});
 
 	}
@@ -277,14 +208,14 @@ public class ClientControllerGameBoard {
 		points += calcGloryPoints(counter1, 1);
 		points += calcGloryPoints(counter2, 2);
 		points += calcGloryPoints(counter3, 3);
+		clientModel.getGamestate().getPlayer(clientModel.getClientID()).addGloryPoints(points);
 		System.out.println("Total glory points: " + points);
-		clientModel.getGamestate().getPlayer(clientModel.getClientID()).setGloryPoints(points);
 	}
 
 	private int calcGloryPoints(int count, int digit) {
 		int points = 0;
 		if (count / 3 > 0) {
-			points += digit * (count / 3) + (count % 3);
+			points = digit * (count / 3) + (count % 3);
 		}
 		return points;
 	}

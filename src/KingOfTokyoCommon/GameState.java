@@ -17,6 +17,7 @@ public class GameState implements Serializable {
 	MapLocation location = MapLocation.insideTokyo;
 	private int currentPlayerId = 1;
 	private static GameState instance = null;
+	private Player winner;
 
 	private GameState() {
 
@@ -86,17 +87,12 @@ public class GameState implements Serializable {
 		return new Player(id);
 	}
 
-	public void getWinner() {
+	public Player getWinner() {
+		return winner;
+	}
 
-		// Playerliste iterieren
-		for (Player player : players) {
-
-			if (player.getGloryPoints() == 20) {
-
-				System.out.println(player + " is the winner!");
-			}
-		}
-
+	public void setWinner(Player winner) {
+		this.winner = winner;
 	}
 
 	@Override

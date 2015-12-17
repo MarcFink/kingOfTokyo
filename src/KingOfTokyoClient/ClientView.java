@@ -18,13 +18,14 @@ public class ClientView {
 	private String ipaddress = "Localhost";
 	private int port = 4444;
 	private AnchorPane root;
-	Label pname1, pname2, glory1, glory2, life1, life2, playername1, playername2, lifepoints1, lifepoints2,
-			glorypoints1, glorypoints2;
+	Label yourname, othername, yourglory, otherglory, yourlife, otherlife, currentplayername, otherplayername,
+			currentlifepoints, otherlifepoints, yourglorypoints, otherglorypoints, gameover;
 	Button rollDice;
 	RadioButton dr1, dr2, dr3, dr4, dr5, dr6;
 	ImageView div1, div2, div3, div4, div5, div6, monster1, monster2, gameBoard;
 	Image id1, id2, id3, id4, id5, id6, gb;
 	private Scene scene;
+	int würfelVersuchCounter = 0;
 
 	public ClientView(Stage kingOfTokyoStage, ClientModel clientModel) throws Exception {
 		this.clientModel = clientModel;
@@ -45,55 +46,61 @@ public class ClientView {
 
 		// Labels die während dem Spiel nicht verändert werden
 		// Player1
-		playername1 = new Label("Spielername:");
-		playername1.setLayoutX(58);
-		playername1.setLayoutY(300);
+		currentplayername = new Label("Dein Spieler:");
+		currentplayername.setLayoutX(58);
+		currentplayername.setLayoutY(300);
 
-		lifepoints1 = new Label("Lebenspunkte:");
-		lifepoints1.setLayoutX(58);
-		lifepoints1.setLayoutY(340);
+		currentlifepoints = new Label("Deine Lebenspunkte:");
+		currentlifepoints.setLayoutX(58);
+		currentlifepoints.setLayoutY(340);
 
-		glorypoints1 = new Label("Ruhmpunkte:");
-		glorypoints1.setLayoutX(58);
-		glorypoints1.setLayoutY(380);
+		yourglorypoints = new Label("Deine Ruhmpunkte:");
+		yourglorypoints.setLayoutX(58);
+		yourglorypoints.setLayoutY(380);
 
-		playername2 = new Label("Spielername:");
-		playername2.setLayoutX(892);
-		playername2.setLayoutY(300);
+		otherplayername = new Label("Dein Gegner:");
+		otherplayername.setLayoutX(892);
+		otherplayername.setLayoutY(300);
 
-		lifepoints2 = new Label("Lebenspunkte:");
-		lifepoints2.setLayoutX(891);
-		lifepoints2.setLayoutY(340);
+		otherlifepoints = new Label("Seine Lebenspunkte:");
+		otherlifepoints.setLayoutX(891);
+		otherlifepoints.setLayoutY(340);
 
-		glorypoints2 = new Label("Ruhmpunkte:");
-		glorypoints2.setLayoutX(887);
-		glorypoints2.setLayoutY(380);
+		otherglorypoints = new Label("Seine Ruhmpunkte:");
+		otherglorypoints.setLayoutX(887);
+		otherglorypoints.setLayoutY(380);
 
 		// Labels die während dem Spiel verändert werden
 		// Player2
-		pname1 = new Label("Text");
-		pname1.setLayoutX(160);
-		pname1.setLayoutY(300);
+		yourname = new Label("Text");
+		yourname.setLayoutX(160);
+		yourname.setLayoutY(300);
 
-		life1 = new Label("Text");
-		life1.setLayoutX(160);
-		life1.setLayoutY(340);
+		yourlife = new Label("Text");
+		yourlife.setLayoutX(170);
+		yourlife.setLayoutY(340);
 
-		glory1 = new Label("Text");
-		glory1.setLayoutX(160);
-		glory1.setLayoutY(380);
+		yourglory = new Label("Text");
+		yourglory.setLayoutX(170);
+		yourglory.setLayoutY(380);
 
-		pname2 = new Label("Text");
-		pname2.setLayoutX(987);
-		pname2.setLayoutY(300);
+		othername = new Label("Text");
+		othername.setLayoutX(987);
+		othername.setLayoutY(300);
 
-		life2 = new Label("Text");
-		life2.setLayoutX(987);
-		life2.setLayoutY(340);
+		otherlife = new Label("Text");
+		otherlife.setLayoutX(997);
+		otherlife.setLayoutY(340);
 
-		glory2 = new Label("Text");
-		glory2.setLayoutX(987);
-		glory2.setLayoutY(380);
+		otherglory = new Label("Text");
+		otherglory.setLayoutX(997);
+		otherglory.setLayoutY(380);
+
+		// Game over status
+		gameover = new Label("Text");
+		gameover.setLayoutX(550);
+		gameover.setLayoutY(619);
+		gameover.setVisible(false);
 
 		// RadioButtons, sie sind am Anfang nicht sichtbar.
 		dr1 = new RadioButton();
@@ -189,9 +196,9 @@ public class ClientView {
 		rollDice.setLayoutX(1009);
 		rollDice.setLayoutY(619);
 
-		root.getChildren().addAll(pname1, glory1, life2, pname2, glory2, life1, playername1, playername2, glorypoints1,
-				glorypoints2, lifepoints1, lifepoints2, div1, div2, div3, div4, div5, div6, monster1, monster2,
-				gameBoard, rollDice, dr1, dr2, dr3, dr4, dr5, dr6);
+		root.getChildren().addAll(yourname, yourglory, otherlife, othername, otherglory, yourlife, currentplayername,
+				otherplayername, yourglorypoints, otherglorypoints, currentlifepoints, otherlifepoints, gameover, div1,
+				div2, div3, div4, div5, div6, monster1, monster2, gameBoard, rollDice, dr1, dr2, dr3, dr4, dr5, dr6);
 
 	}
 
@@ -232,20 +239,49 @@ public class ClientView {
 	public void updateGUI() {
 		Platform.runLater(() -> {
 
-			if (clientModel.getClientID() == clientModel.getGamestate().getCurrentPlayerId()) {
-				rollDice.setText("Würfeln");
-				rollDice.setDisable(false);
-			} else {
-				rollDice.setDisable(true);
-			}
+			if (clientModel.getGamestate() != null) {
 
-			if (clientModel.getGamestate() != null && clientModel.getGamestate().getPlayers().size() == 2) {
-				pname1.setText(clientModel.getGamestate().getPlayer(1).getPlayername());
-				pname2.setText(clientModel.getGamestate().getPlayer(2).getPlayername());
-				glory1.setText(String.valueOf(clientModel.getGamestate().getPlayer(1).getGloryPoints()));
-				glory2.setText(String.valueOf(clientModel.getGamestate().getPlayer(2).getGloryPoints()));
-				life1.setText(String.valueOf(clientModel.getGamestate().getPlayer(1).getLifePoints()));
-				life2.setText(String.valueOf(clientModel.getGamestate().getPlayer(2).getLifePoints()));
+				Player currentPlayer = clientModel.getGamestate().getPlayer(clientModel.getClientID());
+				Player otherPlayer = clientModel.getGamestate().getPlayer((clientModel.getClientID() == 1) ? 2 : 1);
+
+				if (clientModel.getClientID() == clientModel.getGamestate().getCurrentPlayerId()) {
+					rollDice.setDisable(false);
+					if (würfelVersuchCounter < 2) {
+						rollDice.setText("Würfeln");
+					}
+				} else {
+					rollDice.setDisable(true);
+				}
+
+				if (currentPlayer != null) {
+					yourname.setText(currentPlayer.getPlayername());
+					yourlife.setText(String.valueOf(currentPlayer.getLifePoints()));
+					yourglory.setText(String.valueOf(currentPlayer.getGloryPoints()));
+
+					if (currentPlayer.getGloryPoints() >= 20) {
+						clientModel.getGamestate().setWinner(currentPlayer);
+					}
+					if (currentPlayer.getLifePoints() <= 0) {
+						clientModel.getGamestate().setWinner(otherPlayer);
+					}
+
+				}
+				if (otherPlayer != null) {
+					othername.setText(otherPlayer.getPlayername());
+					otherlife.setText(String.valueOf(otherPlayer.getLifePoints()));
+					otherglory.setText(String.valueOf(otherPlayer.getGloryPoints()));
+				}
+
+				if (clientModel.getGamestate().getWinner() != null) {
+					if (clientModel.getGamestate().getWinner().getPlayerId() == clientModel.getClientID()) {
+						gameover.setText("Game Over! You won!!!");
+					} else {
+						gameover.setText("Game Over! You lost!!!");
+					}
+					gameover.setVisible(true);
+					clientModel.getGamestate().setCurrentPlayerId(0);
+				}
+
 			}
 		});
 
