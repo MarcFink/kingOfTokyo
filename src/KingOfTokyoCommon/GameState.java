@@ -18,6 +18,16 @@ public class GameState implements Serializable {
 	private int currentPlayerId = 1;
 	private static GameState instance = null;
 	private Player winner;
+	boolean musicOn=true;
+	
+
+	public boolean isMusicOn() {
+		return musicOn;
+	}
+
+	public void setMusicOn(boolean musicOn) {
+		this.musicOn = musicOn;
+	}
 
 	private GameState() {
 

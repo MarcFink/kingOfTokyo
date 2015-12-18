@@ -1,6 +1,7 @@
 package KingOfTokyoClient;
 
 import KingOfTokyoCommon.GameState;
+import KingOfTokyoServer.Music;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,6 +27,7 @@ public class ClientView {
 	Image id1, id2, id3, id4, id5, id6, gb;
 	private Scene scene;
 	int würfelVersuchCounter = 0;
+	
 
 	public ClientView(Stage kingOfTokyoStage, ClientModel clientModel) throws Exception {
 		this.clientModel = clientModel;
@@ -238,6 +240,7 @@ public class ClientView {
 
 	public void updateGUI() {
 		Platform.runLater(() -> {
+			Music music=new Music();
 
 			if (clientModel.getGamestate() != null) {
 
@@ -282,6 +285,13 @@ public class ClientView {
 				if (clientModel.getGamestate().getWinner() != null) {
 					if (clientModel.getGamestate().getWinner().getPlayerId() == clientModel.getClientID()) {
 						gameover.setText("Game Over! You won!!!");
+						
+						
+						if(clientModel.getGamestate().isMusicOn()==true)
+							music.start();
+							
+						clientModel.getGamestate().setMusicOn(false);
+						
 					} else {
 						gameover.setText("Game Over! You lost!!!");
 					}
@@ -291,6 +301,8 @@ public class ClientView {
 
 			}
 		});
+		
 
 	}
+	
 }
