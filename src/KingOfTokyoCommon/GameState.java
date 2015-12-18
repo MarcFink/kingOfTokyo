@@ -8,8 +8,8 @@ import KingOfTokyoClient.Player;
 
 public class GameState implements Serializable {
 
-	/**
-	 * 
+	/*
+	 * @author Fink Marc, Attinkara Robin, Mäder David
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Player> players = new ArrayList<Player>();

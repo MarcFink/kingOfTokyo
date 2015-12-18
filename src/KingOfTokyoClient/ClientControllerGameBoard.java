@@ -7,11 +7,16 @@ import java.util.Optional;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class ClientControllerGameBoard {
+	/* 
+	 * @author Attinkara Robin
+	 * */
 
 	private ClientModel clientModel;
 
@@ -23,6 +28,9 @@ public class ClientControllerGameBoard {
 	private String die4 = "";
 	private String die5 = "";
 	private String die6 = "";
+	private FactsView Fview;
+	private Scene scene;
+	private Stage factsStage;
 
 	/**
 	 * @param clientModel
@@ -38,27 +46,57 @@ public class ClientControllerGameBoard {
 
 			int id = clientModel.getClientID();
 
-			//Namen Dialogfeld setzen 
-			TextInputDialog dialog = new TextInputDialog("");
-			dialog.setTitle("Text Input Dialog");
-			dialog.setHeaderText("Look, a Text Input Dialog");
-			dialog.setContentText("Please enter your name:");
+			clientView.insertPlayerData();
+			
+			// Button um das Spiel zu starten
+			clientView.ready.setOnAction(new EventHandler<ActionEvent>() {
 
-			// Den eingegebnen Wert verarbeiten
-			Optional<String> result = dialog.showAndWait();
-			if (result.isPresent()) {
-
-				System.out.println("Your name: " + result.get());
-
+				@Override
+				public void handle(ActionEvent event) {
+			
 				// Neues Playerobjekt wird erstellt und der Playername wird
 				// gesetzt
 				clientModel.getGamestate().addPlayer(id);
-				clientModel.getGamestate().getPlayer(id).setPlayername(result.get());
+				clientModel.getGamestate().getPlayer(id).setPlayername(clientView.txtpname.getText());
 				clientModel.sendToServer(clientModel.getGamestate());
+				clientView.closeinsertPlayerData();
+				clientView.start();
+				GUIUpdateThread guiThread= new GUIUpdateThread(clientView);
+				guiThread.start();
+				
 			}
+			});
 
+				
 		});
+		
+		//Button um die Facts einzusehen
+		
+		clientView.factButton.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent event) {
+				clientView.FactsView();
+				
+			}
+		});
+		
+		//Button um die Anleitung einzusehen
+		clientView.instrucButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				clientView.InstrucView();
+				
+			}
+		});
+		
+		
+		
+
+	
+
+		
 		//Würfelbutton onclick Action
 		clientView.rollDice.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -191,12 +229,12 @@ public class ClientControllerGameBoard {
 			@Override
 			public void handle(ActionEvent event) {
 
-				if (clientView.moveToTokyo.getText() == "Move to Tokyo") {
+				if (clientView.moveToTokyo.getText() == "nach Tokyo") {
 					clientModel.getGamestate().getPlayer(clientModel.getClientID()).setInTokyo(true);
 					System.out.println("Player " + clientModel.getClientID() + " moved to Tokyo");
 					// Bild von Tokyo wird gewechselt
 					clientView.gameBoard.setImage(new Image("./Images/InTokyo.JPG"));
-					clientView.moveToTokyo.setText("Move out of Tokyo");
+					clientView.moveToTokyo.setText("Tokyo verlassen");
 					// Glorypoints werden hinzugefügt für Tokyo
 					clientModel.getGamestate().getPlayer(clientModel.getClientID()).addGloryPoints(1);
 				} else {
@@ -204,7 +242,7 @@ public class ClientControllerGameBoard {
 					System.out.println("Player " + clientModel.getClientID() + " moved out of Tokyo");
 					// Bild von Tokyo wird gewechselt(für den anderen Spieler)
 					clientView.gameBoard.setImage(new Image("./Images/GameBoard.png"));
-					clientView.moveToTokyo.setText("Move to Tokyo");
+					clientView.moveToTokyo.setText("nach Tokyo");
 					clientView.moveToTokyo.setVisible(false);
 
 				}

@@ -3,8 +3,8 @@ package KingOfTokyoClient;
 import java.io.Serializable;
 
 public class Player implements Serializable {
-	/**
-	 * 
+	/*
+	 * @author Mäder David
 	 */
 	private static final long serialVersionUID = 1L;
 	private int playerId;

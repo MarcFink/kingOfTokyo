@@ -12,6 +12,9 @@ import KingOfTokyoCommon.GameState;
 import javafx.application.Platform;
 
 public class ClientThread extends Thread {
+	/* 
+	 * @author Mäder David
+	 */
 
 	Socket clientSocket;
 	ObjectInputStream in;
@@ -36,10 +39,11 @@ public class ClientThread extends Thread {
 	}
 
 	public void run() {
-		
+	
+		//clientid wird einmal an den Client geschickt
 		sendIDToClient(id);
 		
-		
+		//GameState Objekt wird einmal zum Client gesendet
 		sendObjectToClient(this.gameState);
 
 		try {
@@ -78,6 +82,8 @@ public class ClientThread extends Thread {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	//Objekt GameState wird verschickt
 
 	public void sendObjectToClient(GameState gameState) {
 		try {
@@ -89,6 +95,7 @@ public class ClientThread extends Thread {
 		}
 	}
 
+	// Interger Wert wird verschickt
 	public void sendIDToClient(int client_id) {
 			try {
 				out.writeInt(client_id);

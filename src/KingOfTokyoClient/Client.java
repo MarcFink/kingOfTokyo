@@ -8,6 +8,7 @@ public class Client extends Application {
 	private Stage kingOfTokyoStage;
 
 	@Override
+	// Client wird gestartet
 	public void start(Stage primaryStage) throws Exception {
 		kingOfTokyoStage = primaryStage;
 
@@ -15,9 +16,7 @@ public class Client extends Application {
 		ClientView clientView = new ClientView(kingOfTokyoStage, clientModel);
 		ClientControllerGameBoard clientControllerGameBoard = new ClientControllerGameBoard(clientModel, clientView);
 
-		clientView.start();
-		GUIUpdateThread guiThread= new GUIUpdateThread(clientView);
-		guiThread.start();
+		
 
 	}
 

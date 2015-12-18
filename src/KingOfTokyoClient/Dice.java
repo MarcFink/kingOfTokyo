@@ -3,6 +3,9 @@ package KingOfTokyoClient;
 import java.util.Random;
 
 public class Dice {
+	/* 
+	 * @author Fink Marc
+	 * */
 
 	private String[] symbols = { "1", "2", "3", "A", "H" };
 	private String currentDiceValue;

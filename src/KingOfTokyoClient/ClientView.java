@@ -6,38 +6,51 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class ClientView {
+	/* 
+	 * @author  Fink Marc, Attinkara Robin, Mäder David
+	 * */
 
-	private Stage kingOfTokyoStage;
+	private Stage kingOfTokyoStage,stage,factStage,AnleitungStage;
 	private ClientModel clientModel;
 	private String ipaddress = "Localhost";
 	private int port = 4444;
 	private AnchorPane root;
+	BorderPane borderPane;
 	Label yourname, othername, yourglory, otherglory, yourlife, otherlife, currentplayername, otherplayername,
 			currentlifepoints, otherlifepoints, yourglorypoints, otherglorypoints, gameover;
-	Button rollDice;
+	Button rollDice, ready,factButton,instrucButton;
 	Button moveToTokyo;
-	RadioButton dr1, dr2, dr3, dr4, dr5, dr6;
+	RadioButton dr1, dr2, dr3, dr4, dr5, dr6,mG,tK,k;
 	ImageView div1, div2, div3, div4, div5, div6, monster1, monster2, gameBoard;
 	Image id1, id2, id3, id4, id5, id6, gb;
+	TextField txtpname;
 	private Scene scene;
 	int würfelVersuchCounter = 0;
-
+	
+	
 	public ClientView(Stage kingOfTokyoStage, ClientModel clientModel) throws Exception {
 		this.clientModel = clientModel;
 		this.setKingOfTokyoStage(kingOfTokyoStage);
+		
 		initGUI();
-
+		
 		scene = new Scene(root);
 		kingOfTokyoStage.setScene(scene);
-
+		
+		
+	
+	
 		clientModel.startClientConnection(ipaddress, port);
-
+		
 	}
 
 	private void initGUI() {
@@ -196,9 +209,20 @@ public class ClientView {
 		rollDice = new Button("Wüfeln");
 		rollDice.setLayoutX(1009);
 		rollDice.setLayoutY(619);
+		
+		//Button um Facts einzusehen
+		factButton=new Button("Facts");
+		factButton.setLayoutX(58);
+		factButton.setLayoutY(619);
+		
+		//Button um die Anleitung einzusehen
+		instrucButton=new Button("Anleitung");
+		instrucButton.setLayoutX(115);
+		instrucButton.setLayoutY(619);
 
+		
 		// button um nach tokyo zu gelangen
-		moveToTokyo = new Button("Move to Tokyo");
+		moveToTokyo = new Button("nach Tokyo");
 		moveToTokyo.setLayoutX(1009);
 		moveToTokyo.setLayoutY(580);
 		moveToTokyo.setVisible(false);
@@ -207,7 +231,7 @@ public class ClientView {
 		root.getChildren().addAll(yourname, yourglory, otherlife, othername, otherglory, yourlife, currentplayername,
 				otherplayername, yourglorypoints, otherglorypoints, currentlifepoints, otherlifepoints, gameover, div1,
 				div2, div3, div4, div5, div6, monster1, monster2, gameBoard, rollDice, moveToTokyo, dr1, dr2, dr3, dr4,
-				dr5, dr6);
+				dr5, dr6,factButton,instrucButton);
 
 	}
 
@@ -217,6 +241,8 @@ public class ClientView {
 		kingOfTokyoStage.show();
 
 	}
+	
+
 
 	/**
 	 * Stopping the view - just make it invisible
@@ -310,5 +336,99 @@ public class ClientView {
 		});
 
 	}
+	//Neue Stage für Dateneingabe:
+		public void insertPlayerData(){
+				final ToggleGroup group = new ToggleGroup();
 
-}
+				stage=new Stage();
+				AnchorPane iPD=new AnchorPane();
+				iPD.setPrefHeight(350);
+				iPD.setPrefWidth(500);
+				
+				Image monsterGigaZaur=new Image("./Images/MonsterGigaZaur.png");
+				Image monsterTheKing=new Image("./Images/MonsterTheKing.png");
+				Image monsterKraken=new Image("./Images/MonsterKraken.png");
+				
+				ImageView mGiga=new ImageView(monsterGigaZaur);
+				mGiga.setLayoutX(42.5);
+				mGiga.setLayoutY(65);
+				mGiga.setFitHeight(120);
+				mGiga.setFitWidth(110);
+				
+				ImageView mtheK=new ImageView(monsterTheKing);
+				mtheK.setLayoutX(195);
+				mtheK.setLayoutY(65);
+				mtheK.setFitHeight(120);
+				mtheK.setFitWidth(110);
+				
+				ImageView mK=new ImageView(monsterKraken);
+				mK.setFitHeight(120);
+				mK.setFitWidth(110);
+				mK.setLayoutX(347.5);
+				mK.setLayoutY(65);
+				
+				Label pname=new Label("Bitte Namen eingeben");
+				pname.setLayoutX(34);
+				pname.setLayoutY(299);
+				
+				txtpname=new TextField();
+				txtpname.setLayoutX(166);
+				txtpname.setLayoutY(295);
+				
+				mG=new RadioButton();
+				mG.setLayoutX(86);
+				mG.setLayoutY(205);
+				mG.setToggleGroup(group);
+				mG.setSelected(true);
+				
+				tK=new RadioButton();
+				tK.setLayoutX(240);
+				tK.setLayoutY(205);
+				tK.setToggleGroup(group);
+				
+				k=new RadioButton();
+				k.setLayoutX(392);
+				k.setLayoutY(205);
+				k.setToggleGroup(group);
+				
+				ready=new Button("ready!");
+				ready.setLayoutX(377);
+				ready.setLayoutY(295);
+				
+				iPD.getChildren().addAll(ready,tK,k,mG,txtpname,pname,mK,mtheK,mGiga);
+				Scene scene2=new Scene(iPD);
+				
+				if (clientModel.getClientID() == 1) {
+					stage.setTitle("Player 1");
+				} else {
+					stage.setTitle("Player 2");
+				}
+				stage.setScene(scene2);
+				stage.show();
+				
+				
+				
+			}
+			public void closeinsertPlayerData(){
+				stage.close();
+			}
+			//View mit eigener Stage für die Facts
+			public void FactsView(){
+				FactsView fView=new FactsView();
+				factStage=new Stage();
+				factStage.setScene(fView.getScene());
+				factStage.show();
+				
+			}
+			
+			// View mit eigener Stage für die Anleitung
+			public void InstrucView(){
+				AnleitungView Aview=new AnleitungView();
+				AnleitungStage=new Stage();
+				AnleitungStage.setTitle("Spielanleitung");
+				AnleitungStage.setScene(Aview.getScene());
+				AnleitungStage.show();
+			}
+			
+		}
+

@@ -16,7 +16,7 @@ public class Server extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		//Server wird gestartet
+	
 		ServerController serverController=new ServerController();
 				
 	}

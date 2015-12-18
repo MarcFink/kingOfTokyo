@@ -1,7 +1,9 @@
 package KingOfTokyoClient;
 
 public class GUIUpdateThread extends Thread {
-	
+	/* 
+	 * @author Attinkara Robin
+	 * */
 	ClientView clientView;
 	
 	

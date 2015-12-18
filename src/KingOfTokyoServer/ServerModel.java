@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import KingOfTokyoCommon.GameState;
 
 public class ServerModel {
+	/* 
+	 * @author Mäder David + Fink Marc
+	 * */
+	
 	private Integer port;
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
@@ -37,6 +41,7 @@ public class ServerModel {
 	public void start() throws IOException {
 		serverSocket = new ServerSocket(port);
 		System.out.println(port + " Server ist gestartet");
+		//Server hört auf eingehende Client Verbindungen
 		
 		while (true) {
 			clientSocket = serverSocket.accept();
@@ -45,8 +50,6 @@ public class ServerModel {
 			clientThreadList.add(clientThread);
 			clientThread.start();
 			System.out.println(client_id + ". Client hinzugefügt");
-			//sendet als erstes die ClientID des ClientThreads zu dem dazugehörigen
-			//Client, so weiss jeder Client welcher ClientThread zu ihm gehört
 			
 		}
 

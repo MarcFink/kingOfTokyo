@@ -7,6 +7,9 @@ import java.net.Socket;
 import KingOfTokyoCommon.GameState;
 
 public class ClientModel {
+	/* 
+	 * @author Fink Marc
+	 * */
 
 	private Socket socket;
 	private ServerListener serverListener;
@@ -23,8 +26,10 @@ public class ClientModel {
 	public Socket startClientConnection(String ipaddress, int port) throws Exception {
 		this.ipadress = ipadress;
 		this.port = port;
+		
 		socket = new Socket(ipadress, port);
 		System.out.println("Client ist gestartet");
+		
 		gamestate = GameState.getInstance();
 		// neuer serverlistener erzeugt und dem Clientmodel zugeordnet
 		serverListener = new ServerListener(this, socket);

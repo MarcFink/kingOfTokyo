@@ -9,7 +9,9 @@ import KingOfTokyoCommon.GameState;
 import javafx.application.Platform;
 
 public class ServerListener extends Thread {
-
+	/* 
+	 * @author Fink Marc
+	 */
 	private Socket clientsocket;
 	private ObjectInputStream in;
 	private ClientModel clientmodel;
