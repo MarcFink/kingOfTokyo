@@ -1,6 +1,7 @@
 package KingOfTokyoClient;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -38,12 +39,15 @@ public class factsView extends Application {
 		Text txtTitleAbout = new Text();
 		txtTitleAbout.setText("Informatikprojekt 2015 - King of Tokyo ");
 		txtTitleAbout.setFont(Font.font ("Verdana", 20));
+		
+		
 		Text txtAbout = new Text();
 		txtAbout.setText(
 				"In diesem Projekt geht es um die Umsetzung des Brettspiels King of Tokyo in ein Computerspiel. \nWir sind drei Wirtschaftsinformatikstudenten an der Fachhochschule Nordwestschweiz.\nDie Basisanforderungen wurden von den Dozenten festgelegt. \nDa wir einen engen Zeitplan haben, konnte nicht das ganze Brettspiel umgesetzt werden. \nAusserdem hat man uns einen kreativen Freiraum zur Verfügung gestellt,\nwo wir selber Regeln erstellen und so dem Spiel einen eigenen Stempel aufdrücken können. \nDas Programm ist in Java geschrieben und als Entwicklungsumgebung wurde Eclipse verwendet. \nUm eine reibungslose Zusammenarbeit zu gewährleisten wurde mit der Versionskontrolle Git gearbeitet.");
 		tabAboutUs.setContent(borderAbout);
 		borderAbout.setTop(txtTitleAbout);
 		borderAbout.setCenter(txtAbout);
+		borderAbout.setAlignment(txtTitleAbout, Pos.CENTER);
 
 		Tab tabRobin = new Tab("Robin Attinkara");
 		GridPane gridRobin = new GridPane();
