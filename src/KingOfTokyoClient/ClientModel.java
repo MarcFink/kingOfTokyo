@@ -14,7 +14,7 @@ public class ClientModel {
 	private ObjectOutputStream out;
 	private int port;
 	private String ipadress;
-	private int clientID;
+	private int clientID = 1;
 
 	public ClientModel() {
 

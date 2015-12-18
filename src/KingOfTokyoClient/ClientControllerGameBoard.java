@@ -38,6 +38,7 @@ public class ClientControllerGameBoard {
 
 			int id = clientModel.getClientID();
 
+			//Namen Dialogfeld setzen 
 			TextInputDialog dialog = new TextInputDialog("");
 			dialog.setTitle("Text Input Dialog");
 			dialog.setHeaderText("Look, a Text Input Dialog");
@@ -58,13 +59,14 @@ public class ClientControllerGameBoard {
 
 		});
 
+		//Würfelbutton onclick Action
 		clientView.rollDice.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 
 				if (clientView.würfelVersuchCounter <= 2) {
-
+					//Radiobuttons werden auf visible gesetzt
 					clientView.dr1.setVisible(true);
 					clientView.dr2.setVisible(true);
 					clientView.dr3.setVisible(true);
@@ -72,10 +74,16 @@ public class ClientControllerGameBoard {
 					clientView.dr5.setVisible(true);
 					clientView.dr6.setVisible(true);
 
-					// clientModel.sendToServer(clientModel.getGamestate());
-
+					
+					//erste Würfelrunde 
 					if (clientView.würfelVersuchCounter == 0) {
-
+						//falls in Tokyo 
+						if (clientModel.getGamestate().getPlayer(clientModel.getClientID()).isInTokyo()) {
+							System.out.println("Player " + clientModel.getClientID() + " started game in Tokyo");
+							clientModel.getGamestate().getPlayer(clientModel.getClientID()).addGloryPoints(2);
+							clientModel.sendToServer(clientModel.getGamestate());
+						}
+						//Würfelstrings werden initialisiert, damit diese nicht leer sind
 						die1 = getRollDice(clientView.div1);
 						die2 = getRollDice(clientView.div2);
 						die3 = getRollDice(clientView.div3);
@@ -104,6 +112,7 @@ public class ClientControllerGameBoard {
 							die6 = getRollDice(clientView.div6);
 						}
 					}
+					//Letzte Würfelrunde ; Werte werden ausgelesen
 					if (clientView.würfelVersuchCounter == 2) {
 						diceValues = new ArrayList<String>();
 						clientView.rollDice.setText("Zug beenden");
@@ -119,7 +128,7 @@ public class ClientControllerGameBoard {
 
 					System.out.println("Würfel Runde: " + clientView.würfelVersuchCounter);
 				} else {
-					// clientView.rollDice.setText("Zug beenden");
+					
 
 					clientView.dr1.setVisible(false);
 					clientView.dr2.setVisible(false);
@@ -134,8 +143,9 @@ public class ClientControllerGameBoard {
 					clientView.dr4.setSelected(false);
 					clientView.dr5.setSelected(false);
 					clientView.dr6.setSelected(false);
-
+					
 					System.out.println("Calculating game points..");
+					//Alle Punkte werden ausgelesen
 					setGamePoints();
 					clientView.rollDice.setDisable(true);
 					// other players turn
@@ -144,12 +154,14 @@ public class ClientControllerGameBoard {
 					} else {
 						clientModel.getGamestate().setCurrentPlayerId(1);
 					}
+					//Für nächste Runde wird Würfelcounter 0 gesetzt
+					//Gamestate wird als Benachrichtigung zum Server gesendet
 					clientView.würfelVersuchCounter = 0;
 					clientModel.sendToServer(clientModel.getGamestate());
 				}
 
 			}
-
+			// Würfelbilder werden gesetzt
 			private String getRollDice(ImageView view) {
 				String die;
 				die = dice.rollDice();
@@ -171,6 +183,32 @@ public class ClientControllerGameBoard {
 					view.setImage(img);
 				}
 				return die;
+			}
+
+		});//Nach Tokyo Button onclick Action
+		clientView.moveToTokyo.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				if (clientView.moveToTokyo.getText() == "Move to Tokyo") {
+					clientModel.getGamestate().getPlayer(clientModel.getClientID()).setInTokyo(true);
+					System.out.println("Player " + clientModel.getClientID() + " moved to Tokyo");
+					// Bild von Tokyo wird gewechselt
+					clientView.gameBoard.setImage(new Image("./Images/InTokyo.JPG"));
+					clientView.moveToTokyo.setText("Move out of Tokyo");
+					// Glorypoints werden hinzugefügt für Tokyo
+					clientModel.getGamestate().getPlayer(clientModel.getClientID()).addGloryPoints(1);
+				} else {
+					clientModel.getGamestate().getPlayer(clientModel.getClientID()).setInTokyo(false);
+					System.out.println("Player " + clientModel.getClientID() + " moved out of Tokyo");
+					// Bild von Tokyo wird gewechselt(für den anderen Spieler)
+					clientView.gameBoard.setImage(new Image("./Images/GameBoard.png"));
+					clientView.moveToTokyo.setText("Move to Tokyo");
+					clientView.moveToTokyo.setVisible(false);
+
+				}
+				clientModel.sendToServer(clientModel.getGamestate());
 			}
 
 		});
@@ -197,10 +235,18 @@ public class ClientControllerGameBoard {
 				int otherPlayerId = (clientModel.getClientID() == 1) ? 2 : 1;
 				System.out.println("Attacking player " + otherPlayerId);
 				clientModel.getGamestate().attack(otherPlayerId);
+				// Nur wenn der Spieler oder Gegner nicht schon in tokyo ist
+				if (!clientModel.getGamestate().getPlayer(clientModel.getClientID()).isInTokyo()
+						&& !clientModel.getGamestate().getPlayer(otherPlayerId).isInTokyo()) {
+					clientView.moveToTokyo.setVisible(true);
+				}
 			}
-			if (val.equals("H")) {
-				System.out.println("Healing player " + clientModel.getClientID());
-				clientModel.getGamestate().heal(clientModel.getClientID());
+			if (val == "H") {
+				// nur heilen nur wenn nicht in Tokyo
+				if (!clientModel.getGamestate().getPlayer(clientModel.getClientID()).isInTokyo()) {
+					System.out.println("Healing player " + clientModel.getClientID());
+					clientModel.getGamestate().heal(clientModel.getClientID());
+				}
 			}
 
 		}

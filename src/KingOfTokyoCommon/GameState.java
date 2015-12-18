@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import KingOfTokyoClient.MapLocation;
 import KingOfTokyoClient.Player;
 
 public class GameState implements Serializable {
@@ -14,12 +13,10 @@ public class GameState implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Player> players = new ArrayList<Player>();
-	MapLocation location = MapLocation.insideTokyo;
 	private int currentPlayerId = 1;
 	private static GameState instance = null;
 	private Player winner;
-	boolean musicOn=true;
-	
+	boolean musicOn = true;
 
 	public boolean isMusicOn() {
 		return musicOn;
@@ -80,6 +77,7 @@ public class GameState implements Serializable {
 	}
 
 	public void heal(int playerID) {
+		//füge Lebenspunkt hinzu
 		int currentLifePoints = this.getPlayer(playerID).getLifePoints();
 		currentLifePoints += 1;
 		this.getPlayer(playerID).setLifePoints(currentLifePoints);
@@ -111,9 +109,8 @@ public class GameState implements Serializable {
 
 		for (Player player : players) {
 			stringVal.append("Player Name: " + player.getPlayername() + " Life points: " + player.getLifePoints()
-					+ " Glory points: " + player.getGloryPoints() + "\n");
+					+ " Glory points: " + player.getGloryPoints() + " Inside Tokyo: " + player.isInTokyo() + "\n");
 		}
-		stringVal.append("Current location:  " + location.name());
 		return stringVal.toString();
 	}
 

@@ -8,7 +8,7 @@ public class Player implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int playerId;
-	private boolean isInTokyo = false;
+	private boolean isInTokyo;
 	private String playername = "";
 	private String monster;
 	private int gloryPoints = 0;

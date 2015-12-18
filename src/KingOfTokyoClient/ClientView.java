@@ -1,6 +1,5 @@
 package KingOfTokyoClient;
 
-import KingOfTokyoCommon.GameState;
 import KingOfTokyoServer.Music;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -22,12 +21,12 @@ public class ClientView {
 	Label yourname, othername, yourglory, otherglory, yourlife, otherlife, currentplayername, otherplayername,
 			currentlifepoints, otherlifepoints, yourglorypoints, otherglorypoints, gameover;
 	Button rollDice;
+	Button moveToTokyo;
 	RadioButton dr1, dr2, dr3, dr4, dr5, dr6;
 	ImageView div1, div2, div3, div4, div5, div6, monster1, monster2, gameBoard;
 	Image id1, id2, id3, id4, id5, id6, gb;
 	private Scene scene;
 	int würfelVersuchCounter = 0;
-	
 
 	public ClientView(Stage kingOfTokyoStage, ClientModel clientModel) throws Exception {
 		this.clientModel = clientModel;
@@ -87,15 +86,15 @@ public class ClientView {
 		yourglory.setLayoutY(380);
 
 		othername = new Label("Text");
-		othername.setLayoutX(987);
+		othername.setLayoutX(1010);
 		othername.setLayoutY(300);
 
 		otherlife = new Label("Text");
-		otherlife.setLayoutX(1000);
+		otherlife.setLayoutX(1010);
 		otherlife.setLayoutY(340);
 
 		otherglory = new Label("Text");
-		otherglory.setLayoutX(997);
+		otherglory.setLayoutX(1010);
 		otherglory.setLayoutY(380);
 
 		// Game over status
@@ -198,21 +197,24 @@ public class ClientView {
 		rollDice.setLayoutX(1009);
 		rollDice.setLayoutY(619);
 
+		// button um nach tokyo zu gelangen
+		moveToTokyo = new Button("Move to Tokyo");
+		moveToTokyo.setLayoutX(1009);
+		moveToTokyo.setLayoutY(580);
+		moveToTokyo.setVisible(false);
+
+		//zu Stage hinzufügen(labels, buttons etc.)
 		root.getChildren().addAll(yourname, yourglory, otherlife, othername, otherglory, yourlife, currentplayername,
 				otherplayername, yourglorypoints, otherglorypoints, currentlifepoints, otherlifepoints, gameover, div1,
-				div2, div3, div4, div5, div6, monster1, monster2, gameBoard, rollDice, dr1, dr2, dr3, dr4, dr5, dr6);
+				div2, div3, div4, div5, div6, monster1, monster2, gameBoard, rollDice, moveToTokyo, dr1, dr2, dr3, dr4,
+				dr5, dr6);
 
 	}
 
 	public void start() {
 		// Setzt den Titel anhand der ID, die der Client vom Server erhält.
-		if (clientModel.getClientID() == 1) {
-			getKingOfTokyoStage().setTitle("Player 1");
-		} else {
-			getKingOfTokyoStage().setTitle("Player 2");
-		}
-
-		getKingOfTokyoStage().show();
+		kingOfTokyoStage.setTitle("Player " + clientModel.getClientID());
+		kingOfTokyoStage.show();
 
 	}
 
@@ -226,9 +228,6 @@ public class ClientView {
 	/**
 	 * Getter for the stage, so that the controller can access window events
 	 */
-	public Stage getkingOfTokyoStage() {
-		return getKingOfTokyoStage();
-	}
 
 	public Stage getKingOfTokyoStage() {
 		return kingOfTokyoStage;
@@ -240,7 +239,7 @@ public class ClientView {
 
 	public void updateGUI() {
 		Platform.runLater(() -> {
-			Music music=new Music();
+			Music music = new Music();
 
 			if (clientModel.getGamestate() != null) {
 
@@ -258,6 +257,9 @@ public class ClientView {
 
 				if (currentPlayer != null) {
 					yourname.setText(currentPlayer.getPlayername());
+					if (!currentPlayer.getPlayername().isEmpty()) {
+						kingOfTokyoStage.setTitle(currentPlayer.getPlayername());
+					}
 					yourlife.setText(String.valueOf(currentPlayer.getLifePoints()));
 					yourglory.setText(String.valueOf(currentPlayer.getGloryPoints()));
 
@@ -267,6 +269,9 @@ public class ClientView {
 					if (currentPlayer.getLifePoints() <= 0) {
 						clientModel.getGamestate().setWinner(otherPlayer);
 					}
+//					if (currentPlayer.isInTokyo()) {
+//						moveToTokyo.setDisable(true);
+//					}
 
 				}
 				if (otherPlayer != null) {
@@ -280,18 +285,20 @@ public class ClientView {
 					if (otherPlayer.getLifePoints() <= 0) {
 						clientModel.getGamestate().setWinner(currentPlayer);
 					}
+					if (otherPlayer.isInTokyo()) {
+						moveToTokyo.setVisible(false);
+					}
 				}
 
 				if (clientModel.getGamestate().getWinner() != null) {
 					if (clientModel.getGamestate().getWinner().getPlayerId() == clientModel.getClientID()) {
-						gameover.setText("Game Over! You won!!!");
-						
-						
-						if(clientModel.getGamestate().isMusicOn()==true)
+						gameover.setText("Congratulations! You won!!!");
+
+						if (clientModel.getGamestate().isMusicOn() == true)
 							music.start();
-							
+
 						clientModel.getGamestate().setMusicOn(false);
-						
+
 					} else {
 						gameover.setText("Game Over! You lost!!!");
 					}
@@ -301,8 +308,7 @@ public class ClientView {
 
 			}
 		});
-		
 
 	}
-	
+
 }
