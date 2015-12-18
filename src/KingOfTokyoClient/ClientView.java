@@ -202,7 +202,7 @@ public class ClientView {
 		gameBoard = new ImageView(gb);
 		gameBoard.setFitHeight(300.0);
 		gameBoard.setFitWidth(300.0);
-		gameBoard.setLayoutX(504);
+		gameBoard.setLayoutX(400);
 		gameBoard.setLayoutY(66);
 
 		// Button um zu Würfeln
